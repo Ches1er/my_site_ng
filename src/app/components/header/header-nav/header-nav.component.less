@@ -1,0 +1,22 @@
+@import "../../../common";
+
+ul{
+  list-style: none;
+    li{
+      display: inline-block;
+      line-height: 50px;
+      margin-right: 5px;
+        a{
+          display: inline-block;
+          text-decoration: none;
+          text-transform: uppercase;
+          height: 50px;
+          padding: 0 20px;
+          color: @link_color;
+          &.active{
+            color: @active_main_nav_link_color;
+          }
+        }
+    }
+}
+

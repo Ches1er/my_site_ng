@@ -1,0 +1,27 @@
+header{
+  margin-top: 20px;
+  display: inline-flex;
+  flex-flow: column nowrap;
+  border: 1px solid black;
+  width: 100%;
+}
+.header_title{
+
+}
+.header_nav{
+  display: inline-flex;
+  flex-flow: row nowrap;
+}
+.header_menu{
+  box-sizing: border-box;
+  padding: 10px;
+  width: 70%;
+  border: 1px solid red;
+  flex-grow: 1;
+}
+.header_auth{
+  box-sizing: border-box;
+  padding: 10px;
+  border: 1px solid red;
+  width: 30%;
+}

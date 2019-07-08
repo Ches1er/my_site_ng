@@ -1,0 +1,112 @@
+/* You can add global styles to this file, and also import other style files */
+
+*{
+  margin: 0;
+  padding: 0;
+}
+.container{
+  width: 960px;
+  margin: 0 auto;
+}
+.container .wrapper{
+  display: inline-flex;
+  flex-flow: column;
+  width: 100%;
+}
+
+
+/*For windows*/
+
+.window{
+  width: 500px;
+  height: auto;
+  position: absolute;
+  left: calc(50% - 250px);
+  top: 100px;
+  background-color: #fff;
+
+}
+.window .window-header{
+  padding: 0 20px;
+  height: 50px;
+  line-height: 50px;
+  background-color: #eee;
+  font-family: 'Raleway', sans-serif;
+  color: #8b8fe6;
+}
+.window .window-main{
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 20px;
+  display: inline-flex;
+  flex-flow: column nowrap;
+}
+.window dl{
+  margin: 0;
+}
+.window dt{
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-size: larger;
+  margin-bottom: 5px;
+}
+.window dt span{
+  font-weight: bold;
+}
+.window input{
+  width: 100%;
+}
+.window .window-footer{
+  padding: 10px 20px;
+  background-color: #eee;
+}
+.wnd-btn {
+  margin-right: 10px;
+  height: 40px;
+  line-height: 40px;
+  background-color: #a5d7ff;
+  color: white;
+  cursor: pointer;
+  padding: 0 10px;
+  border: 1px solid rgba(0,0,0,.1);
+  border-radius: 2px;
+  transition: all .218s ease 0s;
+}
+.add {
+  height: 20px;
+  width: 30px;
+  text-align: center;
+  line-height: 20px;
+  margin-top: 5px;
+  padding: 0;
+}
+.remove {
+  height: 20px;
+  width: 30px;
+  text-align: center;
+  line-height: 20px;
+  margin-left: 5px;
+  padding: 0;
+}
+.wnd-btn:hover{
+  background-color: #86b0d3;
+}
+.fade{
+  position: fixed;
+  height: 100%;
+  z-index: 2222;
+  background-color: rgba(0,0,0,0.5);
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.input_error{
+  border: red 1px solid;
+}
+
+.not_required_info{
+  font-size: small;
+  color: #86b0d3;
+}
+

@@ -1,0 +1,76 @@
+<div class="fade" *ngIf="visible">
+  <div class="window">
+    <div class="window-header">Регистрация нового пользователя</div>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <div class="window-main">
+
+        <div class="form-froup">
+          <label for="login">Логин:</label>
+          <input type="text" id="login" formControlName = "name">
+          <div class="error"
+               *ngIf="registerForm.get('name').getError('required') &&
+                (registerForm.get('name').dirty || registerForm.get('name').touched)">
+            Поле "Логин" необходимо для заполнения
+          </div>
+        </div>
+
+        <div class="form-froup">
+          <label for="email">Электронная почта:</label>
+          <input type="email" id="email" formControlName = "email">
+          <div class="error"
+               *ngIf="registerForm.get('email').getError('required') &&
+                (registerForm.get('email').dirty || registerForm.get('email').touched)">
+            Поле "Электронная почта" необходимо для заполнения
+          </div>
+        </div>
+
+        <div class="form-group" formArrayName="phones">
+          <label>Телефон:</label>
+          <div class="form-group-unit"
+               *ngFor="let phone of registerForm.controls.phones.controls; let i = index">
+            <input formControlName = "{{i}}">
+            <button class="wnd-btn remove" (click)="DelPhone(i,$event)">-</button>
+          </div>
+          <button class="wnd-btn add" (click)="AddPhone($event)">+</button>
+        </div>
+
+        <div class="form-group">
+          <label for="confirmedClient">*Подтвержденный клиент:</label>
+          <input type="password" id="confirmedClient" formControlName = "confirmedClient">
+          <div class="not_required_info">*Если вы уже являетесь клиентом ТД "Марафон", заполните это поле</div>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Пароль:</label>
+          <input type="password" id="password" formControlName = "password">
+          <div class="error"
+               *ngIf="registerForm.get('password').getError('required') &&
+                (registerForm.get('password').dirty || registerForm.get('password').touched)">
+            Поле "Пароль" необходимо для заполнения
+          </div>
+        </div>
+
+        <div class="form-group">
+
+          <label for="password">Подтверждение пароля:</label>
+          <input type="password" id="confirm_password" formControlName = "confirmPassword"
+          [class.input_error]="registerForm.value.password!==registerForm.value.confirmPassword">
+          <div class="error"
+               *ngIf="registerForm.get('confirmPassword').getError('required') &&
+                (registerForm.get('confirmPassword').dirty || registerForm.get('confirmPassword').touched)">
+            Поле "Подтверждение пароля" необходимо для заполнения
+          </div>
+          <div class="error"
+               *ngIf="registerForm.value.password!==registerForm.value.confirmPassword">Вы не подтвердили свой пароль!</div>
+        </div>
+
+      </div>
+      <div class="window-footer">
+        <button class = 'wnd-btn' type="submit" *ngIf="registerForm.valid">Зарегистрироваться</button>
+        <button class = 'wnd-btn' (click)="cancel()">Отмена</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+

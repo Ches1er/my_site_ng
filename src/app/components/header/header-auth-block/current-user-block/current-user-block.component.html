@@ -1,0 +1,11 @@
+<div class="current_user_block">
+
+  <div *ngIf="currentUser">
+    <div class="current_user_name">Текущий пользователь: {{currentUser.name}}</div>
+  </div>
+  <div *ngIf="!currentUser">
+    <div class="current_user_name">Текущий пользователь: пусто</div>
+  </div>
+  <div class="current_user_profile"></div>
+  <div class="current_user_admin" *ngIf="admin"><a routerLink="admin">Admin</a></div>
+</div>

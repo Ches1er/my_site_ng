@@ -1,0 +1,43 @@
+<div class="fade" *ngIf="visible">
+  <div class="window">
+    <div class="window-header">Вход на сайт</div>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="window-main">
+
+        <div class="error" *ngIf="error">{{error.error}}</div>
+
+        <div class="form-froup">
+          <label for="login">Логин:</label>
+          <input type="text" id="login" formControlName = "name">
+          <div class="error"
+               *ngIf="loginForm.get('name').getError('required') &&
+                (loginForm.get('name').dirty || loginForm.get('name').touched)">
+            Поле "Логин" необходимо для заполнения
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Пароль:</label>
+          <input type="password" id="password" formControlName = "password">
+          <div class="error"
+               *ngIf="loginForm.get('password').getError('required') &&
+                (loginForm.get('password').dirty || loginForm.get('password').touched)">
+            Поле "Пароль" необходимо для заполнения
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="rememberMe">Запомнить меня:</label>
+          <input type="checkbox" id="rememberMe" formControlName="rememberMe">
+        </div>
+
+      </div>
+      <div class="window-footer">
+        <button type="submit" *ngIf="loginForm.valid">Вход</button>
+        <button (click)="cancel()">Отмена</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+

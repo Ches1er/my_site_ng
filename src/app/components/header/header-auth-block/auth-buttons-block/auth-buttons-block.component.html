@@ -1,0 +1,5 @@
+<div class="auth-buttons-block">
+  <button *ngIf="!ifUserLoggedIn" (click)="loginWindowShow()">Вход</button>
+  <button *ngIf="!ifUserLoggedIn" (click)="registerWindowShow()">Регистрация</button>
+  <button *ngIf="ifUserLoggedIn" (click)="logout()">Выход</button>
+</div>
