@@ -9,9 +9,14 @@ export class MessagesService {
   private pRegisterWindowShow: Subject<null> = new Subject<null>();
   private pLoginSuccess: Subject<string> = new Subject<string>();
   private pLogoutSuccess: Subject<null> = new Subject<null>();
+  private pPackMenuShow: Subject<null> = new Subject<null>();
 
   constructor() {
   }
+
+  // GETTERS
+
+  // Windows
 
   get loginWindowShowMessage() {
     return this.pLoginWindowShow;
@@ -21,6 +26,8 @@ export class MessagesService {
     return this.pRegisterWindowShow;
   }
 
+  // AUTH
+
   get loginSuccessMessage() {
     return this.pLoginSuccess;
   }
@@ -29,11 +36,20 @@ export class MessagesService {
     return this.pLogoutSuccess;
   }
 
+  // MENU
+
+  get packMenuMessage() {
+    return this.pPackMenuShow;
+  }
+
+  // FUNCTIONS
+
   // Auth
 
   public loginSuccess(token: string) {
     this.pLoginSuccess.next(token);
   }
+
   public logoutSuccess() {
     this.pLogoutSuccess.next();
   }
@@ -46,5 +62,11 @@ export class MessagesService {
 
   public registerWindowShow() {
     this.pRegisterWindowShow.next(null);
+  }
+
+  // Menu
+
+  public packMenuShow() {
+    this.pPackMenuShow.next(null);
   }
 }

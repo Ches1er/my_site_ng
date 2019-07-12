@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
+import {MessagesService} from '../../../services/messages.service';
 
 @Component({
   selector: 'app-products',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductsComponent implements OnInit {
 
-  constructor() { }
+  constructor(@Inject(MessagesService) private msgService: MessagesService) {
+  }
 
   ngOnInit() {
   }
 
+  buildingMenuShow() {
+    // TODO
+  }
+
+  public packMenuShow() {
+    this.msgService.packMenuShow();
+  }
 }
