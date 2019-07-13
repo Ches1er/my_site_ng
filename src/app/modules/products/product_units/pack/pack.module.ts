@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {PackMainModule} from './pack_components/pack_main/pack-main.module';
 import {PackNavComponent} from './pack_components/pack-nav/pack-nav.component';
 import {RouterModule, Routes} from '@angular/router';
 import {CampaignComponent} from './pack_components/pack_main/campaign/campaign.component';
@@ -11,13 +10,16 @@ import {ClientsComponent} from './pack_components/pack_main/clients/clients.comp
 import {PackComponent} from './pack_components/pack.component';
 
 const routes: Routes = [
+  {path: '', redirectTo: 'pack', pathMatch: 'full'},
   {path: 'pack', component: PackComponent, children: [
+      {path: '', redirectTo: 'news', pathMatch: 'full'},
       {path: 'news', component: NewsComponent},
       {path: 'campaign', component: CampaignComponent},
       {path: 'production_by_applying', component: ProductionByApplyingComponent},
       {path: 'production_by_brand', component: ProductionByBrandComponent},
       {path: 'clients', component: ClientsComponent}
-    ]}
+    ]},
+  {path: '', redirectTo: 'main/pack/campaign', pathMatch: 'full'},
 ];
 
 @NgModule({
@@ -25,7 +27,6 @@ const routes: Routes = [
     ProductionByBrandComponent, ClientsComponent, PackNavComponent, PackComponent],
   imports: [
     CommonModule,
-    PackMainModule,
     RouterModule.forChild(routes)
   ]
 })
