@@ -8,6 +8,7 @@ import {ProductionByBrandComponent} from './pack_components/pack_main/production
 import {ProductionByApplyingComponent} from './pack_components/pack_main/production-by-applying/production-by-applying.component';
 import {ClientsComponent} from './pack_components/pack_main/clients/clients.component';
 import {PackComponent} from './pack_components/pack.component';
+import { PackNewsUnitComponent } from './pack_components/pack_main/news/pack-news-unit/pack-news-unit.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'pack', pathMatch: 'full'},
@@ -24,7 +25,7 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [NewsComponent, CampaignComponent, ProductionByApplyingComponent,
-    ProductionByBrandComponent, ClientsComponent, PackNavComponent, PackComponent],
+    ProductionByBrandComponent, ClientsComponent, PackNavComponent, PackComponent, PackNewsUnitComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes)

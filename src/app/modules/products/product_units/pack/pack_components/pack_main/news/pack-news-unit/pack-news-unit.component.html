@@ -1,0 +1,9 @@
+<div class="news" *ngIf="news">
+  <div class="news_name">{{news.name}}</div>
+  <div class="news_date">{{news.date}}</div>
+
+  <div class="news_full">
+    <div class="news_img"><img src="{{news.img}}"></div>
+    {{news.fullNews}}
+  </div>
+</div>

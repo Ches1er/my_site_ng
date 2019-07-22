@@ -11,6 +11,7 @@ import {BuildingObjectsComponent} from './building/building_components/building_
 import {BuildingSolutionsComponent} from './building/building_components/building_main/building-solutions/building-solutions.component';
 import {BuildingTechInfoComponent} from './building/building_components/building_main/building-tech-info/building-tech-info.component';
 import {BuildingOrderComponent} from './building/building_components/building_main/building-order/building-order.component';
+import {BuildingNewsUnitComponent } from './building/building_components/building_main/building-news/building-news-unit/building-news-unit.component';
 
 
 const routes: Routes = [
@@ -40,7 +41,8 @@ const routes: Routes = [
     BuildingObjectsComponent,
     BuildingSolutionsComponent,
     BuildingTechInfoComponent,
-    BuildingOrderComponent],
+    BuildingOrderComponent,
+    BuildingNewsUnitComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes)
