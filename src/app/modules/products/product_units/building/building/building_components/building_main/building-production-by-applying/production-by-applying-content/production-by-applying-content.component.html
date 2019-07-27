@@ -1,0 +1,5 @@
+{{product.name}}
+<div *ngFor="let product_img of product.img">
+  <img src="{{product_img}}" alt="">
+</div>
+<p [innerHTML]=product.techInfo></p>

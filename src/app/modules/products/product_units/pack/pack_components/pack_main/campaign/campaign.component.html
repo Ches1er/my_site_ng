@@ -1,4 +1,15 @@
-
 <div class="main_content">
-  <p>campaign works!</p>
+  <div class="main_content_left">
+    <ul class="news_list">
+      <li *ngFor="let campaign_unit of campaign" (click)="changeCurrentCampaign(campaign_unit)">
+        <div class="news_name">{{campaign_unit.name}}</div>
+        <div class="news_short">{{campaign_unit.shortCampaign}}</div>
+      </li>
+    </ul>
+  </div>
+  <div class="main_content_right">
+    <div *ngIf="currentCampaign">
+      <app-pack-campaign-unit [campaign]="currentCampaign"></app-pack-campaign-unit>
+    </div>
+  </div>
 </div>

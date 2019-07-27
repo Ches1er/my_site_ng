@@ -79,6 +79,24 @@
   color: black;
   font-size: small;
 }
+/*production by - list*/
+.production_by_list{
+  list-style: none;
+  padding: 5px;
+}
+.production_by_list_unit{
+  color: #417dbe;
+  cursor: pointer;
+}
+.products_by_list_products {
+  list-style: none;
+  margin: 5px;
+}
+.products_by_list_product{
+  font-size: small;
+  color: #1d4ebe;
+  cursor: pointer;
+}
 
 /* Main right news*/
 

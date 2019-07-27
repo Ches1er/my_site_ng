@@ -1,1 +1,12 @@
-<p>building-production-by-applying works!</p>
+<div class="main_content">
+  <div class="main_content_left">
+    <app-production-by-applying-menu [appGroups]="appGroups"></app-production-by-applying-menu>
+  </div>
+  <div class="main_content_right">
+    <div *ngIf="currentProduct">
+      <app-production-by-applying-content [product]="currentProduct">
+
+      </app-production-by-applying-content>
+    </div>
+  </div>
+</div>

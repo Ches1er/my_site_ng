@@ -1,4 +1,10 @@
-
 <div class="main_content">
-  <p>production-by-brand works!</p>
+  <div class="main_content_left">
+    <app-prod-by-brand-menu [brands]="brands"></app-prod-by-brand-menu>
+  </div>
+  <div class="main_content_right">
+    <div *ngIf="currentProduct">
+      <app-prod-by-brand-content [product]="currentProduct"></app-prod-by-brand-content>
+    </div>
+  </div>
 </div>

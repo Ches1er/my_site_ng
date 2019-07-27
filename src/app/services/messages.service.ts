@@ -10,6 +10,7 @@ export class MessagesService {
   private pLoginSuccess: Subject<string> = new Subject<string>();
   private pLogoutSuccess: Subject<null> = new Subject<null>();
   private pPackMenuShow: Subject<null> = new Subject<null>();
+  private pProductsMenuUnitsShow: Subject<number> = new Subject<number>();
 
   constructor() {
   }
@@ -26,7 +27,7 @@ export class MessagesService {
     return this.pRegisterWindowShow;
   }
 
-  // AUTH
+  // Auth
 
   get loginSuccessMessage() {
     return this.pLoginSuccess;
@@ -36,11 +37,18 @@ export class MessagesService {
     return this.pLogoutSuccess;
   }
 
-  // MENU
+  // Menu
 
   get packMenuMessage() {
     return this.pPackMenuShow;
   }
+
+  // Products
+
+  get productsMenuUnitsShowMessage() {
+    return this.pProductsMenuUnitsShow;
+  }
+
 
   // FUNCTIONS
 
@@ -69,4 +77,11 @@ export class MessagesService {
   public packMenuShow() {
     this.pPackMenuShow.next(null);
   }
+
+  // Products
+
+  public productsMenuUnitsShow(id: number) {
+    this.pProductsMenuUnitsShow.next(id);
+  }
+
 }

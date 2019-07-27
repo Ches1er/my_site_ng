@@ -4,7 +4,6 @@ import {ProductsComponent} from './products/products.component';
 import {RouterModule, Routes} from '@angular/router';
 import {BuildingModule} from './product_units/building/building.module';
 import {PackModule} from './product_units/pack/pack.module';
-import {PageNotFoundComponent} from '../../components/main/page-not-found/page-not-found.component';
 
 const routes: Routes = [
   {path: 'main', component: ProductsComponent},
