@@ -9,7 +9,7 @@ import {MessagesService} from '../../../../../../../../../services/messages.serv
   styleUrls: ['./prod-by-add-menu-unit.component.css']
 })
 export class ProdByAddMenuUnitComponent implements OnInit {
-  @Input() private pAppGroupId = null;
+  @Input() pAppGroupId = null;
   private pProducts: Array<Product> = [];
   private pVisible = false;
 

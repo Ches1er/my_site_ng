@@ -1,7 +1,7 @@
 <ul class="production_by_list">
   <div *ngFor="let group of appGroups">
     <li class="production_by_list_unit" (click)="showGroupContent(group.id)">{{group.name}}
-      <app-prod-by-app-menu-unit [pAppGroupId]="group.id"></app-prod-by-app-menu-unit>
+      <app-prod-by-add-menu-unit [pAppGroupId]="group.id"></app-prod-by-add-menu-unit>
     </li>
   </div>
 </ul>

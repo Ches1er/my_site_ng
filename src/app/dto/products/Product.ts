@@ -4,7 +4,7 @@ export class Product {
               private pBrandId: number,
               private pSalesAreaId: number,
               private pActive: boolean,
-              private pImg: Array,
+              private pImg: Array<string>,
               private pTechInfo: string
   ) {
   }
@@ -42,11 +42,11 @@ export class Product {
     this.pActive = value;
   }
 
-  get img(): Array {
+  get img(): Array<string> {
     return this.pImg;
   }
 
-  set img(value: Array) {
+  set img(value: Array<string>) {
     this.pImg = value;
   }
 

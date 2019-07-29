@@ -22,6 +22,7 @@ import {AuthButtonsBlockComponent} from './components/header/header-auth-block/a
 import {LoginComponent} from './components/windows/login/login.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RegisterComponent} from './components/windows/register/register.component';
+import {SharedModule} from './modules/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import {RegisterComponent} from './components/windows/register/register.componen
     AdminModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ],
   providers: [CookieService
   ],

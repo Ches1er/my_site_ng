@@ -20,14 +20,14 @@ export class ProductsService {
     return this.http.get(this.urlConfig.SHOW_PRODUCT + id)
       .pipe(map(product => Product.fromJson(product)));
   }
-  productsByApplying(id: number): Observable<Array<Product>>{
+  productsByApplying(id: number): Observable<Array<Product>> {
     return this.http.get(this.urlConfig.SHOW_PRODUCTS_BY_APPLYING + id)
       .pipe(map(resp => ProductsResponse.fromJson(resp)))
       .pipe(map(productsResponse => productsResponse.data));
   }
   productsByBrand(id: number): Observable<Array<Product>>{
     return this.http.get(this.urlConfig.SHOW_PRODUCTS_BY_BRAND + id)
-      .pipe(map(resp => ProductsResponse(resp)))
+      .pipe(map(resp => ProductsResponse.fromJson(resp)))
       .pipe(map(productsResponse => productsResponse.data));
   }
 }

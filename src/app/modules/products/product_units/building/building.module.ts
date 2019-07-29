@@ -17,8 +17,8 @@ import { ProductionByApplyingMenuComponent } from './building/building_component
 import { ProductionByApplyingContentComponent } from './building/building_components/building_main/building-production-by-applying/production-by-applying-content/production-by-applying-content.component';
 import { BuildProdByBrandsMenuComponent } from './building/building_components/building_main/building-production-by-brand/build-prod-by-brands-menu/build-prod-by-brands-menu.component';
 import { BuildProdByBrandContentComponent } from './building/building_components/building_main/building-production-by-brand/build-prod-by-brand-content/build-prod-by-brand-content.component';
-import { ProdByAppMenuUnitComponent } from './building/building_components/building_main/building-production-by-applying/production-by-applying-menu/prod-by-app-menu-unit/prod-by-app-menu-unit.component';
-
+import {ProdByAppMenuUnitComponent} from './building/building_components/building_main/building-production-by-applying/production-by-applying-menu/prod-by-app-menu-unit/prod-by-app-menu-unit.component';
+import {SharedModule} from '../../../shared/shared.module';
 
 const routes: Routes = [
   {path: '', redirectTo: 'building', pathMatch: 'full'},
@@ -54,10 +54,12 @@ const routes: Routes = [
     ProductionByApplyingContentComponent,
     BuildProdByBrandsMenuComponent,
     BuildProdByBrandContentComponent,
-    ProdByAppMenuUnitComponent],
+    ProdByAppMenuUnitComponent
+  ],
   imports: [
     CommonModule,
-    RouterModule.forChild(routes)
+    SharedModule,
+    RouterModule.forChild(routes),
   ]
 })
 export class BuildingModule {

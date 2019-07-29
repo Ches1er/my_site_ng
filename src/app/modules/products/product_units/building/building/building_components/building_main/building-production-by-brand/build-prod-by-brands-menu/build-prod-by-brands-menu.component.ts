@@ -1,5 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Inject, Input, OnInit} from '@angular/core';
 import {Brand} from '../../../../../../../../../dto/Brand/Brand';
+import {MessagesService} from '../../../../../../../../../services/messages.service';
 
 @Component({
   selector: 'app-build-prod-by-brands-menu',
@@ -8,9 +9,12 @@ import {Brand} from '../../../../../../../../../dto/Brand/Brand';
 })
 export class BuildProdByBrandsMenuComponent implements OnInit {
   @Input() brands: Array<Brand> = [];
-  constructor() { }
+  constructor(@Inject(MessagesService) private msgService: MessagesService) { }
 
   ngOnInit() {
+  }
+  showGroupContent(id: number) {
+    this.msgService.productsMenuUnitsShow(id);
   }
 
 }

@@ -1,7 +1,8 @@
 export class Brand {
 
-  constructor(private pName: string,
+  constructor(
               private pId: number,
+              private pName: string,
               private pSalesAreaId: number,
               private pImg: string) {
   }

@@ -9,7 +9,7 @@ import {ProductsService} from '../../../../../../../../../../services/http/produ
   styleUrls: ['./prod-by-app-menu-unit.component.css']
 })
 export class ProdByAppMenuUnitComponent implements OnInit {
-  @Input() private pAppGroupId = null;
+  @Input() pAppGroupId = 1;
   private pProducts: Array<Product> = [];
   private pVisible = false;
 
