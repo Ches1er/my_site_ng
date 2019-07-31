@@ -12,7 +12,6 @@ import {Product} from '../../../../../../../dto/products/Product';
 export class ProductionByApplyingComponent implements OnInit {
   appGroups: Array<ApplyingGroup> = [];
   currentProduct: Product = null;
-  private pProductId = 3;
 
   constructor(@Inject(ApplyingGroupsService) private appGroupService: ApplyingGroupsService,
               @Inject(ProductsService) private productService: ProductsService) {
@@ -20,24 +19,19 @@ export class ProductionByApplyingComponent implements OnInit {
 
   ngOnInit() {
     this.updateAppGroups();
-    this.updateCurrentProduct();
-  }
-
-  get productId(): number {
-    return this.pProductId;
-  }
-
-  set productId(value: number) {
-    this.pProductId = value;
   }
 
   private updateAppGroups() {
-    this.appGroupService.packAppGroups.subscribe(e => this.appGroups = e);
+    this.appGroupService.packAppGroups.subscribe(groups => {
+      this.appGroups = groups;
+      if (groups.length > 0) {
+        this.updateCurrentProduct(groups[0].id);
+      }
+    });
   }
 
-  // Take 1-st product from 5-th applying group
-  private updateCurrentProduct() {
-    this.productService.productsByApplying(5)
+  private updateCurrentProduct(id: number) {
+    this.productService.productsByApplying(id)
       .subscribe(products => this.currentProduct = products[0]);
   }
 }

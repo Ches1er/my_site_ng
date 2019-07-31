@@ -1,10 +1,10 @@
 <div class="main_content">
   <div class="main_content_left">
-    <app-pack-prod-by-app-menu [appGroups]="appGroups"></app-pack-prod-by-app-menu>
+    <app-prod-by-menu [groups]="appGroups" [groupDefiner]="'applying'"></app-prod-by-menu>
   </div>
   <div class="main_content_right">
     <div *ngIf="currentProduct">
-      <app-pack-prod-by-app-content [product]="currentProduct"></app-pack-prod-by-app-content>
+      <app-prod-content [product]="currentProduct"></app-prod-content>
     </div>
   </div>
 </div>

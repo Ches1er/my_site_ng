@@ -1,6 +1,7 @@
 export class Product {
 
-  constructor(private pName: string,
+  constructor(private pId: number,
+              private pName: string,
               private pBrandId: number,
               private pSalesAreaId: number,
               private pActive: boolean,
@@ -9,6 +10,13 @@ export class Product {
   ) {
   }
 
+  get id(): number {
+    return this.pId;
+  }
+
+  set id(value: number) {
+    this.pId = value;
+  }
 
   get name(): string {
     return this.pName;
@@ -59,7 +67,7 @@ export class Product {
   }
 
   public static fromJson(jsonObj): Product {
-    return new Product(jsonObj.name, jsonObj.brand_id, jsonObj.sales_area_id,
+    return new Product(jsonObj.id, jsonObj.name, jsonObj.brand_id, jsonObj.sales_area_id,
       jsonObj.active, jsonObj.img, jsonObj.tech_info);
   }
 }

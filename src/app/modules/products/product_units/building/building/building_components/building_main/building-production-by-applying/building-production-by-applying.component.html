@@ -1,12 +1,10 @@
 <div class="main_content">
   <div class="main_content_left">
-    <app-production-by-applying-menu [appGroups]="appGroups"></app-production-by-applying-menu>
+    <app-prod-by-menu [groups]="appGroups" [groupDefiner]="'applying'"></app-prod-by-menu>
   </div>
   <div class="main_content_right">
     <div *ngIf="currentProduct">
-      <app-production-by-applying-content [product]="currentProduct">
-
-      </app-production-by-applying-content>
+      <app-prod-content [product]="currentProduct"></app-prod-content>
     </div>
   </div>
 </div>

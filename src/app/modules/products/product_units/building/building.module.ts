@@ -13,11 +13,6 @@ import {BuildingTechInfoComponent} from './building/building_components/building
 import {BuildingOrderComponent} from './building/building_components/building_main/building-order/building-order.component';
 import {BuildingNewsUnitComponent } from './building/building_components/building_main/building-news/building-news-unit/building-news-unit.component';
 import { BuildingCampaignUnitComponent } from './building/building_components/building_main/building-campaign/building-campaign-unit/building-campaign-unit.component';
-import { ProductionByApplyingMenuComponent } from './building/building_components/building_main/building-production-by-applying/production-by-applying-menu/production-by-applying-menu.component';
-import { ProductionByApplyingContentComponent } from './building/building_components/building_main/building-production-by-applying/production-by-applying-content/production-by-applying-content.component';
-import { BuildProdByBrandsMenuComponent } from './building/building_components/building_main/building-production-by-brand/build-prod-by-brands-menu/build-prod-by-brands-menu.component';
-import { BuildProdByBrandContentComponent } from './building/building_components/building_main/building-production-by-brand/build-prod-by-brand-content/build-prod-by-brand-content.component';
-import {ProdByAppMenuUnitComponent} from './building/building_components/building_main/building-production-by-applying/production-by-applying-menu/prod-by-app-menu-unit/prod-by-app-menu-unit.component';
 import {SharedModule} from '../../../shared/shared.module';
 
 const routes: Routes = [
@@ -49,12 +44,7 @@ const routes: Routes = [
     BuildingTechInfoComponent,
     BuildingOrderComponent,
     BuildingNewsUnitComponent,
-    BuildingCampaignUnitComponent,
-    ProductionByApplyingMenuComponent,
-    ProductionByApplyingContentComponent,
-    BuildProdByBrandsMenuComponent,
-    BuildProdByBrandContentComponent,
-    ProdByAppMenuUnitComponent
+    BuildingCampaignUnitComponent
   ],
   imports: [
     CommonModule,

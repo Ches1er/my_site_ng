@@ -10,11 +10,7 @@ import {ClientsComponent} from './pack_components/pack_main/clients/clients.comp
 import {PackComponent} from './pack_components/pack.component';
 import {PackNewsUnitComponent} from './pack_components/pack_main/news/pack-news-unit/pack-news-unit.component';
 import {PackCampaignUnitComponent} from './pack_components/pack_main/campaign/pack-campaign-unit/pack-campaign-unit.component';
-import { PackProdByAppMenuComponent } from './pack_components/pack_main/production-by-applying/pack-prod-by-app-menu/pack-prod-by-app-menu.component';
-import { PackProdByAppContentComponent } from './pack_components/pack_main/production-by-applying/pack-prod-by-app-content/pack-prod-by-app-content.component';
-import { ProdByBrandMenuComponent } from './pack_components/pack_main/production-by-brand/prod-by-brand-menu/prod-by-brand-menu.component';
-import { ProdByBrandContentComponent } from './pack_components/pack_main/production-by-brand/prod-by-brand-content/prod-by-brand-content.component';
-import { ProdByAddMenuUnitComponent } from './pack_components/pack_main/production-by-applying/pack-prod-by-app-menu/prod-by-add-menu-unit/prod-by-add-menu-unit.component';
+import {SharedModule} from '../../../shared/shared.module';
 
 
 const routes: Routes = [
@@ -41,14 +37,10 @@ const routes: Routes = [
     PackNavComponent, PackComponent,
     PackNewsUnitComponent,
     PackCampaignUnitComponent,
-    PackProdByAppMenuComponent,
-    PackProdByAppContentComponent,
-    ProductionByBrandComponent,
-    ProdByBrandMenuComponent,
-    ProdByBrandContentComponent,
-    ProdByAddMenuUnitComponent],
+    ProductionByBrandComponent],
   imports: [
     CommonModule,
+    SharedModule,
     RouterModule.forChild(routes)
   ]
 })

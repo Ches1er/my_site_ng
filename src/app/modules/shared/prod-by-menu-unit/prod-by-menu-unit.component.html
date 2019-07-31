@@ -1,5 +1,7 @@
 <ul class="products_by_list_products">
   <div *ngIf="visible">
-    <li class="products_by_list_product" *ngFor="let product of products">{{product.name}}</li>
+    <div *ngFor="let product of products">
+      <li class="products_by_list_product" (click)="changeCurrentProduct(product.id)">{{product.name}}</li>
+    </div>
   </div>
 </ul>

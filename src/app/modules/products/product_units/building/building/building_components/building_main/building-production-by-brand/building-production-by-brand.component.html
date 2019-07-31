@@ -1,10 +1,10 @@
 <div class="main_content">
   <div class="main_content_left">
-    <app-build-prod-by-brands-menu [brands]="brands"></app-build-prod-by-brands-menu>
+    <app-prod-by-menu [groups]="brands" [groupDefiner]="'brand'"></app-prod-by-menu>
   </div>
   <div class="main_content_right">
     <div *ngIf="currentProduct">
-      <app-build-prod-by-brand-content></app-build-prod-by-brand-content>
+      <app-prod-content [product]="currentProduct"></app-prod-content>
     </div>
   </div>
 </div>

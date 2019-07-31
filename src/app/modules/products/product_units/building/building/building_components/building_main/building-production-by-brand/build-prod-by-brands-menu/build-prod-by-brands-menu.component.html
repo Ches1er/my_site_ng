@@ -1,7 +1,0 @@
-<ul class="production_by_list">
-  <div *ngFor="let brand of brands">
-    <li class="production_by_list_unit" (click)="showGroupContent(brand.id)">{{brand.name}}
-      <app-prod-by-menu-unit [pAppGroupId]="brand.id" [pGroupDefiner]="'brand'"></app-prod-by-menu-unit>
-    </li>
-  </div>
-</ul>

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PackProdByAppMenuComponent } from './pack-prod-by-app-menu.component';
+import { ProdContentComponent } from './prod-content.component';
 
-describe('PackProdByAppMenuComponent', () => {
-  let component: PackProdByAppMenuComponent;
-  let fixture: ComponentFixture<PackProdByAppMenuComponent>;
+describe('ProdContentComponent', () => {
+  let component: ProdContentComponent;
+  let fixture: ComponentFixture<ProdContentComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PackProdByAppMenuComponent ]
+      declarations: [ ProdContentComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PackProdByAppMenuComponent);
+    fixture = TestBed.createComponent(ProdContentComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

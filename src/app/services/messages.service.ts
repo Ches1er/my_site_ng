@@ -11,6 +11,7 @@ export class MessagesService {
   private pLogoutSuccess: Subject<null> = new Subject<null>();
   private pPackMenuShow: Subject<null> = new Subject<null>();
   private pProductsMenuUnitsShow: Subject<number> = new Subject<number>();
+  private pChangedCurrentProduct: Subject<number> = new Subject<number>();
 
   constructor() {
   }
@@ -48,6 +49,9 @@ export class MessagesService {
   get productsMenuUnitsShowMessage() {
     return this.pProductsMenuUnitsShow;
   }
+  get changedCurrentProduct() {
+    return this.pChangedCurrentProduct;
+  }
 
 
   // FUNCTIONS
@@ -82,6 +86,9 @@ export class MessagesService {
 
   public productsMenuUnitsShow(id: number) {
     this.pProductsMenuUnitsShow.next(id);
+  }
+  public setChangedCurrentProductId(id: number){
+    this.pChangedCurrentProduct.next(id);
   }
 
 }

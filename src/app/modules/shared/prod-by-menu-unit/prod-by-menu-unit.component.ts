@@ -23,10 +23,10 @@ export class ProdByMenuUnitComponent implements OnInit {
     this.msgService.productsMenuUnitsShowMessage.subscribe(id => {
       if (this.appGroupId === id) {
         this.visible = true;
-        if (this.groupDefiner === 'applying'){
+        if (this.groupDefiner === 'applying') {
           this.productsService.productsByApplying(this.appGroupId).subscribe(prod => this.products = prod);
         }
-        if (this.groupDefiner === 'brand'){
+        if (this.groupDefiner === 'brand') {
           this.productsService.productsByBrand(this.appGroupId).subscribe(prod => this.products = prod);
         }
       } else {
@@ -46,9 +46,11 @@ export class ProdByMenuUnitComponent implements OnInit {
   get appGroupId(): any {
     return this.pAppGroupId;
   }
+
   get groupDefiner(): string {
     return this.pGroupDefiner;
   }
+
   get visible(): any {
     return this.pVisible;
   }
@@ -58,4 +60,7 @@ export class ProdByMenuUnitComponent implements OnInit {
   }
 
 
+  changeCurrentProduct(id: number) {
+    this.msgService.setChangedCurrentProductId(id);
+  }
 }
