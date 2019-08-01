@@ -1,0 +1,15 @@
+<div class="clients_objs_main">
+  <div *ngFor="let unit of componentUnits" class="clients_objs_unit">
+    <div class="clients_objs_unit_name">{{unit.name}}</div>
+    <div class="clients_objs_unit_desc">
+      <div *ngIf="unit.photo"><img src="{{unit.photo[0]}}" alt=""></div>
+      <div *ngIf="unit.logo"><img src="{{unit.logo}}" alt=""></div>
+      {{unit.desc}}
+    </div>
+    <div *ngIf="unit.photo" class="clients_objs_unit_photo">
+      <div *ngFor="let photo of unit.photo">
+        <img src="{{photo}}" alt="">
+      </div>
+    </div>
+  </div>
+</div>

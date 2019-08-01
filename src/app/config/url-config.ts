@@ -40,4 +40,14 @@ export class UrlConfig {
   SHOW_PRODUCT = this.productsBase;
   SHOW_PRODUCTS_BY_APPLYING = this.productsBase + 'applying/';
   SHOW_PRODUCTS_BY_BRAND = this.productsBase + 'brand/';
+
+  // clients
+
+  SHOW_CLIENT = this.base + 'client/';
+  SHOW_CLIENTS = this.base + 'clients/';
+
+  // build_obj
+
+  SHOW_BUILD_OBJ = this.base + 'object/';
+  SHOW_BUILD_OBJS = this.base + 'objects';
 }
