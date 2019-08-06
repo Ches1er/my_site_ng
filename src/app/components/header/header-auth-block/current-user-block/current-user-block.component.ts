@@ -28,10 +28,8 @@ export class CurrentUserBlockComponent implements OnInit {
     });
 
     if (this.cookieService.check('remember_token')) {
-      console.log(this.cookieService.get('remember_token'));
       this.httpAuthService.loginByRememberMeToken(this.cookieService.get('remember_token'))
         .subscribe(resp => {
-          console.log(resp);
           if (resp) {
             this.httpAuthService.user(resp.api_token).subscribe(user => this.currentUser = user);
             this.httpAuthService.roles(resp.api_token).subscribe(roles => {

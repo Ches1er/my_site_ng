@@ -1,8 +1,35 @@
 @import "../../../../../../../../common";
 
-.news_list{
-  list-style: none;
-  li{
-    line-height: 30px;
+.main_content_left{
+  margin-right: 5px;
+  .news_events_list{
+    list-style: none;
+    padding: 5px;
+    .active{
+      box-shadow: inset 0px 1px 2px 0px @main_left_side_list;
+    }
+    li{
+      margin-bottom: 5px;
+      display: block;
+      line-height: 30px;
+      box-shadow: 0px 1px 1px 0px @main_content_border;
+      box-sizing: border-box;
+      cursor: pointer;
+      .news_event_name{
+        color: @main_left_side_list;
+        &:hover {color: @admin_button_background}
+        padding: 5px;
+        box-sizing: border-box;
+        font-weight: bold;
+        text-transform: uppercase;
+      }
+      .news_event_short{
+        color: @main_left_side_list_short;
+        text-indent: 10px;
+        padding: 5px;
+        box-sizing: border-box;
+      }
+    }
   }
 }
+

@@ -3,14 +3,13 @@ import {CommonModule} from '@angular/common';
 import {PackNavComponent} from './pack_components/pack-nav/pack-nav.component';
 import {RouterModule, Routes} from '@angular/router';
 import {CampaignComponent} from './pack_components/pack_main/campaign/campaign.component';
-import {NewsComponent} from './pack_components/pack_main/news/news.component';
 import {ProductionByBrandComponent} from './pack_components/pack_main/production-by-brand/production-by-brand.component';
 import {ProductionByApplyingComponent} from './pack_components/pack_main/production-by-applying/production-by-applying.component';
 import {ClientsComponent} from './pack_components/pack_main/clients/clients.component';
 import {PackComponent} from './pack_components/pack.component';
-import {PackNewsUnitComponent} from './pack_components/pack_main/news/pack-news-unit/pack-news-unit.component';
 import {PackCampaignUnitComponent} from './pack_components/pack_main/campaign/pack-campaign-unit/pack-campaign-unit.component';
 import {SharedModule} from '../../../shared/shared.module';
+import {NewsContentComponent} from '../../../shared/news-content/news-content.component';
 
 
 const routes: Routes = [
@@ -18,7 +17,7 @@ const routes: Routes = [
   {
     path: 'pack', component: PackComponent, children: [
       {path: '', redirectTo: 'news', pathMatch: 'full'},
-      {path: 'news', component: NewsComponent},
+      {path: 'news', component: NewsContentComponent, data: {definer: 'pack'}},
       {path: 'campaign', component: CampaignComponent},
       {path: 'production_by_applying', component: ProductionByApplyingComponent},
       {path: 'production_by_brand', component: ProductionByBrandComponent},
@@ -29,13 +28,12 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [NewsComponent,
+  declarations: [
     CampaignComponent,
     ProductionByApplyingComponent,
     ProductionByBrandComponent,
     ClientsComponent,
     PackNavComponent, PackComponent,
-    PackNewsUnitComponent,
     PackCampaignUnitComponent,
     ProductionByBrandComponent],
   imports: [

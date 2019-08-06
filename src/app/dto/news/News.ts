@@ -5,6 +5,7 @@ export class News {
               private pShortNews: string,
               private pFullNews: string,
               private pImg: string,
+              private pImgId: number,
               private pDate,
               private pSalesAreaId: number) {
   }
@@ -15,6 +16,13 @@ export class News {
 
   set id(value: number) {
     this.pId = value;
+  }
+  get imgId(): number {
+    return this.pImgId;
+  }
+
+  set imgId(value: number) {
+    this.pImgId = value;
   }
 
   get name(): string {
@@ -72,6 +80,7 @@ export class News {
       jsonObj.short_news,
       jsonObj.full_news,
       jsonObj.img,
+      jsonObj.img_id,
       jsonObj.date,
       jsonObj.sales_area_id);
 

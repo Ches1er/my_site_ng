@@ -11,11 +11,18 @@ export class UrlConfig {
 
   // MAIN
 
+  // SALES_AREA
+
+  private salesAreaBase = this.base + 'salesarea';
+  SALES_AREA = this.salesAreaBase;
+
   // NEWS
 
-  private newsBase = this.base + 'news/';
-  PACK_NEWS = this.newsBase + 'pack';
-  BUILDING_NEWS = this.newsBase + 'building';
+  private newsBase = this.base + 'news';
+  ALL_NEWS = this.newsBase;
+  PACK_NEWS = this.newsBase + '/pack';
+  BUILDING_NEWS = this.newsBase + '/building';
+  ADD_NEWS = this.newsBase + '/add';
 
   // CAMPAIGN
 
@@ -50,4 +57,12 @@ export class UrlConfig {
 
   SHOW_BUILD_OBJ = this.base + 'object/';
   SHOW_BUILD_OBJS = this.base + 'objects';
+
+  // ADMIN
+
+  // Images
+
+  private imagesBase = this.base + 'images';
+  SHOW_IMAGES = this.imagesBase;
+  UPLOAD_IMAGE = this.imagesBase + '/upload_image';
 }

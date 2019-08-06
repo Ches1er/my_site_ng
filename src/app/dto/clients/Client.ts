@@ -1,6 +1,6 @@
 export class Client {
 
-  constructor(private pName: string, private pDesc: string, private pLogo: string, private pSalesAreaId: number) {
+  constructor(private pName: string, private pDesc: string, private pImg: string, private pSalesAreaId: number) {
   }
 
   get name(): string {
@@ -28,14 +28,14 @@ export class Client {
   }
 
   get logo(): string {
-    return this.pLogo;
+    return this.pImg;
   }
 
   set logo(value: string) {
-    this.pLogo = value;
+    this.pImg = value;
   }
 
   public static fromJson(jsonObj: any): Client {
-    return new Client(jsonObj.name, jsonObj.desc, jsonObj.logo, jsonObj.sales_area_id);
+    return new Client(jsonObj.name, jsonObj.desc, jsonObj.img, jsonObj.sales_area_id);
   }
 }

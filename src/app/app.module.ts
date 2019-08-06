@@ -13,6 +13,7 @@ import {AboutUsComponent} from './components/main/about-us/about-us.component';
 import {HeaderNavComponent} from './components/header/header-nav/header-nav.component';
 import {HeaderAuthBlockComponent} from './components/header/header-auth-block/header-auth-block.component';
 import {PageNotFoundComponent} from './components/main/page-not-found/page-not-found.component';
+import { AngularEditorModule } from '@kolkov/angular-editor';
 
 import {ProductsModule} from './modules/products/products.module';
 import {AdminModule} from './modules/admin/admin.module';
@@ -48,7 +49,8 @@ import {SharedModule} from './modules/shared/shared.module';
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    SharedModule
+    SharedModule,
+    AngularEditorModule
   ],
   providers: [CookieService
   ],

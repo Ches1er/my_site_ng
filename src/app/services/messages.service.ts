@@ -5,6 +5,7 @@ import {Subject} from 'rxjs';
   providedIn: 'root'
 })
 export class MessagesService {
+
   private pLoginWindowShow: Subject<null> = new Subject<null>();
   private pRegisterWindowShow: Subject<null> = new Subject<null>();
   private pLoginSuccess: Subject<string> = new Subject<string>();
@@ -28,6 +29,8 @@ export class MessagesService {
     return this.pRegisterWindowShow;
   }
 
+
+
   // Auth
 
   get loginSuccessMessage() {
@@ -49,10 +52,10 @@ export class MessagesService {
   get productsMenuUnitsShowMessage() {
     return this.pProductsMenuUnitsShow;
   }
+
   get changedCurrentProduct() {
     return this.pChangedCurrentProduct;
   }
-
 
   // FUNCTIONS
 
@@ -87,7 +90,8 @@ export class MessagesService {
   public productsMenuUnitsShow(id: number) {
     this.pProductsMenuUnitsShow.next(id);
   }
-  public setChangedCurrentProductId(id: number){
+
+  public setChangedCurrentProductId(id: number) {
     this.pChangedCurrentProduct.next(id);
   }
 

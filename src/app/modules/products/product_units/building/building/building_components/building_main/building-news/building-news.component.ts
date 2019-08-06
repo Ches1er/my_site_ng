@@ -9,8 +9,10 @@ import {MessagesService} from '../../../../../../../../services/messages.service
   styleUrls: ['./building-news.component.less']
 })
 export class BuildingNewsComponent implements OnInit {
+
   private pNews: Array<News> = [];
   private pCurrentNews: News = null;
+  private pActiveBlock = null;
 
   constructor(@Inject(HttpNewsService) private newsService: HttpNewsService,
               @Inject(MessagesService) private msgService: MessagesService) {
@@ -23,7 +25,7 @@ export class BuildingNewsComponent implements OnInit {
   private updateNews() {
     this.newsService.buildingNews.subscribe(resp => {
       this.news = resp;
-      this.currentNews = resp[resp.length - 1];
+      this.currentNews = resp[0];
     });
 
   }
@@ -43,8 +45,16 @@ export class BuildingNewsComponent implements OnInit {
   set currentNews(value: News) {
     this.pCurrentNews = value;
   }
+  get activeBlock(): any {
+    return this.pActiveBlock;
+  }
 
-  changeCurrentNews(news: News) {
+  set activeBlock(value: any) {
+    this.pActiveBlock = value;
+  }
+
+  changeCurrentNews(news: News, i) {
     this.currentNews = news;
+    this.activeBlock = i;
   }
 }

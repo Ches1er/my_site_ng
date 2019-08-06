@@ -1,0 +1,76 @@
+<div class="news_block">
+  <div class="admin_block_header">В данном блоке вы можете изменять существующие или добавлять новые новости на сайт</div>
+  <div class="news_list_block">
+    <div *ngFor="let news_unit of news">
+      <div class="news_unit_block">
+        <div class="news_unit_name" (click)="fillInNews(news_unit)">{{news_unit.name}}</div>
+      </div>
+
+    </div>
+  </div>
+  <div class="add_news_block">
+    <form [formGroup]="addChangeNewsForm" (ngSubmit)="onSubmit()">
+
+      <div class="form-group">
+        <p class="admin_content_block_label">Выберите группу, в которой будет размещена новость</p>
+        <select name="" id="salesArea" formControlName = "salesArea">
+          <option *ngFor="let salesArea of salesAreas" value="{{salesArea.id}}">{{salesArea.name}}</option>
+        </select>
+        <div class="validation_error"
+             *ngIf="addChangeNewsForm.get('salesArea').getError('required') &&
+                (addChangeNewsForm.get('salesArea').dirty || addChangeNewsForm.get('salesArea').touched)">
+          Выберите пожалуйста группу, в которой будет размещена новость.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <p class="admin_content_block_label">Введите название новости</p>
+        <input type="text" id="name" formControlName = "name">
+        <div class="validation_error"
+             *ngIf="addChangeNewsForm.get('name').getError('required') &&
+                (addChangeNewsForm.get('name').dirty || addChangeNewsForm.get('name').touched)">
+          Введите пожалуйста заголовок новости.
+        </div>
+      </div>
+
+      <div class="form-group" *ngIf="choosenImg">
+        <img class="choosenImg" src="{{choosenImg.path}}" alt="">
+
+      </div>
+
+      <div class="form-group">
+        <p class="admin_content_block_label">Выберите заглавную картинку для новости</p>
+        <p class="admin_content_block_label_small">*Если картинка не будет выбрана, до будет установлена картинка по-умолчанию</p>
+        <button (click)="imagesPickerShow($event)">Выберите картинку новости</button>
+      </div>
+
+      <div class="form-group">
+        <p class="admin_content_block_label">Введите короткое описание новости</p>
+        <textarea name="" id="short_news" cols="30" rows="10" formControlName = "short_news"></textarea>
+        <div class="validation_error"
+             *ngIf="addChangeNewsForm.get('short_news').getError('required') &&
+                (addChangeNewsForm.get('short_news').dirty || addChangeNewsForm.get('short_news').touched)">
+          Добавьте пожалуйста короткое описание вашей новости.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <p class="admin_content_block_label">Введите полный текст новости</p>
+        <angular-editor formControlName="full_news" [config]="config"></angular-editor>
+        <div class="validation_error"
+             *ngIf="addChangeNewsForm.get('full_news').getError('required') &&
+                (addChangeNewsForm.get('full_news').dirty || addChangeNewsForm.get('full_news').touched)">
+          Добавьте пожалуйста текст новости.
+        </div>
+      </div>
+
+      <div class="admin_content_button_block" *ngIf="addChangeNewsForm.valid">
+        <button type="submit" *ngIf="whatHaveToDo==='add'">Добавить новость</button>
+        <button type="submit" *ngIf="whatHaveToDo==='update'">Обновить новость</button>
+        <button type="submit" *ngIf="whatHaveToDo==='update'" (click)="clearFields()">Очистить поля</button>
+      </div>
+    </form>
+  </div>
+</div>
+<app-images-picker></app-images-picker>
+

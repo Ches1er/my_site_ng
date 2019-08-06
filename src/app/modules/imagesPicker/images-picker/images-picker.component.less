@@ -1,0 +1,52 @@
+@import "../../../common";
+
+
+.images-picker-message {
+  margin: 5px 0;
+  color: @messages_color;
+  font-family: 'Raleway', sans-serif;
+}
+.images-picker-button-block{
+  display: inline-flex;
+  flex-flow: column nowrap;
+  align-items: center;
+
+}
+.images_picker_all{
+  border: 1px solid @main_content_border;
+  overflow-y: scroll;
+  height: 300px;
+  display: inline-flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 10px;
+  .images_picker_image{
+    width: 30%;
+    height: 30%;
+    margin: 5px;
+    display: inline-flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-content: center;
+    padding: 5px;
+    img{
+      width: 100%;
+      height: auto;
+    }
+  }
+  }
+.images-picker-button {
+  margin-bottom: 5px;
+  width: auto;
+  user-select: none;
+  padding: .5em 1.3em;
+  outline: none;
+  color: @admin_button_color;
+  background-color: @admin_button_background;
+  &:hover {
+    background-color: @admin_button_background_hover;
+  }
+}
+

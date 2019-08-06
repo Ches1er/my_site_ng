@@ -1,6 +1,4 @@
 import {ApplyingGroup} from './Applying_group';
-import {CampaignResponse} from '../campaign/CampaignResponse';
-import {Campaign} from '../campaign/Campaign';
 
 export class ApplyingGroupsResponse {
 

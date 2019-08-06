@@ -1,7 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MessagesService} from '../../../services/messages.service';
-import {Form, FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
-import {CustomValidators} from '../../../validators/custom-validators';
+import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 import {HttpAuthService} from '../../../services/http/http-auth.service';
 
 @Component({

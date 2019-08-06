@@ -5,7 +5,7 @@
   padding: 0;
 }
 .container{
-  width: 960px;
+  width: 90%;
   margin: 0 auto;
 }
 .container .wrapper{
@@ -135,11 +135,13 @@
   height: 50px;
   line-height: 50px;
   background-color: #eee;
+  font-weight: bold;
   font-family: 'Raleway', sans-serif;
-  color: #8b8fe6;
+  color: #325c8e;
 }
 .window .window-main{
   width: 100%;
+  height: auto;
   box-sizing: border-box;
   padding: 10px 20px;
   display: inline-flex;
@@ -205,12 +207,20 @@
   right: 0;
 }
 
-.input_error{
-  border: red 1px solid;
+.validation_error{
+  color: red;
+  font-size: small;
 }
 
 .not_required_info{
   font-size: small;
   color: #86b0d3;
+}
+
+/* Admin */
+
+.choosenImg {
+  width: 30%;
+  height: 30%;
 }
 
