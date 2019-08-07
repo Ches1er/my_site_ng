@@ -19,6 +19,7 @@ export class HttpAuthService {
   // LOGIN
 
   login(data: any): Observable<any> {
+    if (data.rememberMe === '') { data.rememberMe = 0; }
     const params = new FormData();
     params.append('name', data.name);
     params.append('password', data.password);

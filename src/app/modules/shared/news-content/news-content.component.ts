@@ -11,7 +11,7 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class NewsContentComponent implements OnInit {
 
-  @Input() private pSalesAreaDefiner = null;
+  private pSalesAreaDefiner = null;
   private pNews: Array<News> = [];
   private pCurrentNews: News = null;
   private pActiveBlock = null;

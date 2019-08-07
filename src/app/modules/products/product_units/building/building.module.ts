@@ -13,6 +13,7 @@ import {BuildingOrderComponent} from './building/building_components/building_ma
 import { BuildingCampaignUnitComponent } from './building/building_components/building_main/building-campaign/building-campaign-unit/building-campaign-unit.component';
 import {SharedModule} from '../../../shared/shared.module';
 import {NewsContentComponent} from '../../../shared/news-content/news-content.component';
+import {CampaignContentComponent} from '../../../shared/campaign-content/campaign-content.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'building', pathMatch: 'full'},
@@ -20,7 +21,7 @@ const routes: Routes = [
     path: 'building', component: BuildingComponent, children: [
       {path: '', redirectTo: 'news', pathMatch: 'full'},
       {path: 'news', component: NewsContentComponent, data: {definer: 'build'}},
-      {path: 'campaign', component: BuildingCampaignComponent},
+      {path: 'campaign', component: CampaignContentComponent, data: {definer: 'build'}},
       {path: 'production_by_applying', component: BuildingProductionByApplyingComponent},
       {path: 'production_by_brand', component: BuildingProductionByBrandComponent},
       {path: 'building_objects', component: BuildingObjectsComponent},

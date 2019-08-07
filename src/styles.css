@@ -3,20 +3,32 @@
 *{
   margin: 0;
   padding: 0;
+
 }
 .container{
-  width: 90%;
+  width: 100%;
   margin: 0 auto;
-}
-.container .wrapper{
+  background-image: url('http://mydomain/img/bgc/white_wall_hash.png');
   display: inline-flex;
   flex-flow: column;
+  align-items: center;
+}
+.wrapper{
+  border-radius: 5px;
+  margin: 10px 0;
+  width: 80%;
+  background-image: url('http://mydomain/img/bgc/concrete_seamless.png');
+  display: inline-flex;
+  flex-flow: row;
+}
+header{
+  background-color: #fff;
   width: 100%;
 }
 
 /* Main*/
 .main_content{
-  width: 100%;
+  width: 80%;
   box-sizing: border-box;
   display: inline-flex;
   flex-flow: row nowrap;
@@ -36,7 +48,9 @@
   width: 70%;
   border: 1px solid #E1F1FF;
 }
+button {
 
+}
 /* Main content nav */
 
 .main_nav ul{
@@ -219,8 +233,27 @@
 
 /* Admin */
 
+.admin_content_input {
+  width: 100%;
+}
+.admin_content_input[type='number'] {
+  width: 50px;
+}
 .choosenImg {
   width: 30%;
   height: 30%;
+}
+.info_message{
+  padding: 5px;
+  margin: 5px 0;
+  border: 1px solid #124071;
+  color: #124071;
+  width: 100%;
+  box-sizing: border-box;
+  font-weight: bolder;
+  border-radius: 3px;
+}
+.admin_content_block_label{
+  margin-bottom: 5px;
 }
 

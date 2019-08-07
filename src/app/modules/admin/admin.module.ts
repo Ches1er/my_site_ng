@@ -12,6 +12,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {ImagesPickerModule} from '../imagesPicker/images-picker.module';
 import {MessagesService} from '../../services/messages.service';
 import {AdminMessagesService} from '../../services/admin/admin-messages.service';
+import {CampaignService} from '../../services/http/campaign/campaign.service';
 
 const routes: Routes = [
   {path: '', redirectTo: 'admin', pathMatch: 'full'},
@@ -33,6 +34,6 @@ const routes: Routes = [
     AngularEditorModule,
     ImagesPickerModule
   ],
-  providers: [HttpNewsService, SalesAreaService, MessagesService, AdminMessagesService]
+  providers: [HttpNewsService, SalesAreaService, MessagesService, AdminMessagesService, CampaignService]
 })
 export class AdminModule { }

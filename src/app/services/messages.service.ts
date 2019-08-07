@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Subject} from 'rxjs';
+import {Campaign} from '../dto/campaign/Campaign';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,8 @@ export class MessagesService {
   private pPackMenuShow: Subject<null> = new Subject<null>();
   private pProductsMenuUnitsShow: Subject<number> = new Subject<number>();
   private pChangedCurrentProduct: Subject<number> = new Subject<number>();
+  private pChangeCurrentCampaign: Subject<Campaign> = new Subject<Campaign>();
+  private pAdminLoggedIn: Subject<null> = new Subject<null>();
 
   constructor() {
   }
@@ -30,7 +33,6 @@ export class MessagesService {
   }
 
 
-
   // Auth
 
   get loginSuccessMessage() {
@@ -41,10 +43,20 @@ export class MessagesService {
     return this.pLogoutSuccess;
   }
 
+  get adminLoggedInMessage() {
+    return this.pAdminLoggedIn;
+  }
+
   // Menu
 
   get packMenuMessage() {
     return this.pPackMenuShow;
+  }
+
+  // Campaigns
+
+  get changeCurrentCampaignMessage(): Subject<Campaign> {
+    return this.pChangeCurrentCampaign;
   }
 
   // Products
@@ -69,6 +81,10 @@ export class MessagesService {
     this.pLogoutSuccess.next();
   }
 
+  public adminLoggedIn() {
+    this.pAdminLoggedIn.next();
+  }
+
   // Windows
 
   public loginWindowShow() {
@@ -83,6 +99,12 @@ export class MessagesService {
 
   public packMenuShow() {
     this.pPackMenuShow.next(null);
+  }
+
+  // Campaigns
+
+  public changeCurrentCampaign(campaign: Campaign) {
+    this.pChangeCurrentCampaign.next(campaign);
   }
 
   // Products

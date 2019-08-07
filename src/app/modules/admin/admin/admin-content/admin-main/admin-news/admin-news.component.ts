@@ -27,6 +27,7 @@ export class AdminNewsComponent implements OnInit {
   private pSalesAreas: Array<SalesArea> = [];
   private pChoosenImg: Image = null;
   private pWhatHaveToDo: string;
+  private pOnSubmitResponse: string;
 
   config: AngularEditorConfig = {
     editable: true,
@@ -107,20 +108,45 @@ export class AdminNewsComponent implements OnInit {
     this.pWhatHaveToDo = value;
   }
 
+  get onSubmitResponse() {
+    return this.pOnSubmitResponse;
+  }
+
+  set onSubmitResponse(value) {
+    this.pOnSubmitResponse = value;
+  }
+
   ngOnInit() {
     this.choosenImg = null;
     this.whatHaveToDo = 'add';
-    this.newsService.allNews.subscribe(news => this.news = news);
+    this.updateNews();
     this.salesAreaService.getSalesAreas().subscribe(salesArea => this.salesAreas = salesArea);
     this.adminMessageService.imageHasChoosen.subscribe(i => {
       this.moveImageToTheFormControl(i);
       this.choosenImg = i;
     });
+    this.adminMessageService.newsCampaignAdded.subscribe(resp => {
+      if (resp === 'update success') {
+        this.onSubmitResponse = 'Данные успешно обновлены';
+      }
+      if (resp === 'insert success') {
+        this.onSubmitResponse = 'Данные успешно добавлены';
+      }
+      if (resp === 'error') {
+        this.onSubmitResponse = 'Ой, что-то пошло не так! Повторите попытку.';
+      }
+      this.updateNews();
+    });
+  }
+
+  private updateNews() {
+    this.newsService.allNews.subscribe(news => this.news = news);
   }
 
   onSubmit() {
-    this.newsService.addNews(this.addChangeNewsForm.value).subscribe(resp => console.log(resp));
-    this.newsService.allNews.subscribe(news => this.news = news);
+    this.newsService.addNews(this.addChangeNewsForm.value, this.whatHaveToDo).subscribe(resp => {
+      this.adminMessageService.newsCampaignAddedMessage(resp);
+    });
   }
 
   imagesPickerShow(e) {

@@ -11,6 +11,8 @@
   <div class="add_news_block">
     <form [formGroup]="addChangeNewsForm" (ngSubmit)="onSubmit()">
 
+      <div class="info_message" *ngIf="onSubmitResponse">{{onSubmitResponse}}</div>
+
       <div class="form-group">
         <p class="admin_content_block_label">Выберите группу, в которой будет размещена новость</p>
         <select name="" id="salesArea" formControlName = "salesArea">
@@ -64,10 +66,14 @@
         </div>
       </div>
 
-      <div class="admin_content_button_block" *ngIf="addChangeNewsForm.valid">
-        <button type="submit" *ngIf="whatHaveToDo==='add'">Добавить новость</button>
-        <button type="submit" *ngIf="whatHaveToDo==='update'">Обновить новость</button>
-        <button type="submit" *ngIf="whatHaveToDo==='update'" (click)="clearFields()">Очистить поля</button>
+      <div class="admin_content_button_block">
+        <div *ngIf="addChangeNewsForm.valid">
+          <button type="submit" *ngIf="whatHaveToDo==='add'">Добавить новость</button>
+        </div>
+        <div *ngIf="addChangeNewsForm.valid">
+          <button type="submit" *ngIf="whatHaveToDo==='update'">Обновить новость</button>
+        </div>
+        <button type="submit" (click)="clearFields()">Очистить поля</button>
       </div>
     </form>
   </div>

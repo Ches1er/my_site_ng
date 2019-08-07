@@ -6,7 +6,7 @@ import {CookieService} from 'ngx-cookie-service';
 @Component({
   selector: 'app-auth-buttons-block',
   templateUrl: './auth-buttons-block.component.html',
-  styleUrls: ['./auth-buttons-block.component.css']
+  styleUrls: ['./auth-buttons-block.component.less']
 })
 export class AuthButtonsBlockComponent implements OnInit {
 
@@ -17,6 +17,8 @@ export class AuthButtonsBlockComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.ifUserLoggedIn = false;
+    this.emptyCookie();
     this.msgService.loginSuccessMessage.subscribe(m => this.ifUserLoggedIn = true);
     this.msgService.logoutSuccessMessage.subscribe(m => this.ifUserLoggedIn = false);
     this.cookieService.check('api_token') ? this.ifUserLoggedIn = true : this.ifUserLoggedIn = false;
@@ -31,8 +33,12 @@ export class AuthButtonsBlockComponent implements OnInit {
   }
 
   logout() {
+    this.emptyCookie();
+    this.msgService.logoutSuccess();
+  }
+
+  private emptyCookie() {
     this.cookieService.delete('api_token');
     this.cookieService.delete('remember_token');
-    this.msgService.logoutSuccess();
   }
 }

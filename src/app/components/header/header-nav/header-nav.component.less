@@ -10,15 +10,17 @@ ul{
           display: inline-block;
           text-decoration: none;
           text-transform: uppercase;
+          font-size: larger;
+          font-family: 'Oswald', sans-serif;
           height: 50px;
           padding: 0 20px;
-          color: @link_color;
+          color: @nav_font_color;
           &.active{
             color: @active_main_nav_link_color;
           }
           &:hover{
             transition: 0.5s;
-            color: @link_color_hover;
+            color: @nav_font_color_hover;
           }
         }
     }

@@ -5,8 +5,9 @@ export class Campaign {
               private pShortCampaign: string,
               private pFullCampaign: string,
               private pImg: string,
-              private pDate,
-              private pExpiration,
+              private pImgId: number,
+              private pDate: number,
+              private pExpiration: number,
               private pSalesAreaId: number) {
   }
 
@@ -16,6 +17,13 @@ export class Campaign {
 
   set id(value: number) {
     this.pId = value;
+  }
+  set imgId(value: number) {
+    this.pImgId = value;
+  }
+
+  get imgId(): number {
+    return this.pImgId;
   }
 
   get name(): string {
@@ -50,19 +58,19 @@ export class Campaign {
     this.pImg = value;
   }
 
-  get date() {
+  get date(): number {
     return this.pDate;
   }
 
-  set date(value) {
+  set date(value: number) {
     this.pDate = value;
   }
 
-  get expiration() {
+  get expiration(): number {
     return this.pExpiration;
   }
 
-  set expiration(value) {
+  set expiration(value: number) {
     this.pExpiration = value;
   }
 
@@ -81,6 +89,7 @@ export class Campaign {
       jsonObj.short_event,
       jsonObj.full_event,
       jsonObj.img,
+      jsonObj.img_id,
       jsonObj.date,
       jsonObj.expiration,
       jsonObj.sales_area_id);

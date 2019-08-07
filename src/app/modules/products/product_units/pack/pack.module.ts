@@ -10,6 +10,7 @@ import {PackComponent} from './pack_components/pack.component';
 import {PackCampaignUnitComponent} from './pack_components/pack_main/campaign/pack-campaign-unit/pack-campaign-unit.component';
 import {SharedModule} from '../../../shared/shared.module';
 import {NewsContentComponent} from '../../../shared/news-content/news-content.component';
+import {CampaignContentComponent} from '../../../shared/campaign-content/campaign-content.component';
 
 
 const routes: Routes = [
@@ -18,7 +19,7 @@ const routes: Routes = [
     path: 'pack', component: PackComponent, children: [
       {path: '', redirectTo: 'news', pathMatch: 'full'},
       {path: 'news', component: NewsContentComponent, data: {definer: 'pack'}},
-      {path: 'campaign', component: CampaignComponent},
+      {path: 'campaign', component: CampaignContentComponent, data: {definer: 'pack'}},
       {path: 'production_by_applying', component: ProductionByApplyingComponent},
       {path: 'production_by_brand', component: ProductionByBrandComponent},
       {path: 'clients', component: ClientsComponent}

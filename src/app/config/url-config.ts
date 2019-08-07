@@ -27,8 +27,10 @@ export class UrlConfig {
   // CAMPAIGN
 
   private campaignBase = this.base + 'events/';
+  ALL_CAMPAIGN = this.campaignBase + 'all';
   PACK_CAMPAIGN = this.campaignBase + 'pack';
   BUILDING_CAMPAIGN = this.campaignBase + 'building';
+  ADD_CAMPAIGN = this.campaignBase + 'add';
 
   // GOODS
 

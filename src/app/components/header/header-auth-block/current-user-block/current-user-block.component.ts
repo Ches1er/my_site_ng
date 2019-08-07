@@ -6,7 +6,7 @@ import {CookieService} from 'ngx-cookie-service';
 @Component({
   selector: 'app-current-user-block',
   templateUrl: './current-user-block.component.html',
-  styleUrls: ['./current-user-block.component.css']
+  styleUrls: ['./current-user-block.component.less']
 })
 export class CurrentUserBlockComponent implements OnInit {
   currentUser = null;
@@ -24,7 +24,6 @@ export class CurrentUserBlockComponent implements OnInit {
   ngOnInit() {
     this.msgService.logoutSuccessMessage.subscribe(m => {
       this.currentUser = null;
-      this.admin = false;
     });
 
     if (this.cookieService.check('remember_token')) {
@@ -33,7 +32,9 @@ export class CurrentUserBlockComponent implements OnInit {
           if (resp) {
             this.httpAuthService.user(resp.api_token).subscribe(user => this.currentUser = user);
             this.httpAuthService.roles(resp.api_token).subscribe(roles => {
-              this.admin = CurrentUserBlockComponent.isAdmin(roles);
+              if (CurrentUserBlockComponent.isAdmin(roles)) {
+                this.msgService.adminLoggedIn();
+              }
             });
           }
         });
@@ -41,7 +42,9 @@ export class CurrentUserBlockComponent implements OnInit {
     this.msgService.loginSuccessMessage.subscribe(token => {
         this.httpAuthService.user(token).subscribe(user => this.currentUser = user);
         this.httpAuthService.roles(token).subscribe(roles => {
-          this.admin = CurrentUserBlockComponent.isAdmin(roles);
+          if (CurrentUserBlockComponent.isAdmin(roles)) {
+            this.msgService.adminLoggedIn();
+          }
         });
       }
     );

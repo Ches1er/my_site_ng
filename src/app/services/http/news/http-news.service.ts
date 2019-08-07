@@ -5,6 +5,7 @@ import {Observable} from 'rxjs';
 import {News} from '../../../dto/news/News';
 import {NewsResponse} from '../../../dto/news/NewsResponse';
 import {map} from 'rxjs/operators';
+import {ResultResponse} from '../../../dto/server_response/ResultResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -35,9 +36,9 @@ export class HttpNewsService {
       .pipe(map(newsResponse => newsResponse.data));
   }
 
-  addNews(data: any): Observable<any> {
-    console.log('hello');
+  addNews(data: any, action: string): Observable<any> {
     const params = new FormData();
+    params.append('action', action);
     params.append('name', data.name);
     params.append('short_news', data.short_news);
     params.append('full_news', data.full_news);
@@ -45,6 +46,7 @@ export class HttpNewsService {
     params.append('salesArea', data.salesArea);
     console.log(this.urlConfig.ADD_NEWS);
     return this.http.post(this.urlConfig.ADD_NEWS, params)
-      .pipe(map(resp => resp));
+      .pipe(map(resp => ResultResponse.fromJson(resp)))
+      .pipe(map(ResResp => ResResp.response));
   }
 }

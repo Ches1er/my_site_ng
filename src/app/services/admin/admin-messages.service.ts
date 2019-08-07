@@ -6,8 +6,11 @@ import {Image} from '../../dto/images/Image';
   providedIn: 'root'
 })
 export class AdminMessagesService {
+
   private pImagesPickerWindowShow: Subject<null> = new Subject<null>();
   private pImageHasChoosen: Subject<Image> = new Subject<Image>();
+  private pNewsCampaignAdded: Subject<string> = new Subject<string>();
+
 
   constructor() {
   }
@@ -23,6 +26,12 @@ export class AdminMessagesService {
     return this.pImageHasChoosen;
   }
 
+  // Campaign_News
+
+  get newsCampaignAdded(): Subject<string> {
+    return this.pNewsCampaignAdded;
+  }
+
   // FUNCTIONS
 
   // Images Picker
@@ -34,4 +43,11 @@ export class AdminMessagesService {
   public imageHasChoosenMessage(image: Image) {
     this.pImageHasChoosen.next(image);
   }
+
+  // Campaign_News
+
+  public newsCampaignAddedMessage(response: string) {
+    this.pNewsCampaignAdded.next(response);
+  }
+
 }

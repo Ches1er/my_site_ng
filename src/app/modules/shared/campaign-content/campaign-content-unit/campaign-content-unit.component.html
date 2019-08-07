@@ -1,0 +1,13 @@
+<div class="news" *ngIf="campaign">
+  <div class="news_event_name_date_img_block">
+    <img class="news_event_img" src="{{campaign.img}}" alt="">
+    <div class="news_event_name_date">
+      <div class="news_event_name">{{campaign.name}}</div>
+      <div class="news_event_date" *ngIf="!campaignExpired">Дата старта акции: {{campaign.date}}</div>
+      <div class="news_event_expiration_date" *ngIf="!campaignExpired">Дата окончания акции: {{campaign.expiration}}</div>
+      <div class="news_event_campaign_expired" *ngIf="campaignExpired">Эта акция окончена!</div>
+    </div>
+  </div>
+  <hr>
+  <div class="news_event_full" [innerHTML] = campaign.fullCampaign></div>
+</div>

@@ -9,6 +9,7 @@ import {CampaignService} from '../../../../../../../../services/http/campaign/ca
 })
 export class BuildingCampaignComponent implements OnInit {
 
+  private pSalesAreaDefiner = null;
   private pCampaign: Array<Campaign> = [];
   private pCurrentCampaign: Campaign = null;
 
@@ -20,6 +21,13 @@ export class BuildingCampaignComponent implements OnInit {
   }
 
   // Getters-Setters
+  get salesAreaDefiner(): any {
+    return this.pSalesAreaDefiner;
+  }
+
+  set salesAreaDefiner(value: any) {
+    this.pSalesAreaDefiner = value;
+  }
 
   get campaign(): Array<Campaign> {
     return this.pCampaign;

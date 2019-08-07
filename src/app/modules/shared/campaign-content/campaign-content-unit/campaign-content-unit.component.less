@@ -1,4 +1,4 @@
-@import "../../../../../../../../../common";
+@import "../../../../common";
 
 .news {
   display: inline-flex;
@@ -22,6 +22,22 @@
         width: auto;
         margin-left: 10px;
         color: @main_right_side_date;
+        padding: 5px;
+      }
+      .news_event_expiration_date {
+        width: auto;
+        margin-left: 10px;
+        color: @main_right_side_expiration_date;
+        padding: 5px;
+      }
+      .news_event_campaign_expired {
+        width: auto;
+        margin-left: 10px;
+        color: @main_right_side_expired;
+        border: 1px solid red;
+        box-sizing: border-box;
+        padding: 5px;
+        border-radius: 3px;
       }
     }
     img {
