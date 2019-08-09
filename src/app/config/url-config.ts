@@ -47,8 +47,10 @@ export class UrlConfig {
   // products
   private productsBase = this.base + 'products/';
   SHOW_PRODUCT = this.productsBase;
+  SHOW_ALL_PRODUCTS = this.productsBase + 'all';
   SHOW_PRODUCTS_BY_APPLYING = this.productsBase + 'applying/';
   SHOW_PRODUCTS_BY_BRAND = this.productsBase + 'brand/';
+  ADD_PRODUCT = this.productsBase + 'add';
 
   // clients
 

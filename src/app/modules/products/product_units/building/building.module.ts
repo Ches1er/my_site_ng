@@ -14,6 +14,7 @@ import { BuildingCampaignUnitComponent } from './building/building_components/bu
 import {SharedModule} from '../../../shared/shared.module';
 import {NewsContentComponent} from '../../../shared/news-content/news-content.component';
 import {CampaignContentComponent} from '../../../shared/campaign-content/campaign-content.component';
+import {ProdContentComponent} from '../../../shared/prod-content/prod-content.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'building', pathMatch: 'full'},
@@ -22,8 +23,8 @@ const routes: Routes = [
       {path: '', redirectTo: 'news', pathMatch: 'full'},
       {path: 'news', component: NewsContentComponent, data: {definer: 'build'}},
       {path: 'campaign', component: CampaignContentComponent, data: {definer: 'build'}},
-      {path: 'production_by_applying', component: BuildingProductionByApplyingComponent},
-      {path: 'production_by_brand', component: BuildingProductionByBrandComponent},
+      {path: 'production_by_applying', component: ProdContentComponent, data: {definer: 'build', prod_by: 'appl'}},
+      {path: 'production_by_brand', component: ProdContentComponent, data: {definer: 'build', prod_by: 'brand'}},
       {path: 'building_objects', component: BuildingObjectsComponent},
       {path: 'solutions', component: BuildingSolutionsComponent},
       {path: 'tech_info', component: BuildingTechInfoComponent},

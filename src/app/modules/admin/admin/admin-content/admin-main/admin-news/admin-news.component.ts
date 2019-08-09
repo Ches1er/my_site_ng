@@ -4,10 +4,10 @@ import {News} from '../../../../../../dto/news/News';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {SalesAreaService} from '../../../../../../services/http/sales_area/sales-area.service';
 import {SalesArea} from '../../../../../../dto/sales-area/Sales-area';
-import {AngularEditorConfig} from '@kolkov/angular-editor';
 import {MessagesService} from '../../../../../../services/messages.service';
 import {AdminMessagesService} from '../../../../../../services/admin/admin-messages.service';
 import {Image} from '../../../../../../dto/images/Image';
+import {AngularEditorCfg} from '../../../../../../config/angularEditorCfg';
 
 @Component({
   selector: 'app-admin-news',
@@ -23,52 +23,13 @@ export class AdminNewsComponent implements OnInit {
     img: new FormControl(''),
     full_news: new FormControl('', Validators.required),
   });
+  angularEditorCfg = new AngularEditorCfg();
   private pNews: Array<News> = [];
   private pSalesAreas: Array<SalesArea> = [];
   private pChoosenImg: Image = null;
   private pWhatHaveToDo: string;
   private pOnSubmitResponse: string;
-
-  config: AngularEditorConfig = {
-    editable: true,
-    spellcheck: true,
-    height: 'auto',
-    minHeight: '0',
-    maxHeight: 'auto',
-    width: 'auto',
-    minWidth: '0',
-    translate: 'yes',
-    enableToolbar: true,
-    showToolbar: true,
-    placeholder: 'Enter text here...',
-    defaultParagraphSeparator: '',
-    defaultFontName: '',
-    defaultFontSize: '',
-    fonts: [
-      {class: 'arial', name: 'Arial'},
-      {class: 'times-new-roman', name: 'Times New Roman'},
-      {class: 'calibri', name: 'Calibri'},
-      {class: 'comic-sans-ms', name: 'Comic Sans MS'}
-    ],
-    customClasses: [
-      {
-        name: 'quote',
-        class: 'quote',
-      },
-      {
-        name: 'redText',
-        class: 'redText'
-      },
-      {
-        name: 'titleText',
-        class: 'titleText',
-        tag: 'h1',
-      },
-    ],
-    uploadUrl: 'v1/image',
-    sanitize: true,
-    toolbarPosition: 'top',
-  };
+  config = this.angularEditorCfg.CONFIG;
 
   constructor(private msgService: MessagesService,
               private newsService: HttpNewsService,

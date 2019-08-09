@@ -9,7 +9,7 @@ import {SalesAreaService} from '../../../../../../services/http/sales_area/sales
 import {MessagesService} from '../../../../../../services/messages.service';
 import {CampaignService} from '../../../../../../services/http/campaign/campaign.service';
 import {DatePipe} from '@angular/common';
-import {log} from 'util';
+import {AngularEditorCfg} from '../../../../../../config/angularEditorCfg';
 
 @Component({
   selector: 'app-admin-campaign',
@@ -28,51 +28,13 @@ export class AdminCampaignComponent implements OnInit {
     full_campaign: new FormControl('', Validators.required)
   });
   datePipe = new DatePipe('en-EN');
+  angularEditorCfg = new AngularEditorCfg();
   private pCampaigns: Array<Campaign> = [];
   private pSalesAreas: Array<SalesArea> = [];
   private pChoosenImg: Image = null;
   private pWhatHaveToDo: string;
   private pOnSubmitResponse: string;
-  config: AngularEditorConfig = {
-    editable: true,
-    spellcheck: true,
-    height: 'auto',
-    minHeight: '0',
-    maxHeight: 'auto',
-    width: 'auto',
-    minWidth: '0',
-    translate: 'yes',
-    enableToolbar: true,
-    showToolbar: true,
-    placeholder: 'Enter text here...',
-    defaultParagraphSeparator: '',
-    defaultFontName: '',
-    defaultFontSize: '',
-    fonts: [
-      {class: 'arial', name: 'Arial'},
-      {class: 'times-new-roman', name: 'Times New Roman'},
-      {class: 'calibri', name: 'Calibri'},
-      {class: 'comic-sans-ms', name: 'Comic Sans MS'}
-    ],
-    customClasses: [
-      {
-        name: 'quote',
-        class: 'quote',
-      },
-      {
-        name: 'redText',
-        class: 'redText'
-      },
-      {
-        name: 'titleText',
-        class: 'titleText',
-        tag: 'h1',
-      },
-    ],
-    uploadUrl: 'v1/image',
-    sanitize: true,
-    toolbarPosition: 'top',
-  };
+  config = this.angularEditorCfg.CONFIG;
 
   constructor(private msgService: MessagesService,
               private campaignsService: CampaignService,

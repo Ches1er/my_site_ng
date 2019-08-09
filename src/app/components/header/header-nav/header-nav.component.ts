@@ -14,6 +14,7 @@ export class HeaderNavComponent implements OnInit {
   ngOnInit() {
     this.adminLoggedIn = false;
     this.msgService.adminLoggedInMessage.subscribe(resp => this.adminLoggedIn = true);
+    this.msgService.logoutSuccessMessage.subscribe(m => this.adminLoggedIn = false);
   }
 
   get adminLoggedIn(): boolean {

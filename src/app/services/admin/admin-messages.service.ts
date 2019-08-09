@@ -11,7 +11,6 @@ export class AdminMessagesService {
   private pImageHasChoosen: Subject<Image> = new Subject<Image>();
   private pNewsCampaignAdded: Subject<string> = new Subject<string>();
 
-
   constructor() {
   }
 

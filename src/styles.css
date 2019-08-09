@@ -28,7 +28,7 @@ header{
 
 /* Main*/
 .main_content{
-  width: 80%;
+  width: 100%;
   box-sizing: border-box;
   display: inline-flex;
   flex-flow: row nowrap;

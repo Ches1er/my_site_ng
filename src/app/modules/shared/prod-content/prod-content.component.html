@@ -1,5 +1,10 @@
-{{product.name}}
-<div *ngFor="let product_img of product.img">
-  <img src="{{product_img}}" alt="">
+<div class="main_content">
+  <div class="main_content_left">
+    <app-prod-by-menu [groups]="groups" [groupDefiner]="prodByDefiner"></app-prod-by-menu>
+  </div>
+  <div class="main_content_right">
+    <div *ngIf="currentProduct">
+      {{currentProduct.name}}
+    </div>
+  </div>
 </div>
-<p [innerHTML]=product.techInfo></p>

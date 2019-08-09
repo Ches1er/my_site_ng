@@ -67,7 +67,8 @@ export class ImagesPickerComponent implements OnInit {
   onUpload() {
     this.imgService.uploadImage(this.selectedFile).subscribe(resp => {
       this.updateImages();
-      this.imageUploaded = resp.response;
+      // this.imageUploaded = resp.response;
+      this.imageUploaded = 'Uploaded';
       this.selectedFile = null;
     });
   }

@@ -23,7 +23,7 @@ export class ProdByMenuUnitComponent implements OnInit {
     this.msgService.productsMenuUnitsShowMessage.subscribe(id => {
       if (this.appGroupId === id) {
         this.visible = true;
-        if (this.groupDefiner === 'applying') {
+        if (this.groupDefiner === 'appl') {
           this.productsService.productsByApplying(this.appGroupId).subscribe(prod => this.products = prod);
         }
         if (this.groupDefiner === 'brand') {

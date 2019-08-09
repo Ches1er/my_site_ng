@@ -8,7 +8,10 @@ import {NewsContentComponent} from './news-content/news-content.component';
 import {NewsContentUnitComponent} from './news-content/news-content-unit/news-content-unit.component';
 import { CampaignContentComponent } from './campaign-content/campaign-content.component';
 import { CampaignContentUnitComponent } from './campaign-content/campaign-content-unit/campaign-content-unit.component';
-
+import { ProdContentUnitComponent } from './prod-content/prod-content-unit/prod-content-unit.component';
+import {ApplyingGroupsService} from '../../services/http/applying_groups/applying-groups.service';
+import {BrandsService} from '../../services/http/brands/brands.service';
+import {ProductsService} from '../../services/http/products/products.service';
 
 @NgModule({
   declarations: [ProdByMenuUnitComponent,
@@ -18,9 +21,15 @@ import { CampaignContentUnitComponent } from './campaign-content/campaign-conten
     NewsContentComponent,
     NewsContentUnitComponent,
     CampaignContentComponent,
-    CampaignContentUnitComponent],
+    CampaignContentUnitComponent,
+    ProdContentUnitComponent],
   imports: [
     CommonModule
+  ],
+  providers: [
+    ApplyingGroupsService,
+    BrandsService,
+    ProductsService
   ],
   exports: [ProdByMenuUnitComponent,
     ProdContentComponent,
@@ -29,7 +38,8 @@ import { CampaignContentUnitComponent } from './campaign-content/campaign-conten
     NewsContentComponent,
     NewsContentUnitComponent,
     CampaignContentComponent,
-    CampaignContentUnitComponent]
+    CampaignContentUnitComponent,
+    ]
 })
 export class SharedModule {
 }

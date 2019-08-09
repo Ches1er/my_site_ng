@@ -5,6 +5,7 @@ import {Observable} from 'rxjs';
 import {Product} from '../../../dto/products/Product';
 import {map} from 'rxjs/operators';
 import {ProductsResponse} from '../../../dto/products/ProductsResponse';
+import {ResultResponse} from '../../../dto/server_response/ResultResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -16,18 +17,41 @@ export class ProductsService {
   constructor(@Inject(HttpClient) private http: HttpClient) {
   }
 
+  allProducts(): Observable<Array<Product>> {
+    return this.http.get(this.urlConfig.SHOW_ALL_PRODUCTS)
+      .pipe(map(resp => ProductsResponse.fromJson(resp)))
+      .pipe(map(productsResponse => productsResponse.data));
+  }
+
   product(id: number): Observable<Product> {
     return this.http.get(this.urlConfig.SHOW_PRODUCT + id)
       .pipe(map(product => Product.fromJson(product)));
   }
+
   productsByApplying(id: number): Observable<Array<Product>> {
     return this.http.get(this.urlConfig.SHOW_PRODUCTS_BY_APPLYING + id)
       .pipe(map(resp => ProductsResponse.fromJson(resp)))
       .pipe(map(productsResponse => productsResponse.data));
   }
-  productsByBrand(id: number): Observable<Array<Product>>{
+
+  productsByBrand(id: number): Observable<Array<Product>> {
     return this.http.get(this.urlConfig.SHOW_PRODUCTS_BY_BRAND + id)
       .pipe(map(resp => ProductsResponse.fromJson(resp)))
       .pipe(map(productsResponse => productsResponse.data));
+  }
+
+  addUpdateProduct(data: any, action: string): Observable<any> {
+    const params = new FormData();
+    params.append('action', data.action);
+    params.append('name', data.name);
+    params.append('brandId', data.brands);
+    params.append('active', data.active);
+    params.append('img', data.img);
+    params.append('tech_info', data.tech_info);
+    params.append('applying_group', data.applying_group);
+    params.append('salesArea', data.salesArea);
+    return this.http.post(this.urlConfig.ADD_PRODUCT, params)
+      .pipe(map(resp => ResultResponse.fromJson(resp)))
+      .pipe(map(ResResp => ResResp.response));
   }
 }

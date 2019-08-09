@@ -44,7 +44,6 @@ export class HttpNewsService {
     params.append('full_news', data.full_news);
     params.append('img', data.img);
     params.append('salesArea', data.salesArea);
-    console.log(this.urlConfig.ADD_NEWS);
     return this.http.post(this.urlConfig.ADD_NEWS, params)
       .pipe(map(resp => ResultResponse.fromJson(resp)))
       .pipe(map(ResResp => ResResp.response));

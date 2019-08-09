@@ -23,7 +23,7 @@ export class ImagesService {
 
   uploadImage(file: File): Observable<any> {
     const uploadData = new FormData();
-    uploadData.append('myImage', file, file.name);
+    uploadData.append('file', file, file.name);
     return this.http.post(this.urlConfig.UPLOAD_IMAGE, uploadData)
       .pipe(resp => resp);
   }

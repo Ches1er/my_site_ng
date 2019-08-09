@@ -1,12 +1,15 @@
 export class Product {
 
+
   constructor(private pId: number,
               private pName: string,
               private pBrandId: number,
               private pSalesAreaId: number,
               private pActive: boolean,
-              private pImg: Array<string>,
-              private pTechInfo: string
+              private pImg: string,
+              private pImgId: number,
+              private pTechInfo: string,
+              private pApplyingGroupId: number
   ) {
   }
 
@@ -16,6 +19,14 @@ export class Product {
 
   set id(value: number) {
     this.pId = value;
+  }
+
+  set imgId(value: number) {
+    this.pImgId = value;
+  }
+
+  get imgId(): number {
+    return this.pImgId;
   }
 
   get name(): string {
@@ -50,11 +61,11 @@ export class Product {
     this.pActive = value;
   }
 
-  get img(): Array<string> {
+  get img(): string {
     return this.pImg;
   }
 
-  set img(value: Array<string>) {
+  set img(value: string) {
     this.pImg = value;
   }
 
@@ -66,8 +77,23 @@ export class Product {
     this.pTechInfo = value;
   }
 
+  get applyingGroupId(): number {
+    return this.pApplyingGroupId;
+  }
+
+  set applyingGroupId(value: number) {
+    this.pApplyingGroupId = value;
+  }
+
   public static fromJson(jsonObj): Product {
-    return new Product(jsonObj.id, jsonObj.name, jsonObj.brand_id, jsonObj.sales_area_id,
-      jsonObj.active, jsonObj.img, jsonObj.tech_info);
+    return new Product(jsonObj.id,
+      jsonObj.name,
+      jsonObj.brand_id,
+      jsonObj.sales_area_id,
+      jsonObj.active,
+      jsonObj.img,
+      jsonObj.img_id,
+      jsonObj.tech_info,
+      jsonObj.applying_group_id);
   }
 }

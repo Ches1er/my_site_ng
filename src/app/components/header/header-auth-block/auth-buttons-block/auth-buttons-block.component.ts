@@ -18,7 +18,6 @@ export class AuthButtonsBlockComponent implements OnInit {
 
   ngOnInit() {
     this.ifUserLoggedIn = false;
-    this.emptyCookie();
     this.msgService.loginSuccessMessage.subscribe(m => this.ifUserLoggedIn = true);
     this.msgService.logoutSuccessMessage.subscribe(m => this.ifUserLoggedIn = false);
     this.cookieService.check('api_token') ? this.ifUserLoggedIn = true : this.ifUserLoggedIn = false;

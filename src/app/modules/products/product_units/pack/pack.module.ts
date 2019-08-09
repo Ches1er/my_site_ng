@@ -11,6 +11,7 @@ import {PackCampaignUnitComponent} from './pack_components/pack_main/campaign/pa
 import {SharedModule} from '../../../shared/shared.module';
 import {NewsContentComponent} from '../../../shared/news-content/news-content.component';
 import {CampaignContentComponent} from '../../../shared/campaign-content/campaign-content.component';
+import {ProdContentComponent} from '../../../shared/prod-content/prod-content.component';
 
 
 const routes: Routes = [
@@ -20,8 +21,8 @@ const routes: Routes = [
       {path: '', redirectTo: 'news', pathMatch: 'full'},
       {path: 'news', component: NewsContentComponent, data: {definer: 'pack'}},
       {path: 'campaign', component: CampaignContentComponent, data: {definer: 'pack'}},
-      {path: 'production_by_applying', component: ProductionByApplyingComponent},
-      {path: 'production_by_brand', component: ProductionByBrandComponent},
+      {path: 'production_by_applying', component: ProdContentComponent, data: {definer: 'pack', prod_by: 'appl'}},
+      {path: 'production_by_brand', component: ProdContentComponent, data: {definer: 'pack', prod_by: 'brand'}},
       {path: 'clients', component: ClientsComponent}
     ]
   },

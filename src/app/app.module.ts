@@ -1,7 +1,10 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import {LOCALE_ID, NgModule} from '@angular/core';
 import {CookieService} from 'ngx-cookie-service';
 import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
+
+import { registerLocaleData } from '@angular/common';
+import localeRuUa from '@angular/common/locales/ru-UA';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -24,6 +27,8 @@ import {LoginComponent} from './components/windows/login/login.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RegisterComponent} from './components/windows/register/register.component';
 import {SharedModule} from './modules/shared/shared.module';
+
+registerLocaleData(localeRuUa, 'RuUa');
 
 @NgModule({
   declarations: [
@@ -52,9 +57,11 @@ import {SharedModule} from './modules/shared/shared.module';
     SharedModule,
     AngularEditorModule
   ],
-  providers: [CookieService
+  providers: [CookieService, { provide: LOCALE_ID, useValue: 'RuUa' }
   ],
   bootstrap: [AppComponent]
 })
+
 export class AppModule {
+
 }
