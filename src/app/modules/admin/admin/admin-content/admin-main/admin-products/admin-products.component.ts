@@ -8,8 +8,6 @@ import {BrandsService} from '../../../../../../services/http/brands/brands.servi
 import {SalesAreaService} from '../../../../../../services/http/sales_area/sales-area.service';
 import {ProductsService} from '../../../../../../services/http/products/products.service';
 import {AdminMessagesService} from '../../../../../../services/admin/admin-messages.service';
-import {AngularEditorConfig} from '@kolkov/angular-editor';
-
 import {ApplyingGroupsService} from '../../../../../../services/http/applying_groups/applying-groups.service';
 import {ApplyingGroup} from '../../../../../../dto/applying_groups/Applying_group';
 import {UrlConfig} from '../../../../../../config/url-config';
@@ -31,8 +29,10 @@ export class AdminProductsComponent implements OnInit {
     tech_info: new FormControl('', Validators.required),
     applying_group: new FormControl('', Validators.required)
   });
+
   urlConfig = new UrlConfig();
   angularEditorCfg = new AngularEditorCfg();
+
   private pProducts: Array<Product>;
   private pSalesAreas: Array<SalesArea> = [];
   private pBrands: Array<Brand> = null;
@@ -74,6 +74,7 @@ export class AdminProductsComponent implements OnInit {
     const salesArea = this.addChangeProductForm.get('salesArea');
     salesArea.valueChanges.subscribe(val => this.salesAreaChanges(val));
   }
+
   salesAreaChanges(val: number): void {
     this.getBrandsDependsOnSalesArea(val);
     this.getApplyingDependsOnSalesArea(val);
@@ -149,11 +150,9 @@ export class AdminProductsComponent implements OnInit {
 
   private getApplyingDependsOnSalesArea(id: number) {
     if (id == 1) {
-      console.log(id);
       this.applGroupService.packAppGroups.subscribe(a => this.appGroup = a);
     }
     if (id == 2) {
-      console.log(id);
       this.applGroupService.buildAppGroups.subscribe(a => this.appGroup = a);
     }
   }
@@ -170,8 +169,8 @@ export class AdminProductsComponent implements OnInit {
         applying_group: product.applyingGroupId
       }
     );
-    this.getBrandsDependsOnSalesArea(product.salesAreaId.toString());
-    this.getApplyingDependsOnSalesArea(product.salesAreaId.toString());
+    this.getBrandsDependsOnSalesArea(product.salesAreaId);
+    this.getApplyingDependsOnSalesArea(product.salesAreaId);
     this.choosenImg = new Image(product.imgId, 'name', product.img);
     this.whatHaveToDo = 'update';
   }

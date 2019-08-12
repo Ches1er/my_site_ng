@@ -3,10 +3,9 @@ import {UrlConfig} from '../../../config/url-config';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
-import {Campaign} from '../../../dto/campaign/Campaign';
-import {CampaignResponse} from '../../../dto/campaign/CampaignResponse';
 import {ApplyingGroup} from '../../../dto/applying_groups/Applying_group';
 import {ApplyingGroupsResponse} from '../../../dto/applying_groups/ApplyingGroupsResponse';
+import {ResultResponse} from '../../../dto/server_response/ResultResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -25,4 +24,20 @@ export class ApplyingGroupsService {
       .pipe(map(resp => ApplyingGroupsResponse.fromJson(resp)))
       .pipe(map(appGroupResponse => appGroupResponse.data));
   }
+  get allAppGroups(): Observable<Array<ApplyingGroup>> {
+    return this.http.get(this.urlConfig.SHOW_ALL_GROUPS)
+      .pipe(map(resp => ApplyingGroupsResponse.fromJson(resp)))
+      .pipe(map(appGroupResponse => appGroupResponse.data));
+  }
+  add(data: any, action: string): Observable<string> {
+    const params = new FormData();
+    params.append('name', data.name);
+    params.append('id', data.id);
+    params.append('sales_area', data.salesArea);
+    params.append('action', action);
+    return this.http.post(this.urlConfig.ADD_GROUP, params)
+      .pipe(map(resp => ResultResponse.fromJson(resp)))
+      .pipe(map(ResResp => ResResp.response));
+  }
+
 }

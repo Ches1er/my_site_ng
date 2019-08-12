@@ -11,7 +11,7 @@ export class ProdByMenuComponent implements OnInit {
   @Input() groups: Array<any> = [];
   @Input() groupDefiner: string = null;
 
-  constructor(@Inject(MessagesService) private msgService: MessagesService) {
+  constructor(private msgService: MessagesService) {
   }
 
   ngOnInit() {

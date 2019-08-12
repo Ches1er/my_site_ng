@@ -3,6 +3,7 @@ export class Brand {
   constructor(
               private pId: number,
               private pName: string,
+              private pActive: boolean,
               private pSalesAreaId: number,
               private pImg: string) {
   }
@@ -13,6 +14,13 @@ export class Brand {
 
   set id(value: number) {
     this.pId = value;
+  }
+  get active(): boolean {
+    return this.pActive;
+  }
+
+  set active(value: boolean) {
+    this.pActive = value;
   }
 
   get name(): string {
@@ -40,6 +48,6 @@ export class Brand {
   }
 
   public static fromJson(jsonObj: any): Brand {
-    return new Brand(jsonObj.id, jsonObj.name, jsonObj.sales_area_id, jsonObj.img);
+    return new Brand(jsonObj.id, jsonObj.name, jsonObj.active, jsonObj.sales_area_id, jsonObj.img);
   }
 }

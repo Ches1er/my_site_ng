@@ -1,14 +1,15 @@
-<div class="news_block">
+<div class="admin_unit_block">
   <div class="admin_block_header">В данном блоке вы можете изменять существующие или добавлять новые акции на сайт</div>
-  <div class="news_list_block">
+  <div class="admin_left_list_block">
     <div *ngFor="let campaign_unit of campaigns">
-      <div class="news_unit_block">
-        <div class="news_unit_name" (click)="fillInCampaign(campaign_unit)">{{campaign_unit.name}}</div>
+      <div class="admin_left_list_unit_block">
+        <div class="admin_left_list_unit_name" (click)="fillInCampaign(campaign_unit)">{{campaign_unit.name}}</div>
       </div>
 
     </div>
   </div>
-  <div class="add_news_block">
+  <div class="add_block">
+    <div class="add_block_unit">
     <form [formGroup]="addChangeCampaignForm" (ngSubmit)="onSubmit()">
 
       <div class="info_message" *ngIf="onSubmitResponse">{{onSubmitResponse}}</div>
@@ -86,6 +87,7 @@
         <button type="submit" (click)="clearFields()">Очистить поля</button>
       </div>
     </form>
+  </div>
   </div>
 </div>
 <app-images-picker></app-images-picker>

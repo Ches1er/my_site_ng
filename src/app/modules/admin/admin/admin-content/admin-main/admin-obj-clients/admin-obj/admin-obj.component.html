@@ -1,0 +1,30 @@
+<div class="add_block_unit">
+  <div class="admin_block_header_small">
+    Добавление-изменение объектов.
+  </div>
+  <form [formGroup]="addChangeObjForm">
+
+    <div class="info_message" *ngIf="onSubmitResponse">{{onSubmitResponse}}</div>
+
+    <div class="form-group">
+      <p class="admin_content_block_label">Введите название объекта</p>
+      <input type="text" id="name" formControlName = "name">
+      <div class="validation_error"
+           *ngIf="addChangeObjForm.get('name').getError('required') &&
+                (addChangeObjForm.get('name').dirty || addChangeObjForm.get('name').touched)">
+        Введите пожалуйста заголовок новости.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <p class="admin_content_block_label">Введите описание объекта</p>
+      <angular-editor formControlName="desc" [config]="config"></angular-editor>
+      <div class="validation_error"
+           *ngIf="addChangeObjForm.get('desc').getError('required') &&
+                (addChangeObjForm.get('desc').dirty || addChangeObjForm.get('desc').touched)">
+        Добавьте пожалуйста текст новости.
+      </div>
+    </div>
+    
+  </form>
+</div>

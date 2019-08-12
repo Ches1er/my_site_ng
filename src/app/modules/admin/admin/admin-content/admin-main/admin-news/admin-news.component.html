@@ -1,14 +1,15 @@
-<div class="news_block">
+<div class="admin_unit_block">
   <div class="admin_block_header">В данном блоке вы можете изменять существующие или добавлять новые новости на сайт</div>
-  <div class="news_list_block">
+  <div class="admin_left_list_block">
     <div *ngFor="let news_unit of news">
-      <div class="news_unit_block">
-        <div class="news_unit_name" (click)="fillInNews(news_unit)">{{news_unit.name}}</div>
+      <div class="admin_left_list_unit_block">
+        <div class="admin_left_list_unit_name" (click)="fillInNews(news_unit)">{{news_unit.name}}</div>
       </div>
 
     </div>
   </div>
-  <div class="add_news_block">
+  <div class="add_block">
+    <div class="add_block_unit">
     <form [formGroup]="addChangeNewsForm" (ngSubmit)="onSubmit()">
 
       <div class="info_message" *ngIf="onSubmitResponse">{{onSubmitResponse}}</div>
@@ -73,9 +74,10 @@
         <div *ngIf="addChangeNewsForm.valid">
           <button type="submit" *ngIf="whatHaveToDo==='update'">Обновить новость</button>
         </div>
-        <button type="submit" (click)="clearFields()">Очистить поля</button>
+        <button type="submit" (click)="clearFields($event)">Очистить поля</button>
       </div>
     </form>
+  </div>
   </div>
 </div>
 <app-images-picker></app-images-picker>

@@ -128,9 +128,10 @@ export class AdminNewsComponent implements OnInit {
     this.whatHaveToDo = 'update';
   }
 
-  clearFields() {
+  clearFields(e) {
     this.addChangeNewsForm.patchValue({name: '', short_news: '', img: '', full_news: ''});
     this.whatHaveToDo = 'add';
     this.choosenImg = null;
+    e.preventDefault();
   }
 }

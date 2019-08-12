@@ -4,8 +4,6 @@ import {RouterModule, Routes} from '@angular/router';
 import {BuildingComponent} from './building/building_components/building.component';
 import {BuildingNavComponent} from './building/building_components/building-nav/building-nav.component';
 import {BuildingCampaignComponent} from './building/building_components/building_main/building-campaign/building-campaign.component';
-import {BuildingProductionByApplyingComponent} from './building/building_components/building_main/building-production-by-applying/building-production-by-applying.component';
-import {BuildingProductionByBrandComponent} from './building/building_components/building_main/building-production-by-brand/building-production-by-brand.component';
 import {BuildingObjectsComponent} from './building/building_components/building_main/building-objects/building-objects.component';
 import {BuildingSolutionsComponent} from './building/building_components/building_main/building-solutions/building-solutions.component';
 import {BuildingTechInfoComponent} from './building/building_components/building_main/building-tech-info/building-tech-info.component';
@@ -37,8 +35,6 @@ const routes: Routes = [
   declarations: [BuildingComponent,
     BuildingNavComponent,
     BuildingCampaignComponent,
-    BuildingProductionByApplyingComponent,
-    BuildingProductionByBrandComponent,
     BuildingObjectsComponent,
     BuildingSolutionsComponent,
     BuildingTechInfoComponent,

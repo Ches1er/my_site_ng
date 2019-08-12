@@ -38,11 +38,15 @@ export class UrlConfig {
   private appGroupsBase = this.base + 'applying_groups/';
   SHOW_PACK_GROUPS = this.appGroupsBase + 'pack';
   SHOW_BUILD_GROUPS = this.appGroupsBase + 'building';
+  SHOW_ALL_GROUPS = this.appGroupsBase + 'all';
+  ADD_GROUP = this.appGroupsBase + 'add';
 
   // brands
   private brandsBase = this.base + 'brands/';
   SHOW_PACK_BRANDS = this.brandsBase + 'pack';
   SHOW_BUILDING_BRANDS = this.brandsBase + 'building';
+  SHOW_ALL_BRANDS = this.brandsBase + 'all';
+  ADD_BRAND = this.brandsBase + 'add';
 
   // products
   private productsBase = this.base + 'products/';

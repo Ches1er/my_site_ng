@@ -1,14 +1,23 @@
-<div class="news_block">
-  <div class="admin_block_header">В данном блоке вы можете изменять существующие или добавлять новые продукты на сайт</div>
-  <div class="news_list_block">
+<div class="admin_unit_block">
+  <div class="admin_block_header">В данном блоке вы можете изменять существующие или добавлять новые продукты, бренды или группы на сайт</div>
+  <div class="admin_left_list_block">
     <div *ngFor="let product of products">
-      <div class="news_unit_block">
-        <div class="news_unit_name" (click)="fillInProduct(product)">{{product.name}}</div>
+      <div class="admin_left_list_unit_block">
+        <div class="admin_left_list_unit_name" (click)="fillInProduct(product)">{{product.name}}</div>
       </div>
 
     </div>
   </div>
-  <div class="add_news_block">
+  <div class="add_block">
+    <div class="add_block_unit">
+      <app-admin-appl-brand></app-admin-appl-brand>
+    </div>
+    <!-- Form -->
+    <div class="add_block_unit">
+    <div class="admin_block_header_small">
+      Добавление-изменение продукции.
+    </div>
+    <div class="admin-content-form">
     <form [formGroup]="addChangeProductForm" (ngSubmit)="onSubmit()">
 
       <div class="info_message" *ngIf="onSubmitResponse">{{onSubmitResponse}}</div>
@@ -93,6 +102,8 @@
         <button type="submit" (click)="clearFields()">Очистить поля</button>
       </div>
     </form>
+    </div>
+    </div>
   </div>
 </div>
 <app-images-picker></app-images-picker>

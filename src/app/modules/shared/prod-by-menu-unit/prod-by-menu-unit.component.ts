@@ -15,8 +15,8 @@ export class ProdByMenuUnitComponent implements OnInit {
   private pProducts: Array<Product> = [];
   private pVisible = false;
 
-  constructor(@Inject(MessagesService) private msgService: MessagesService,
-              @Inject(ProductsService) private productsService: ProductsService) {
+  constructor(private msgService: MessagesService,
+              private productsService: ProductsService) {
   }
 
   ngOnInit() {

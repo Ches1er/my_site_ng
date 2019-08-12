@@ -9,7 +9,7 @@ import {BrandsService} from '../../../services/http/brands/brands.service';
 @Component({
   selector: 'app-prod-content',
   templateUrl: './prod-content.component.html',
-  styleUrls: ['./prod-content.component.css']
+  styleUrls: ['./prod-content.component.less']
 })
 export class ProdContentComponent implements OnInit {
 

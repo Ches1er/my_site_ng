@@ -27,11 +27,11 @@ export class Client {
     this.pDesc = value;
   }
 
-  get logo(): string {
+  get img(): string {
     return this.pImg;
   }
 
-  set logo(value: string) {
+  set img(value: string) {
     this.pImg = value;
   }
 

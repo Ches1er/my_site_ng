@@ -1,0 +1,31 @@
+<div class="add_block_unit">
+  <div class="admin_block_header_small">
+    Добавление-изменение клиентов.
+  </div>
+  <form [formGroup]="addChangeClientForm">
+
+    <div class="info_message" *ngIf="onSubmitResponse">{{onSubmitResponse}}</div>
+
+    <div class="form-group">
+      <p class="admin_content_block_label">Введите название клиента</p>
+      <input type="text" id="name" formControlName = "name">
+      <div class="validation_error"
+           *ngIf="addChangeClientForm.get('name').getError('required') &&
+                (addChangeClientForm.get('name').dirty || addChangeClientForm.get('name').touched)">
+        Введите пожалуйста заголовок новости.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <p class="admin_content_block_label">Введите описание клиента</p>
+      <angular-editor formControlName="desc" [config]="config"></angular-editor>
+      <div class="validation_error"
+           *ngIf="addChangeClientForm.get('desc').getError('required') &&
+                (addChangeClientForm.get('desc').dirty || addChangeClientForm.get('desc').touched)">
+        Добавьте пожалуйста текст новости.
+      </div>
+    </div>
+
+  </form>
+</div>
+

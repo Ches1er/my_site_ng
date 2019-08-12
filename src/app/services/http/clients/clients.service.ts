@@ -31,4 +31,9 @@ export class ClientsService {
       .pipe(map(resp => ClientsResponse.fromJson(resp)))
       .pipe(map(clientResponse => clientResponse.data));
   }
+  allClients(): Observable<Array<Client>> {
+    return this.http.get(this.urlConfig.SHOW_CLIENTS + 'all')
+      .pipe(map(resp => ClientsResponse.fromJson(resp)))
+      .pipe(map(clientResponse => clientResponse.data));
+  }
 }

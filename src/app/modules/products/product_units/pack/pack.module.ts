@@ -3,8 +3,6 @@ import {CommonModule} from '@angular/common';
 import {PackNavComponent} from './pack_components/pack-nav/pack-nav.component';
 import {RouterModule, Routes} from '@angular/router';
 import {CampaignComponent} from './pack_components/pack_main/campaign/campaign.component';
-import {ProductionByBrandComponent} from './pack_components/pack_main/production-by-brand/production-by-brand.component';
-import {ProductionByApplyingComponent} from './pack_components/pack_main/production-by-applying/production-by-applying.component';
 import {ClientsComponent} from './pack_components/pack_main/clients/clients.component';
 import {PackComponent} from './pack_components/pack.component';
 import {PackCampaignUnitComponent} from './pack_components/pack_main/campaign/pack-campaign-unit/pack-campaign-unit.component';
@@ -32,12 +30,10 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     CampaignComponent,
-    ProductionByApplyingComponent,
-    ProductionByBrandComponent,
     ClientsComponent,
     PackNavComponent, PackComponent,
-    PackCampaignUnitComponent,
-    ProductionByBrandComponent],
+    PackCampaignUnitComponent
+    ],
   imports: [
     CommonModule,
     SharedModule,

@@ -21,7 +21,7 @@ export class BuildingObjectsService {
   }
 
   buildObj() {
-    return this.http.get(this.urlConfig.SHOW_BUILD_OBJS)
+    return this.http.get(this.urlConfig.SHOW_BUILD_OBJS + 'build')
       .pipe(map(resp => BuildObject.fromJson(resp)));
   }
 

@@ -1,6 +1,6 @@
 export class BuildObject {
 
-  constructor(private pName: string, private pDesc: string, private pPhoto: Array<string>) {
+  constructor(private pName: string, private pDesc: string, private pImg: Array<string>, private pImgId: Array<string>) {
   }
 
   get name(): string {
@@ -19,14 +19,22 @@ export class BuildObject {
     this.pDesc = value;
   }
 
-  get photo(): Array<string> {
-    return this.pPhoto;
+  get img(): Array<string> {
+    return this.pImg;
   }
 
-  set photo(value: Array<string>) {
-    this.pPhoto = value;
+  set img(value: Array<string>) {
+    this.pImg = value;
   }
+  get imgId(): Array<string> {
+    return this.pImgId;
+  }
+
+  set imgId(value: Array<string>) {
+    this.pImgId = value;
+  }
+
   public static fromJson(jsonObj: any): BuildObject{
-    return new BuildObject(jsonObj.name, jsonObj.desc, jsonObj.photo);
+    return new BuildObject(jsonObj.name, jsonObj.desc, jsonObj.img, jsonObj.img_id);
   }
 }

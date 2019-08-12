@@ -1,0 +1,21 @@
+<div class="admin_unit_block">
+  <div class="admin_block_header">В данном блоке вы можете изменять существующие или добавлять новых клиентов или объекты</div>
+  <div class="admin_left_list_block">
+    <div class="admin_left_list_block_header">Клиенты</div>
+    <div *ngFor="let client of clients">
+      <div class="admin_left_list_unit_block">
+        <div class="admin_left_list_unit_name" (click)="fillInClient(client)">{{client.name}}</div>
+      </div>
+    </div>
+    <div class="admin_left_list_block_header">Объекты</div>
+    <div *ngFor="let object of objects">
+      <div class="admin_left_list_unit_block">
+        <div class="admin_left_list_unit_name" (click)="fillInObject(object)">{{object.name}}</div>
+      </div>
+    </div>
+  </div>
+  <div class="add_block">
+      <app-admin-clients></app-admin-clients>
+      <app-admin-obj></app-admin-obj>
+  </div>
+</div>

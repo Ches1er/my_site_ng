@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ProductionByBrandComponent } from './production-by-brand.component';
+import { AdminObjComponent } from './admin-obj.component';
 
-describe('ProductionByBrandComponent', () => {
-  let component: ProductionByBrandComponent;
-  let fixture: ComponentFixture<ProductionByBrandComponent>;
+describe('AdminObjComponent', () => {
+  let component: AdminObjComponent;
+  let fixture: ComponentFixture<AdminObjComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProductionByBrandComponent ]
+      declarations: [ AdminObjComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ProductionByBrandComponent);
+    fixture = TestBed.createComponent(AdminObjComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

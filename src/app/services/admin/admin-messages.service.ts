@@ -1,6 +1,8 @@
 import {Injectable} from '@angular/core';
 import {Subject} from 'rxjs';
 import {Image} from '../../dto/images/Image';
+import {Client} from '../../dto/clients/Client';
+import {BuildObject} from '../../dto/objects/Build_object';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +12,10 @@ export class AdminMessagesService {
   private pImagesPickerWindowShow: Subject<null> = new Subject<null>();
   private pImageHasChoosen: Subject<Image> = new Subject<Image>();
   private pNewsCampaignAdded: Subject<string> = new Subject<string>();
+  private pBrandAdded: Subject<null> = new Subject<null>();
+  private pApplGroupAdded: Subject<null> = new Subject<null>();
+  private pClientHasChoosen: Subject<Client> = new Subject<Client>();
+  private pObjectHasChoosen: Subject<BuildObject> = new Subject<BuildObject>();
 
   constructor() {
   }
@@ -31,6 +37,26 @@ export class AdminMessagesService {
     return this.pNewsCampaignAdded;
   }
 
+  // Brand_Appl
+
+  get brandAdded(): Subject<string> {
+    return this.pBrandAdded;
+  }
+
+  get applGroupAdded(): Subject<null> {
+    return this.pApplGroupAdded;
+  }
+
+  // Clients_objects
+
+  get clientHasChoosen(): Subject<Client> {
+    return this.pClientHasChoosen;
+  }
+
+  get objectHasChoosen(): Subject<BuildObject> {
+    return this.pObjectHasChoosen;
+  }
+
   // FUNCTIONS
 
   // Images Picker
@@ -47,6 +73,25 @@ export class AdminMessagesService {
 
   public newsCampaignAddedMessage(response: string) {
     this.pNewsCampaignAdded.next(response);
+  }
+
+  // Brand_Appl
+
+  public brandAddedMessage() {
+    this.pBrandAdded.next();
+  }
+
+  public applGroupAddedMessage() {
+    this.pApplGroupAdded.next();
+  }
+
+  // Clients_objects
+
+  public clientHasChoosenMessege(client: Client) {
+    this.pClientHasChoosen.next(client);
+  }
+  public objectHasChoosenMessage(obj: BuildObject) {
+    this.pObjectHasChoosen.next(obj);
   }
 
 }

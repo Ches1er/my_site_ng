@@ -8,10 +8,10 @@ import {NewsContentComponent} from './news-content/news-content.component';
 import {NewsContentUnitComponent} from './news-content/news-content-unit/news-content-unit.component';
 import { CampaignContentComponent } from './campaign-content/campaign-content.component';
 import { CampaignContentUnitComponent } from './campaign-content/campaign-content-unit/campaign-content-unit.component';
-import { ProdContentUnitComponent } from './prod-content/prod-content-unit/prod-content-unit.component';
 import {ApplyingGroupsService} from '../../services/http/applying_groups/applying-groups.service';
 import {BrandsService} from '../../services/http/brands/brands.service';
 import {ProductsService} from '../../services/http/products/products.service';
+import {MessagesService} from '../../services/messages.service';
 
 @NgModule({
   declarations: [ProdByMenuUnitComponent,
@@ -21,15 +21,15 @@ import {ProductsService} from '../../services/http/products/products.service';
     NewsContentComponent,
     NewsContentUnitComponent,
     CampaignContentComponent,
-    CampaignContentUnitComponent,
-    ProdContentUnitComponent],
+    CampaignContentUnitComponent],
   imports: [
     CommonModule
   ],
   providers: [
     ApplyingGroupsService,
     BrandsService,
-    ProductsService
+    ProductsService,
+    MessagesService
   ],
   exports: [ProdByMenuUnitComponent,
     ProdContentComponent,
