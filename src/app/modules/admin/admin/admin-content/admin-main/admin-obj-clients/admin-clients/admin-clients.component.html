@@ -2,9 +2,21 @@
   <div class="admin_block_header_small">
     Добавление-изменение клиентов.
   </div>
-  <form [formGroup]="addChangeClientForm">
+  <form [formGroup]="addChangeClientForm" (ngSubmit)="onSubmit()">
 
     <div class="info_message" *ngIf="onSubmitResponse">{{onSubmitResponse}}</div>
+
+    <div class="form-group">
+      <p class="admin_content_block_label">Выберите группу, которой будет принадлежать клиент</p>
+      <select name="" id="salesArea" formControlName = "salesArea">
+        <option *ngFor="let salesArea of salesAreas" value="{{salesArea.id}}">{{salesArea.name}}</option>
+      </select>
+      <div class="validation_error"
+           *ngIf="addChangeClientForm.get('salesArea').getError('required') &&
+                (addChangeClientForm.get('salesArea').dirty || addChangeClientForm.get('salesArea').touched)">
+        Выберите пожалуйста группу, которой будет принадлежать клиент.
+      </div>
+    </div>
 
     <div class="form-group">
       <p class="admin_content_block_label">Введите название клиента</p>
@@ -12,8 +24,18 @@
       <div class="validation_error"
            *ngIf="addChangeClientForm.get('name').getError('required') &&
                 (addChangeClientForm.get('name').dirty || addChangeClientForm.get('name').touched)">
-        Введите пожалуйста заголовок новости.
+        Введите пожалуйста название клиента.
       </div>
+    </div>
+
+    <div class="form-group" *ngIf="choosenImg">
+      <img class="choosenImg" src="{{choosenImg.path}}" alt="">
+    </div>
+
+    <div class="form-group">
+      <p class="admin_content_block_label">Выберите картинку для клиента</p>
+      <p class="admin_content_block_label_small">*Если картинка не будет выбрана, то будет установлена картинка по-умолчанию</p>
+      <button (click)="imagesPickerShow($event)">Выберите картинку клиента</button>
     </div>
 
     <div class="form-group">
@@ -22,10 +44,21 @@
       <div class="validation_error"
            *ngIf="addChangeClientForm.get('desc').getError('required') &&
                 (addChangeClientForm.get('desc').dirty || addChangeClientForm.get('desc').touched)">
-        Добавьте пожалуйста текст новости.
+        Добавьте пожалуйста описание клиента.
       </div>
+    </div>
+
+    <div class="admin_content_button_block">
+      <div *ngIf="addChangeClientForm.valid">
+        <button type="submit" *ngIf="whatHaveToDo==='add'">Добавить клиента</button>
+      </div>
+      <div *ngIf="addChangeClientForm.valid">
+        <button type="submit" *ngIf="whatHaveToDo==='update'">Обновить информацию</button>
+      </div>
+      <button type="submit" (click)="clearFields($event)">Очистить поля</button>
     </div>
 
   </form>
 </div>
+<app-images-picker></app-images-picker>
 

@@ -38,7 +38,6 @@
 
       <div class="form-group" *ngIf="choosenImg">
         <img class="choosenImg" src="{{choosenImg.path}}" alt="">
-
       </div>
 
       <div class="form-group">
@@ -72,7 +71,7 @@
           <button type="submit" *ngIf="whatHaveToDo==='add'">Добавить новость</button>
         </div>
         <div *ngIf="addChangeNewsForm.valid">
-          <button type="submit" *ngIf="whatHaveToDo==='update'">Обновить новость</button>
+          <button type="submit" *ngIf="whatHaveToDo==='update'">Обновить информацию</button>
         </div>
         <button type="submit" (click)="clearFields($event)">Очистить поля</button>
       </div>

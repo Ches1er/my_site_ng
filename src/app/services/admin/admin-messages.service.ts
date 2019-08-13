@@ -16,6 +16,7 @@ export class AdminMessagesService {
   private pApplGroupAdded: Subject<null> = new Subject<null>();
   private pClientHasChoosen: Subject<Client> = new Subject<Client>();
   private pObjectHasChoosen: Subject<BuildObject> = new Subject<BuildObject>();
+  private pClientObjHasAddedUpdated: Subject<null> = new Subject<null>();
 
   constructor() {
   }
@@ -56,6 +57,9 @@ export class AdminMessagesService {
   get objectHasChoosen(): Subject<BuildObject> {
     return this.pObjectHasChoosen;
   }
+  get clientObjHasAddedUpdated(): Subject<null> {
+    return this.pClientObjHasAddedUpdated;
+  }
 
   // FUNCTIONS
 
@@ -92,6 +96,9 @@ export class AdminMessagesService {
   }
   public objectHasChoosenMessage(obj: BuildObject) {
     this.pObjectHasChoosen.next(obj);
+  }
+  public clientObjHasAddedUpdatedMessage(){
+    this.pClientObjHasAddedUpdated.next();
   }
 
 }

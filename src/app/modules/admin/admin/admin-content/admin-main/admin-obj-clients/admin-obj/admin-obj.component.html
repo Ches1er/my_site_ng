@@ -25,6 +25,18 @@
         Добавьте пожалуйста текст новости.
       </div>
     </div>
-    
+
+    <div class="form-group" formArrayName="img">
+      <p class="admin_content_block_label">Выберите картинки для объекта</p>
+        <div class="form-group-images-block">
+        <div class="form-group-unit"
+             *ngFor="let img_unit of addChangeObjForm.controls.img.controls; let i = index">
+          <img class="admin_block_min_image" src="{{img_unit.value}}" (click)="showFullImage(img_unit.value)">
+          <button class="wnd-btn remove" (click)="DelImg(i,$event)">-</button>
+        </div>
+        <button class="wnd-btn add" (click)="AddImg($event)">+</button>
+    </div>
+    </div>
   </form>
 </div>
+<app-images-viewer></app-images-viewer>

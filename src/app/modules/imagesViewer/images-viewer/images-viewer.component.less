@@ -1,0 +1,34 @@
+@import "../../../common";
+
+.fade{
+  position: fixed;
+  display: inline-flex;
+  flex-flow: row;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  z-index: 2222;
+  background-color: rgba(0,0,0,0.5);
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  .iv_window{
+    background-color: #fff;
+    .window-main{
+      height: auto;
+      box-sizing: border-box;
+      padding: 10px 20px;
+      display: inline-flex;
+      flex-flow: column nowrap;
+    }
+    .iv-footer{
+      padding: 2px 5px;
+      opacity: 0.3;
+      background-color: #eee;
+      .iv-btn{
+        cursor: pointer;
+        &:hover{background-color: #a1cff7;}}
+    }
+  }
+}

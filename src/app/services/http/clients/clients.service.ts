@@ -5,6 +5,7 @@ import {Observable} from 'rxjs';
 import {Client} from '../../../dto/clients/Client';
 import {map} from 'rxjs/operators';
 import {ClientsResponse} from '../../../dto/clients/ClientsResponse';
+import {ResultResponse} from '../../../dto/server_response/ResultResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -36,4 +37,20 @@ export class ClientsService {
       .pipe(map(resp => ClientsResponse.fromJson(resp)))
       .pipe(map(clientResponse => clientResponse.data));
   }
+  add(data: any, action: string): Observable<string> {
+    const params = new FormData();
+    params.append('action', action);
+    params.append('id', data.id);
+    params.append('name', data.name);
+    params.append('img', data.img);
+    params.append('desc', data.desc);
+    params.append('salesArea', data.salesArea);
+    return this.http.post(this.urlConfig.ADD_CLIENT, params)
+      .pipe(map(resp => ResultResponse.fromJson(resp)))
+      .pipe(map(ResResp => ResResp.response));
+  }
+/*    add(data: any, action: string){
+      console.log(data);
+      console.log(action);
+    }*/
 }

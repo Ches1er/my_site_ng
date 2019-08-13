@@ -58,13 +58,17 @@ export class UrlConfig {
 
   // clients
 
-  SHOW_CLIENT = this.base + 'client/';
+  private clientsBase = this.base + 'client/';
+  SHOW_CLIENT = this.clientsBase;
   SHOW_CLIENTS = this.base + 'clients/';
+  ADD_CLIENT = this.clientsBase + 'add';
 
   // build_obj
 
-  SHOW_BUILD_OBJ = this.base + 'object/';
+  private buildObjBase = this.base + 'object/';
+  SHOW_BUILD_OBJ = this.buildObjBase;
   SHOW_BUILD_OBJS = this.base + 'objects';
+  ADD_BUILD_OBJ = this.buildObjBase + 'add';
 
   // ADMIN
 

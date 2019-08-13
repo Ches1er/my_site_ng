@@ -39,6 +39,7 @@ export class HttpNewsService {
   addNews(data: any, action: string): Observable<any> {
     const params = new FormData();
     params.append('action', action);
+    params.append('id', data.id);
     params.append('name', data.name);
     params.append('short_news', data.short_news);
     params.append('full_news', data.full_news);
@@ -48,4 +49,8 @@ export class HttpNewsService {
       .pipe(map(resp => ResultResponse.fromJson(resp)))
       .pipe(map(ResResp => ResResp.response));
   }
+/*  addNews(data: any, action: string): Observable<any> {
+    console.log(data);
+    console.log(action);
+  }*/
 }

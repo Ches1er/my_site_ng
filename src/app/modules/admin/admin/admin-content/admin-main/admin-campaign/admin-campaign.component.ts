@@ -19,6 +19,7 @@ import {AngularEditorCfg} from '../../../../../../config/angularEditorCfg';
 export class AdminCampaignComponent implements OnInit {
 
   addChangeCampaignForm: FormGroup = new FormGroup({
+    id: new FormControl(''),
     salesArea: new FormControl('', Validators.required),
     name: new FormControl('', Validators.required),
     short_campaign: new FormControl('', Validators.required),
@@ -123,6 +124,7 @@ export class AdminCampaignComponent implements OnInit {
     }
     this.campaignsService.addCampaign(this.addChangeCampaignForm.value, this.whatHaveToDo).subscribe(resp => {
       this.adminMessageService.newsCampaignAddedMessage(resp);
+      this.salesAreaService.getSalesAreas().subscribe(salesArea => this.salesAreas = salesArea);
     });
   }
 
@@ -131,20 +133,32 @@ export class AdminCampaignComponent implements OnInit {
     e.preventDefault();
   }
 
-  clearFields() {
-    this.addChangeCampaignForm.patchValue({name: '', short_campaign: '', img: '', full_campaign: '', expiration: '', date: ''});
+  clearFields(e) {
+    e.preventDefault();
+    this.addChangeCampaignForm.patchValue({
+      id: '',
+      name: '',
+      short_campaign: '',
+      img: '',
+      full_campaign: '',
+      expiration: '',
+      date: ''
+    });
     this.whatHaveToDo = 'add';
     this.choosenImg = null;
+    this.onSubmitResponse = null;
   }
 
   fillInCampaign(campaign: Campaign) {
     this.addChangeCampaignForm.patchValue({
+        id: campaign.id,
         name: campaign.name,
         short_campaign: campaign.shortCampaign,
         img: campaign.imgId,
         full_campaign: campaign.fullCampaign,
         expiration: campaign.expiration,
-        date: campaign.date
+        date: campaign.date,
+        salesArea: campaign.salesAreaId
       }
     );
     this.choosenImg = new Image(campaign.imgId, 'name', campaign.img);

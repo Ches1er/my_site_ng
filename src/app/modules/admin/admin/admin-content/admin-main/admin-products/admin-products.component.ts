@@ -21,11 +21,12 @@ import {AngularEditorCfg} from '../../../../../../config/angularEditorCfg';
 export class AdminProductsComponent implements OnInit {
 
   addChangeProductForm: FormGroup = new FormGroup({
+    id: new FormControl(''),
     name: new FormControl('', Validators.required),
     brands: new FormControl('', Validators.required),
     salesArea: new FormControl('', Validators.required),
-    active: new FormControl('1', Validators.required),
-    img: new FormControl('', Validators.required),
+    active: new FormControl('1'),
+    img: new FormControl(''),
     tech_info: new FormControl('', Validators.required),
     applying_group: new FormControl('', Validators.required)
   });
@@ -67,6 +68,9 @@ export class AdminProductsComponent implements OnInit {
         }
         if (resp === 'error') {
           this.onSubmitResponse = 'Ой, что-то пошло не так! Повторите попытку.';
+        }
+        if (resp === 'this product exists') {
+          this.onSubmitResponse = 'Продукт с таким названием уже существует, выберите его из списка слева, чтоб изменить данные';
         }
         this.updateProducts();
       }
@@ -160,6 +164,7 @@ export class AdminProductsComponent implements OnInit {
 
   fillInProduct(product: Product) {
     this.addChangeProductForm.patchValue({
+        id: product.id,
         name: product.name,
         brands: product.brandId,
         salesArea: product.salesAreaId,
@@ -174,7 +179,6 @@ export class AdminProductsComponent implements OnInit {
     this.choosenImg = new Image(product.imgId, 'name', product.img);
     this.whatHaveToDo = 'update';
   }
-
 
   onSubmit() {
     this.productsService.addUpdateProduct(this.addChangeProductForm.value, this.whatHaveToDo).subscribe(resp => {
@@ -197,5 +201,21 @@ export class AdminProductsComponent implements OnInit {
     this.addChangeProductForm.patchValue({
       img: image.id
     });
+  }
+
+  clearFields(e) {
+    e.preventDefault();
+    this.addChangeProductForm.patchValue({
+      id: '',
+      name: '',
+      brands: '',
+      salesArea: '',
+      active: '',
+      img: '',
+      tech_info: '',
+      applying_group: ''
+    });
+    this.choosenImg = null;
+    this.whatHaveToDo = 'add';
   }
 }

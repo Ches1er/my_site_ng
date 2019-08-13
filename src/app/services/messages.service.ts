@@ -7,6 +7,7 @@ import {Campaign} from '../dto/campaign/Campaign';
 })
 export class MessagesService {
 
+
   private pLoginWindowShow: Subject<null> = new Subject<null>();
   private pRegisterWindowShow: Subject<null> = new Subject<null>();
   private pLoginSuccess: Subject<string> = new Subject<string>();
@@ -16,6 +17,7 @@ export class MessagesService {
   private pChangedCurrentProduct: Subject<number> = new Subject<number>();
   private pChangeCurrentCampaign: Subject<Campaign> = new Subject<Campaign>();
   private pAdminLoggedIn: Subject<null> = new Subject<null>();
+  private pImagesViewerShow: Subject<string> = new Subject<string>();
 
   constructor() {
   }
@@ -32,6 +34,9 @@ export class MessagesService {
     return this.pRegisterWindowShow;
   }
 
+  get imagesViewerShow(): Subject<string> {
+    return this.pImagesViewerShow;
+  }
 
   // Auth
 
@@ -93,6 +98,10 @@ export class MessagesService {
 
   public registerWindowShow() {
     this.pRegisterWindowShow.next(null);
+  }
+
+  public imagesViewerShowMessage(path) {
+    this.pImagesViewerShow.next(path);
   }
 
   // Menu

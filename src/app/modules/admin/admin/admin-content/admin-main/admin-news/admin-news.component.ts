@@ -17,6 +17,7 @@ import {AngularEditorCfg} from '../../../../../../config/angularEditorCfg';
 export class AdminNewsComponent implements OnInit {
 
   addChangeNewsForm: FormGroup = new FormGroup({
+    id: new FormControl(''),
     salesArea: new FormControl('', Validators.required),
     name: new FormControl('', Validators.required),
     short_news: new FormControl('', Validators.required),
@@ -96,6 +97,9 @@ export class AdminNewsComponent implements OnInit {
       if (resp === 'error') {
         this.onSubmitResponse = 'Ой, что-то пошло не так! Повторите попытку.';
       }
+      if (resp === 'this news exist') {
+        this.onSubmitResponse = 'Новость с таким названием уже существует. Вы можете изменить ее, выбрав из списка слева.';
+      }
       this.updateNews();
     });
   }
@@ -122,14 +126,22 @@ export class AdminNewsComponent implements OnInit {
   }
 
   fillInNews(news: News) {
-    this.addChangeNewsForm.patchValue({name: news.name, short_news: news.shortNews, img: news.imgId, full_news: news.fullNews});
+    this.addChangeNewsForm.patchValue({
+      id: news.id,
+      name: news.name,
+      short_news: news.shortNews,
+      img: news.imgId,
+      full_news: news.fullNews,
+      salesArea: news.salesAreaId
+    });
     this.choosenImg = new Image(news.imgId, 'name', news.img);
     this.newsService.allNews.subscribe(n => this.news = n);
+    this.onSubmitResponse = null;
     this.whatHaveToDo = 'update';
   }
 
   clearFields(e) {
-    this.addChangeNewsForm.patchValue({name: '', short_news: '', img: '', full_news: ''});
+    this.addChangeNewsForm.patchValue({id: '', name: '', short_news: '', img: '', full_news: ''});
     this.whatHaveToDo = 'add';
     this.choosenImg = null;
     e.preventDefault();

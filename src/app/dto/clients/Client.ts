@@ -1,6 +1,19 @@
 export class Client {
 
-  constructor(private pName: string, private pDesc: string, private pImg: string, private pSalesAreaId: number) {
+  constructor(private pId: number,
+              private pName: string,
+              private pImg: string,
+              private pDesc: string,
+              private pSalesAreaId: number,
+              private pImgId: number) {
+  }
+
+  get id(): number {
+    return this.pId;
+  }
+
+  set id(value: number) {
+    this.pId = value;
   }
 
   get name(): string {
@@ -9,6 +22,14 @@ export class Client {
 
   set name(value: string) {
     this.pName = value;
+  }
+
+  get imgId(): number {
+    return this.pImgId;
+  }
+
+  set imgId(value: number) {
+    this.pImgId = value;
   }
 
   get salesAreaId(): number {
@@ -36,6 +57,6 @@ export class Client {
   }
 
   public static fromJson(jsonObj: any): Client {
-    return new Client(jsonObj.name, jsonObj.desc, jsonObj.img, jsonObj.sales_area_id);
+    return new Client(jsonObj.id, jsonObj.name, jsonObj.img, jsonObj.desc, jsonObj.sales_area_id, jsonObj.img_id);
   }
 }

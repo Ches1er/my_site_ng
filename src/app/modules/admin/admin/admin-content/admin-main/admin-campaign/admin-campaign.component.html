@@ -84,7 +84,7 @@
         <div class="div" *ngIf="addChangeCampaignForm.valid">
           <button type="submit" *ngIf="whatHaveToDo==='update'">Обновить акцию</button>
         </div>
-        <button type="submit" (click)="clearFields()">Очистить поля</button>
+        <button type="submit" (click)="clearFields($event)">Очистить поля</button>
       </div>
     </form>
   </div>

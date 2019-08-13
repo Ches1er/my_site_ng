@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ClientsService} from '../../../../../../services/http/clients/clients.service';
 import {BuildingObjectsService} from '../../../../../../services/http/building_objects/building-objects.service';
 import {Client} from '../../../../../../dto/clients/Client';
@@ -21,9 +21,17 @@ export class AdminObjClientsComponent implements OnInit {
   constructor(private clientsService: ClientsService,
               private objService: BuildingObjectsService,
               private adminMsgService: AdminMessagesService
-              ) { }
+  ) {
+  }
 
   ngOnInit() {
+    this.updateClientsObjList();
+    this.adminMsgService.clientObjHasAddedUpdated.subscribe(resp => {
+      this.updateClientsObjList();
+    });
+  }
+
+  private updateClientsObjList() {
     this.clientsService.allClients().subscribe(clients => this.clients = clients);
     this.objService.buildObjs().subscribe(obj => this.objects = obj);
   }
@@ -43,9 +51,11 @@ export class AdminObjClientsComponent implements OnInit {
   set objects(value: Array<BuildObject>) {
     this.pObjects = value;
   }
+
   fillInClient(client) {
     this.adminMsgService.clientHasChoosenMessege(client);
   }
+
   fillInObject(object) {
     this.adminMsgService.objectHasChoosenMessage(object);
   }

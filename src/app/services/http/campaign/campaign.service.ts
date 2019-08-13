@@ -38,6 +38,7 @@ export class CampaignService {
   addCampaign(data: any, action: string): Observable<any> {
     const params = new FormData();
     params.append('action', action);
+    params.append('id', data.id);
     params.append('name', data.name);
     params.append('short_event', data.short_campaign);
     params.append('full_event', data.full_campaign);
@@ -50,4 +51,8 @@ export class CampaignService {
       .pipe(map(ResResp => ResResp.response));
 
   }
+/*  addCampaign(data: any, action: string): Observable<any> {
+   console.log(data);
+   console.log(action);
+  }*/
 }

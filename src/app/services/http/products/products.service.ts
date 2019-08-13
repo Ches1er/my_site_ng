@@ -42,7 +42,8 @@ export class ProductsService {
 
   addUpdateProduct(data: any, action: string): Observable<any> {
     const params = new FormData();
-    params.append('action', data.action);
+    params.append('action', action);
+    params.append('id', data.id);
     params.append('name', data.name);
     params.append('brandId', data.brands);
     params.append('active', data.active);
@@ -54,4 +55,5 @@ export class ProductsService {
       .pipe(map(resp => ResultResponse.fromJson(resp)))
       .pipe(map(ResResp => ResResp.response));
   }
+
 }

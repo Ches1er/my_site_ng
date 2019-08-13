@@ -292,4 +292,14 @@ button {
   border-bottom: 1px solid rgba(0,0,0,.1);
   box-sizing: border-box;
 }
+.form-group-images-block{
+  display: inline-flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+}
+.admin_block_min_image{
+  width: 100px;
+  height: auto;
+  cursor: pointer;
+}
 

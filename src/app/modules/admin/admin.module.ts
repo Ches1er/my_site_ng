@@ -23,6 +23,7 @@ import {ClientsService} from '../../services/http/clients/clients.service';
 import {BuildingObjectsService} from '../../services/http/building_objects/building-objects.service';
 import {AdminObjComponent} from './admin/admin-content/admin-main/admin-obj-clients/admin-obj/admin-obj.component';
 import {AdminClientsComponent} from './admin/admin-content/admin-main/admin-obj-clients/admin-clients/admin-clients.component';
+import {ImagesViewerModule} from '../imagesViewer/images-viewer.module';
 
 const routes: Routes = [
   {path: '', redirectTo: 'admin', pathMatch: 'full'},
@@ -52,7 +53,8 @@ const routes: Routes = [
     ReactiveFormsModule,
     FormsModule,
     AngularEditorModule,
-    ImagesPickerModule
+    ImagesPickerModule,
+    ImagesViewerModule
   ],
   providers: [HttpNewsService,
     SalesAreaService,

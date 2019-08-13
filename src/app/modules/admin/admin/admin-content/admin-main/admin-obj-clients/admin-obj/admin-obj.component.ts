@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 import {SalesArea} from '../../../../../../../dto/sales-area/Sales-area';
 import {AdminMessagesService} from '../../../../../../../services/admin/admin-messages.service';
 import {SalesAreaService} from '../../../../../../../services/http/sales_area/sales-area.service';
 import {AngularEditorCfg} from '../../../../../../../config/angularEditorCfg';
+import {MessagesService} from '../../../../../../../services/messages.service';
 
 @Component({
   selector: 'app-admin-obj',
@@ -14,20 +15,29 @@ export class AdminObjComponent implements OnInit {
   addChangeObjForm: FormGroup = new FormGroup({
     name: new FormControl(''),
     desc: new FormControl(''),
-    img: new FormControl(''),
-    imgId: new FormControl('')
+    img: new FormArray([]),
+    imgId: new FormArray([])
   });
   angularEditorCfg = new AngularEditorCfg();
   config = this.angularEditorCfg.CONFIG;
   private pSalesAreas: Array<SalesArea> = [];
-  constructor(private salesAreaService: SalesAreaService, private adminMsgService: AdminMessagesService) { }
+
+  constructor(private salesAreaService: SalesAreaService,
+              private adminMsgService: AdminMessagesService,
+              private msgService: MessagesService) {
+  }
 
   ngOnInit() {
+
     this.adminMsgService.objectHasChoosen.subscribe(obj => {
-     this.addChangeObjForm.patchValue({name: obj.name, desc: obj.desc, img: obj, img_id: obj.imgId});
+      this.addChangeObjForm.controls.img.clear();
+      this.addChangeObjForm.controls.imgId.clear();
+      this.addChangeObjForm.patchValue({name: obj.name, desc: obj.desc});
+      this.pushImagesToTheForm(obj);
     });
     this.salesAreaService.getSalesAreas().subscribe(salesArea => this.salesAreas = salesArea);
   }
+
   get salesAreas(): Array<SalesArea> {
     return this.pSalesAreas;
   }
@@ -36,4 +46,26 @@ export class AdminObjComponent implements OnInit {
     this.pSalesAreas = value;
   }
 
+  DelImg(i, $event) {
+    // todo
+  }
+
+  AddImg($event) {
+    // todo
+  }
+
+  private pushImagesToTheForm(obj: BuildObject) {
+    obj.img.forEach(e => {
+      (this.addChangeObjForm.controls.img as FormArray)
+        .push(new FormControl(e));
+    });
+    obj.imgId.forEach(e => {
+      (this.addChangeObjForm.controls.imgId as FormArray)
+        .push(new FormControl(e));
+    });
+  }
+
+  showFullImage(path: any) {
+    this.msgService.imagesViewerShowMessage(path);
+  }
 }
