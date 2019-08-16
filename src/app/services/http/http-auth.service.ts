@@ -5,6 +5,7 @@ import {HttpClient} from '@angular/common/http';
 import {UrlConfig} from '../../config/url-config';
 import {CookieService} from 'ngx-cookie-service';
 import {stringify} from 'querystring';
+import {ResultResponse} from '../../dto/server_response/ResultResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -52,15 +53,16 @@ export class HttpAuthService {
       .pipe(map(resp => resp));
   }
 
-  register(data: any): Observable<any> {
+  register(data: any): Observable<string> {
     const params = new FormData();
     params.append('name', data.name);
     params.append('email', data.email);
     params.append('password', data.password);
-    params.append('phones', stringify(data.phones));
+    params.append('phones', data.phones.join(','));
     params.append('confirmedClient', data.confirmedClient);
     return this.http.post(this.urlConfig.REGISTER, params)
-      .pipe(map(resp => resp));
+      .pipe(map(resp => ResultResponse.fromJson(resp)))
+      .pipe(map(ResResp => ResResp.response));
   }
 }
 

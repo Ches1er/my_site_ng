@@ -1,1 +1,33 @@
-<p>contacts works!</p>
+<div class="main_content">
+  <div class="contacts_block">
+      <div class="main_right_unit_header">Как нас найти:</div>
+    <div class="contacts_block_content">
+      <div class="map" *ngIf="branches">
+        <div class="main_right_unit_header">Мы на карте:</div>
+        <div class="main_right_header_aux">*Кликните на маркер на карте для того, чтобы получить дополнительную информацию</div>
+        <agm-map (mapClick)='closeWindow()' [latitude]='latitude' [zoom]='zoom' [longitude]='longitude' [mapTypeId]='mapType'>
+          <agm-marker
+            *ngFor="let m of markers; let i = index"
+            (markerClick)="clickedMarker(infoWindow, i)"
+            [latitude]="m.lat"
+            [longitude]="m.lng"
+            [label]="m.label"
+            [markerDraggable]="m.draggable"
+            (dragEnd)="markerDragEnd(m, $event)">
+            <agm-info-window #infoWindow>
+              <strong>{{infoWindowText}}</strong>
+            </agm-info-window>
+          </agm-marker>
+        </agm-map>
+      </div>
+        <div class="contacts_block_content_text">
+          <div class="main_right_unit_header">Наши адреса и телефоны:</div>
+          <div class="contacts_block_content_unit" *ngFor="let branch of branches">
+            <div class="contacts_branch_address">{{branch.role}}: {{branch.address}}</div>
+            <div class="contacts_branch_phone">Телефон: {{branch.phone}}</div>
+            <hr>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>

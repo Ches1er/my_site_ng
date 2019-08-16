@@ -9,6 +9,13 @@ export class UrlConfig {
   ROLES = this.base + 'roles';
   USER = this.base + 'user';
 
+  // CONTACTS
+
+  // Branch
+
+  private branchesBase = this.base + 'branches';
+  BRANCHES = this.branchesBase;
+
   // MAIN
 
   // SALES_AREA
@@ -70,11 +77,18 @@ export class UrlConfig {
   SHOW_BUILD_OBJS = this.base + 'objects';
   ADD_BUILD_OBJ = this.buildObjBase + 'add';
 
+  // solutions
+
+  private solutionsBase = this.base + 'solutions';
+  SHOW_SOLUTIONS = this.solutionsBase;
+
   // ADMIN
 
   // Images
 
   private imagesBase = this.base + 'images';
   SHOW_IMAGES = this.imagesBase;
+  SHOW_IMAGE = this.base + 'image/';
   UPLOAD_IMAGE = this.imagesBase + '/upload_image';
+
 }

@@ -1,13 +1,13 @@
 <div class="fade" *ngIf="visible">
-  <div class="window">
-    <div class="window-header">Регистрация нового пользователя</div>
+  <div class="auth_window">
+    <div class="auth_window-header">Регистрация нового пользователя</div>
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-      <div class="window-main">
-
+      <div class="auth_window-main">
+        <div class="auth_error" *ngIf="authMessage">{{authMessage}}</div>
         <div class="form-group">
           <label for="login">Логин:</label>
           <input type="text" id="login" formControlName = "name">
-          <div class="error"
+          <div class="validation_error"
                *ngIf="registerForm.get('name').getError('required') &&
                 (registerForm.get('name').dirty || registerForm.get('name').touched)">
             Поле "Логин" необходимо для заполнения
@@ -17,10 +17,15 @@
         <div class="form-group">
           <label for="email">Электронная почта:</label>
           <input type="email" id="email" formControlName = "email">
-          <div class="error"
+          <div class="validation_error"
                *ngIf="registerForm.get('email').getError('required') &&
                 (registerForm.get('email').dirty || registerForm.get('email').touched)">
             Поле "Электронная почта" необходимо для заполнения
+          </div>
+          <div class="validation_error"
+               *ngIf="registerForm.get('email').getError('pattern') &&
+                (registerForm.get('email').dirty || registerForm.get('email').touched)">
+            Данные которые вы ввели, не очень-то похожи на адрес электронной почты =).
           </div>
         </div>
 
@@ -43,7 +48,7 @@
         <div class="form-group">
           <label for="password">Пароль:</label>
           <input type="password" id="password" formControlName = "password">
-          <div class="error"
+          <div class="validation_error"
                *ngIf="registerForm.get('password').getError('required') &&
                 (registerForm.get('password').dirty || registerForm.get('password').touched)">
             Поле "Пароль" необходимо для заполнения
@@ -55,19 +60,21 @@
           <label for="password">Подтверждение пароля:</label>
           <input type="password" id="confirm_password" formControlName = "confirmPassword"
           [class.input_error]="registerForm.value.password!==registerForm.value.confirmPassword">
-          <div class="error"
+          <div class="vaidation_error"
                *ngIf="registerForm.get('confirmPassword').getError('required') &&
                 (registerForm.get('confirmPassword').dirty || registerForm.get('confirmPassword').touched)">
             Поле "Подтверждение пароля" необходимо для заполнения
           </div>
-          <div class="error"
+          <div class="validation_error"
                *ngIf="registerForm.value.password!==registerForm.value.confirmPassword">Вы не подтвердили свой пароль!</div>
         </div>
 
       </div>
-      <div class="window-footer">
-        <button class = 'wnd-btn' type="submit" *ngIf="registerForm.valid">Зарегистрироваться</button>
-        <button class = 'wnd-btn' (click)="cancel()">Отмена</button>
+      <div class="auth_window-footer">
+        <div class="auth_window_btn_block">
+          <button class = 'wnd-btn' type="submit" *ngIf="registerForm.valid">Зарегистрироваться</button>
+          <button class = 'wnd-btn' (click)="cancel()">Отмена</button>
+        </div>
       </div>
     </form>
   </div>

@@ -1,1 +1,13 @@
-<p>building-tech-info works!</p>
+<div class="tech_info_block">
+  <div class="main_right_header">В данном блоке вы можете посчитать расход материалов</div>
+  <div class="tech_info_block_unit">
+    <div class="main_right_unit_header">Расчет расхода затирки для швов</div>
+    <div class="tech_info_block_unit_img_block">
+      <img src="http://mydomain/img/calc_ultracolor.png" alt="" (click)="setCalcDefiner('Ultracolor')" [class.active]="isCalcDefiner==='Ultracolor'">
+      <img src="http://mydomain/img/calc_keracolor.png" alt="" (click)="setCalcDefiner('Keracolor')" [class.active]="isCalcDefiner==='Keracolor'">
+      <img src="http://mydomain/img/calc_kerapoxy.png" alt="" (click)="setCalcDefiner('Kerapoxy')" [class.active]="isCalcDefiner==='Kerapoxy'">
+    </div>
+    <app-build-tech-info-grout-calc></app-build-tech-info-grout-calc>
+  </div>
+</div>
+

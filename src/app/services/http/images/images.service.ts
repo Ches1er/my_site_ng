@@ -20,6 +20,10 @@ export class ImagesService {
       .pipe(map(resp => ImagesResponse.fromJson(resp)))
       .pipe(map(imgResp => imgResp.data));
   }
+  image(name: string): Observable<Image> {
+    return this.http.get(this.urlConfig.SHOW_IMAGE + name)
+      .pipe(map(resp => Image.fromJson(resp)));
+  }
 
   uploadImage(file: File): Observable<any> {
     const uploadData = new FormData();

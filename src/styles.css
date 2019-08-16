@@ -24,6 +24,7 @@
 header{
   background-color: #fff;
   width: 100%;
+  height: auto;
 }
 
 /* Main*/
@@ -121,6 +122,24 @@ button {
   cursor: pointer;
 }
 
+/* Main right */
+
+.main_right_header {
+  text-align: center;
+  font-size: larger;
+  font-family: 'Oswald', sans-serif;
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px;
+  color: #505050;
+}
+.main_right_unit_header {
+  font-family: 'Oswald', sans-serif;
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px;
+  color: #727272;
+}
 /* Main right news*/
 
 .news{
@@ -153,7 +172,99 @@ button {
   background-color: #fff;
 
 }
-.window .window-header{
+.auth_window{
+  width: 300px;
+  height: auto;
+  position: absolute;
+  left: calc(50% - 150px);
+  top: 100px;
+  background-color: #fff;
+
+}
+.auth_error {
+  font-family: 'Raleway', sans-serif;
+  color: red;
+  text-align: center;
+}
+.auth_window-header{
+  padding: 0 10px;
+  height: 40px;
+  line-height: 40px;
+  background-color: #eee;
+  font-weight: bold;
+  font-family: 'Raleway', sans-serif;
+  color: #325c8e;
+}
+.auth_window-main{
+  width: 100%;
+  height: auto;
+  box-sizing: border-box;
+  padding: 10px 20px;
+  display: inline-flex;
+  flex-flow: column nowrap;
+}
+.auth_window-main .form-group {
+  display: inline-flex;
+  flex-flow: column nowrap;
+}
+.auth_window-main .form-group {
+  display: inline-flex;
+  flex-flow: column nowrap;
+}
+.auth_remember_me_block {
+  display: inline-flex;
+  flex-flow: row nowrap;
+  justify-content: start;
+  align-items: center;
+}
+.form-group label{
+  font-size: 0.8em;
+  font-family: 'Roboto', sans-serif;
+  margin-bottom: 5px;
+}
+.auth_remember_me_block label {
+  margin-bottom: 0;
+  margin-right: 10px;
+}
+.auth_window .auth_window-footer{
+  width: 100%;
+  padding: 0 10px;
+  box-sizing: border-box;
+  background-color: #eee;
+  display: inline-flex;
+  flex-flow: row;
+  justify-content: space-between;
+}
+.auth_window_btn_block{
+  display: inline-flex;
+  flex-flow: row nowrap;
+  margin-left: 10px;
+}
+.auth_window_redirect_block{
+  margin: 5px 5px 5px 0;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  font-size: small;
+}
+.auth_window_redirect_block span{
+  cursor: pointer;
+  color: #1d4ebe;
+}
+.auth_window_btn_block .wnd-btn {
+  margin: 5px 5px 5px 0;
+  height: 30px;
+  line-height: 30px;
+  background-color: #a5d7ff;
+  color: white;
+  cursor: pointer;
+  padding: 0 10px;
+  border: 1px solid rgba(0,0,0,.1);
+  border-radius: 2px;
+  transition: all .218s ease 0s;
+}
+
+.window-header{
   padding: 0 20px;
   height: 50px;
   line-height: 50px;
@@ -162,7 +273,7 @@ button {
   font-family: 'Raleway', sans-serif;
   color: #325c8e;
 }
-.window .window-main{
+.window-main{
   width: 100%;
   height: auto;
   box-sizing: border-box;
@@ -241,6 +352,13 @@ button {
 }
 
 /* Admin */
+.admin_block_header {
+  font-family: 'Oswald', sans-serif;
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px;
+  font-size: large;
+}
 .admin-content-form {
   display: inline-flex;
   flex-flow: row nowrap;
@@ -301,5 +419,9 @@ button {
   width: 100px;
   height: auto;
   cursor: pointer;
+}
+agm-map{
+  width: 500px;
+  height: 400px;
 }
 

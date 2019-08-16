@@ -2,6 +2,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {LOCALE_ID, NgModule} from '@angular/core';
 import {CookieService} from 'ngx-cookie-service';
 import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
+import {AgmCoreModule} from '@agm/core';
 
 import { registerLocaleData } from '@angular/common';
 import localeRuUa from '@angular/common/locales/ru-UA';
@@ -27,6 +28,9 @@ import {LoginComponent} from './components/windows/login/login.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RegisterComponent} from './components/windows/register/register.component';
 import {SharedModule} from './modules/shared/shared.module';
+import {ContactsService} from './services/http/contacts/contacts.service';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { AuthResultComponent } from './components/windows/auth-result/auth-result.component';
 
 registerLocaleData(localeRuUa, 'RuUa');
 
@@ -44,7 +48,8 @@ registerLocaleData(localeRuUa, 'RuUa');
     CurrentUserBlockComponent,
     AuthButtonsBlockComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    AuthResultComponent
   ],
   imports: [
     BrowserModule,
@@ -55,9 +60,12 @@ registerLocaleData(localeRuUa, 'RuUa');
     HttpClientModule,
     ReactiveFormsModule,
     SharedModule,
-    AngularEditorModule
+    BrowserAnimationsModule,
+    AngularEditorModule, AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyCgMofhJxwMZCzZoIass33M98elHnblts8'
+    })
   ],
-  providers: [CookieService, { provide: LOCALE_ID, useValue: 'RuUa' }
+  providers: [CookieService, { provide: LOCALE_ID, useValue: 'RuUa' }, ContactsService
   ],
   bootstrap: [AppComponent]
 })

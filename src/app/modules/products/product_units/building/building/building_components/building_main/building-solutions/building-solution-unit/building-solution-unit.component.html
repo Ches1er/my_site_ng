@@ -1,0 +1,8 @@
+<img src="{{currentSolution.img}}" alt="">
+<div class="solution_products_block">
+  <div *ngFor="let product of products">
+    <div class="solution_product_name" (click)="showProduct(product)">{{product.name}}</div>
+  </div>
+  <app-building-solution-product></app-building-solution-product>
+</div>
+

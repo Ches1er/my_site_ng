@@ -1,0 +1,62 @@
+@import "../../../common";
+
+:host{
+  width: 100%;
+}
+.contacts_block{
+  width: 100%;
+  display: inline-flex;
+  flex-flow: column nowrap;
+  .main_right_unit_header{
+    font-size: larger;
+  }
+  .contacts_block_content{
+    width: 100%;
+    display: inline-flex;
+    flex-flow: row nowrap;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid @main_content_border;
+    .main_right_unit_header{
+
+    }
+    .map{
+      padding: 5px;
+      box-sizing: border-box;
+      border: 1px solid @main_content_border;
+      .main_right_header_aux{
+        font-size: small;
+        color: #4b4b4b;
+        text-indent: 10px;
+        margin-bottom: 20px;
+      }
+    }
+    .contacts_block_content_text{
+      width: 100%;
+      margin-left: 20px;
+      .contacts_block_content_unit{
+        margin-bottom: 10px;
+        .contacts_branch_address{
+          font-family: 'Open Sans Condensed', sans-serif;
+          font-size: large;
+          font-weight: bold;
+          color: @active_main_nav_link_color;
+        }
+        .contacts_branch_phone{
+          margin-top: 5px;
+          font-family: 'Open Sans Condensed', sans-serif;
+          font-size: large;
+          text-indent: 15px;
+          color: @active_main_nav_link_color;
+        }
+        hr {
+          border: none; /* Убираем границу для браузера Firefox */
+          color: @main_content_border; /* Цвет линии для остальных браузеров */
+          background-color: @main_content_border; /* Цвет линии для браузера Firefox и Opera */
+          height: 1px; /* Толщина линии */
+        }
+      }
+
+    }
+  }
+}

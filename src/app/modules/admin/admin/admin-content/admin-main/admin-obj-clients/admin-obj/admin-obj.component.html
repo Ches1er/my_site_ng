@@ -33,10 +33,12 @@
              *ngFor="let img_unit of addChangeObjForm.controls.img.controls; let i = index">
           <img class="admin_block_min_image" src="{{img_unit.value}}" (click)="showFullImage(img_unit.value)">
           <button class="wnd-btn remove" (click)="DelImg(i,$event)">-</button>
+          <button (click)="imagesPickerShow($event)">+</button>
         </div>
-        <button class="wnd-btn add" (click)="AddImg($event)">+</button>
+        <button class="wnd-btn add" (click)="AddImg($event)">Добавить еще картинку</button>
     </div>
     </div>
   </form>
 </div>
 <app-images-viewer></app-images-viewer>
+<app-images-picker></app-images-picker>

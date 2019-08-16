@@ -1,1 +1,12 @@
-<p>building-solutions works!</p>
+<div class="main_content">
+  <div class="main_content_left">
+    <ul class="solution_list">
+      <li *ngFor="let solution of solutions; let i = index" (click)="changeCurrentSolution(solution,i)" [class.active]="activeBlock===i">
+        <div class="object_name">{{solution.name}}</div>
+      </li>
+    </ul>
+  </div>
+  <div class="main_content_right">
+    <app-building-solution-unit></app-building-solution-unit>
+  </div>
+</div>

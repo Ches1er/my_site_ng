@@ -1,15 +1,15 @@
 <div class="fade" *ngIf="visible">
-  <div class="window">
-    <div class="window-header">Вход на сайт</div>
+  <div class="auth_window">
+    <div class="auth_window-header">Вход на сайт</div>
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-      <div class="window-main">
+      <div class="auth_window-main">
 
-        <div class="error" *ngIf="error">{{error.error}}</div>
+        <div class="auth_error" *ngIf="error">{{error.error}}</div>
 
         <div class="form-group">
           <label for="login">Логин:</label>
           <input type="text" id="login" formControlName = "name">
-          <div class="error"
+          <div class="validation_error"
                *ngIf="loginForm.get('name').getError('required') &&
                 (loginForm.get('name').dirty || loginForm.get('name').touched)">
             Поле "Логин" необходимо для заполнения
@@ -19,7 +19,7 @@
         <div class="form-group">
           <label for="password">Пароль:</label>
           <input type="password" id="password" formControlName = "password">
-          <div class="error"
+          <div class="validation_error"
                *ngIf="loginForm.get('password').getError('required') &&
                 (loginForm.get('password').dirty || loginForm.get('password').touched)">
             Поле "Пароль" необходимо для заполнения
@@ -27,14 +27,21 @@
         </div>
 
         <div class="form-group">
-          <label for="rememberMe">Запомнить меня:</label>
-          <input type="checkbox" id="rememberMe" formControlName="rememberMe">
+          <div class="auth_remember_me_block">
+            <label for="rememberMe">Запомнить меня:</label>
+            <input type="checkbox" id="rememberMe" formControlName="rememberMe">
+          </div>
         </div>
 
       </div>
-      <div class="window-footer">
-        <button class = 'wnd-btn' type="submit" *ngIf="loginForm.valid">Вход</button>
-        <button class = 'wnd-btn' (click)="cancel()">Отмена</button>
+      <div class="auth_window-footer">
+        <div class="auth_window_btn_block">
+          <button class = 'wnd-btn' type="submit" *ngIf="loginForm.valid">Вход</button>
+          <button class = 'wnd-btn' (click)="cancel()">Отмена</button>
+        </div>
+        <div class="auth_window_redirect_block">
+          Перейти к <span (click)="registerFormShow($event)">регистрации</span>
+        </div>
       </div>
     </form>
   </div>

@@ -13,6 +13,13 @@ import {SharedModule} from '../../../shared/shared.module';
 import {NewsContentComponent} from '../../../shared/news-content/news-content.component';
 import {CampaignContentComponent} from '../../../shared/campaign-content/campaign-content.component';
 import {ProdContentComponent} from '../../../shared/prod-content/prod-content.component';
+import { BuildTechInfoGroutCalcComponent } from './building/building_components/building_main/building-tech-info/build-tech-info-grout-calc/build-tech-info-grout-calc.component';
+import {ReactiveFormsModule} from '@angular/forms';
+import {MessagesService} from '../../../../services/messages.service';
+import { BuildingSolutionUnitComponent } from './building/building_components/building_main/building-solutions/building-solution-unit/building-solution-unit.component';
+import {SolutionsService} from '../../../../services/http/solutions/solutions.service';
+import { BuildingSolutionProductComponent } from './building/building_components/building_main/building-solutions/building-solution-unit/building-solution-product/building-solution-product.component';
+import {ProductsService} from '../../../../services/http/products/products.service';
 
 const routes: Routes = [
   {path: '', redirectTo: 'building', pathMatch: 'full'},
@@ -39,13 +46,18 @@ const routes: Routes = [
     BuildingSolutionsComponent,
     BuildingTechInfoComponent,
     BuildingOrderComponent,
-    BuildingCampaignUnitComponent
+    BuildingCampaignUnitComponent,
+    BuildTechInfoGroutCalcComponent,
+    BuildingSolutionUnitComponent,
+    BuildingSolutionProductComponent
   ],
   imports: [
     CommonModule,
     SharedModule,
+    ReactiveFormsModule,
     RouterModule.forChild(routes),
-  ]
+  ],
+  providers: [MessagesService, SolutionsService, ProductsService]
 })
 export class BuildingModule {
 }

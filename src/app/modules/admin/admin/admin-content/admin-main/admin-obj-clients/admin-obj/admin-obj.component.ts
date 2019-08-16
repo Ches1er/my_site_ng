@@ -5,6 +5,7 @@ import {AdminMessagesService} from '../../../../../../../services/admin/admin-me
 import {SalesAreaService} from '../../../../../../../services/http/sales_area/sales-area.service';
 import {AngularEditorCfg} from '../../../../../../../config/angularEditorCfg';
 import {MessagesService} from '../../../../../../../services/messages.service';
+import {BuildObject} from '../../../../../../../dto/objects/Build_object';
 
 @Component({
   selector: 'app-admin-obj',
@@ -30,8 +31,8 @@ export class AdminObjComponent implements OnInit {
   ngOnInit() {
 
     this.adminMsgService.objectHasChoosen.subscribe(obj => {
-      this.addChangeObjForm.controls.img.clear();
-      this.addChangeObjForm.controls.imgId.clear();
+      this.addChangeObjForm.get('img').reset();
+      this.addChangeObjForm.get('imgId').reset();
       this.addChangeObjForm.patchValue({name: obj.name, desc: obj.desc});
       this.pushImagesToTheForm(obj);
     });
@@ -55,17 +56,22 @@ export class AdminObjComponent implements OnInit {
   }
 
   private pushImagesToTheForm(obj: BuildObject) {
-    obj.img.forEach(e => {
+    console.log(obj);
+    /*obj.img.forEach(e => {
       (this.addChangeObjForm.controls.img as FormArray)
         .push(new FormControl(e));
     });
     obj.imgId.forEach(e => {
       (this.addChangeObjForm.controls.imgId as FormArray)
         .push(new FormControl(e));
-    });
+    });*/
   }
 
   showFullImage(path: any) {
     this.msgService.imagesViewerShowMessage(path);
+  }
+  imagesPickerShow(event) {
+    this.adminMsgService.imagesPickerWindowShow();
+    event.preventDefault();
   }
 }

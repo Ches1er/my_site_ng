@@ -49,4 +49,9 @@ export class LoginComponent implements OnInit {
       });
   }
 
+  public registerFormShow(event) {
+    event.preventDefault();
+    this.cancel();
+    this.msgService.registerWindowShow();
+  }
 }

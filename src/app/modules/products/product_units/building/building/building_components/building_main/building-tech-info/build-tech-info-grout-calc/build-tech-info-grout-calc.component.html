@@ -1,0 +1,60 @@
+<div class="grout_calc_main" *ngIf="calcDefiner">
+  <div class="grout_calc_header">Расчитываем расход для затирки {{calcDefiner}}</div>
+  <form [formGroup]="groutCalc">
+    <div class="form-group">
+      <p class="grout_calc_label">Ширина плитки:</p>
+      <input class="grout_calc_input" type="number" formControlName="width">
+      <div class="validation_error"
+           *ngIf="groutCalc.get('width').getError('required') &&
+                  (groutCalc.get('width').dirty || groutCalc.get('width').touched)">
+        Поле "ширина плитки", обязательно для заполнения!.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <p class="grout_calc_label">Длина плитки:</p>
+      <input class="grout_calc_input" type="number" formControlName="height">
+      <div class="validation_error"
+           *ngIf="groutCalc.get('height').getError('required') &&
+                  (groutCalc.get('height').dirty || groutCalc.get('height').touched)">
+        Поле "длина плитки", обязательно для заполнения!.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <p class="grout_calc_label">Введите толщину плитки</p>
+      <input class="grout_calc_input" type="number" formControlName="thickness">
+      <div class="validation_error"
+           *ngIf="groutCalc.get('thickness').getError('required') &&
+                  (groutCalc.get('thickness').dirty || groutCalc.get('thickness').touched)">
+        Поле "толщина плитки", обязательно для заполнения!.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <p class="grout_calc_label">Введите ширину шва</p>
+      <input class="grout_calc_input" type="number" formControlName="seam">
+      <div class="validation_error"
+           *ngIf="groutCalc.get('seam').getError('required') &&
+                  (groutCalc.get('seam').dirty || groutCalc.get('seam').touched)">
+        Поле "ширина шва", обязательно для заполнения!.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <p class="grout_calc_label">Введите площадь</p>
+      <input class="grout_calc_input" type="number" formControlName="square">
+      <div class="validation_error"
+           *ngIf="groutCalc.get('square').getError('required') &&
+                  (groutCalc.get('square').dirty || groutCalc.get('square').touched)">
+        Поле "площадь", обязательно для заполнения!.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <p class="grout_calc_label">Расход затирки, кг</p>
+      <input type="text" formControlName="result" disabled>
+    </div>
+
+  </form>
+</div>

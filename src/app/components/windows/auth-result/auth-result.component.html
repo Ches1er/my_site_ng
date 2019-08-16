@@ -1,0 +1,19 @@
+<div class="fade" *ngIf="visible">
+  <div class="auth_window" *ngIf="definer==='register'">
+    <div class="auth_window-header">Окончание регистрации</div>
+    <div class="auth_window-main">
+      <div class="auth_result_block">
+        Для окончания регистрации остался последний шаг.
+        Через некоторое время на вашу почту придет письмо.
+        Перейдите по ссылке, указанной в этом письме.
+        После этого вы сможете полностью использовать функционал нашего сайта.
+        Спасибо.
+      </div>
+    </div>
+    <div class="auth_window-footer">
+      <div class="auth_window_btn_block">
+        <button class = 'wnd-btn' (click)="cancel()">Ок</button>
+      </div>
+    </div>
+  </div>
+</div>

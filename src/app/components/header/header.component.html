@@ -1,4 +1,26 @@
-  <div class="header_title">Marafon</div>
+  <div class="header_title">
+    <div class="header_logo">
+    <img *ngIf="logo" src="{{logo.path}}" alt="">
+    </div>
+    <div class="header_text">
+      <div class="header_text_main">
+        Марафон
+      </div>
+      <div class="header_text_second">
+        Торговый дом
+      </div>
+      <div class="header_text_third">
+        «Плечом к плечу - философия взаимопонимания,
+      </div>
+      <div class="header_text_fourth">
+        взаимоуважения,
+      </div>
+      <div class="header_text_fifth">
+        взаимовыгоды»
+      </div>
+    </div>
+
+  </div>
   <div class="header_nav">
     <div class="header_menu">
       <app-header-nav></app-header-nav>
