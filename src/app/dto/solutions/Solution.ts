@@ -5,7 +5,8 @@ export class Solution {
               private pDesc: string,
               private pImg: string,
               private pImgId: number,
-              private pProducts: string) {
+              private pProducts,
+              private pItems) {
   }
 
   get id(): number {
@@ -48,15 +49,31 @@ export class Solution {
     this.pImgId = value;
   }
 
-  get products(): string {
+  get products() {
     return this.pProducts;
   }
 
-  set products(value: string) {
+  set products(value) {
     this.pProducts = value;
   }
 
+  get items() {
+    return this.pItems;
+  }
+
+  set items(value) {
+    this.pItems = value;
+  }
+
   public static fromJson(jsonObj): Solution {
-    return new Solution(jsonObj.id, jsonObj.name, jsonObj.desc, jsonObj.img, jsonObj.imgId, jsonObj.products);
+    return new Solution(
+      jsonObj.id,
+      jsonObj.name,
+      jsonObj.desc,
+      jsonObj.img,
+      jsonObj.img_id,
+      jsonObj.products,
+      jsonObj.items
+    );
   }
 }

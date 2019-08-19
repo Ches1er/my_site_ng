@@ -1,11 +1,13 @@
 export class Brand {
 
   constructor(
-              private pId: number,
-              private pName: string,
-              private pActive: boolean,
-              private pSalesAreaId: number,
-              private pImg: string) {
+    private pId: number,
+    private pName: string,
+    private pActive: boolean,
+    private pSalesAreaId: number,
+    private pImg: string,
+    private pOfficial: boolean,
+    private pWeb: string) {
   }
 
   get id(): number {
@@ -15,6 +17,7 @@ export class Brand {
   set id(value: number) {
     this.pId = value;
   }
+
   get active(): boolean {
     return this.pActive;
   }
@@ -47,7 +50,31 @@ export class Brand {
     this.pImg = value;
   }
 
+  get official(): boolean {
+    return this.pOfficial;
+  }
+
+  set official(value: boolean) {
+    this.pOfficial = value;
+  }
+
+  get web(): string {
+    return this.pWeb;
+  }
+
+  set web(value: string) {
+    this.pWeb = value;
+  }
+
+
   public static fromJson(jsonObj: any): Brand {
-    return new Brand(jsonObj.id, jsonObj.name, jsonObj.active, jsonObj.sales_area_id, jsonObj.img);
+    return new Brand(
+      jsonObj.id,
+      jsonObj.name,
+      jsonObj.active,
+      jsonObj.sales_area_id,
+      jsonObj.img,
+      jsonObj.official,
+      jsonObj.web);
   }
 }

@@ -1,10 +1,19 @@
 <div class="main_content">
+  <div class="main_content_header">{{header}}</div>
   <div class="main_content_left">
     <app-prod-by-menu [groups]="groups" [groupDefiner]="prodByDefiner"></app-prod-by-menu>
   </div>
   <div class="main_content_right">
-    <div *ngIf="currentProduct">
-      {{currentProduct.name}}
+    <div *ngIf="currentProduct" class="product_block">
+      <div class = "product_block_img_name">
+        <div class = "product_block_img">
+          <img src="{{currentProduct.img}}" alt="">
+        </div>
+        <div class = "product_block_name">
+          {{currentProduct.name}}
+        </div>
+      </div>
+      <div class = "product_block_tech_info" [innerHTML] = currentProduct.techInfo></div>
     </div>
   </div>
 </div>

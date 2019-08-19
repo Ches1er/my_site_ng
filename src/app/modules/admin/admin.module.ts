@@ -24,16 +24,18 @@ import {BuildingObjectsService} from '../../services/http/building_objects/build
 import {AdminObjComponent} from './admin/admin-content/admin-main/admin-obj-clients/admin-obj/admin-obj.component';
 import {AdminClientsComponent} from './admin/admin-content/admin-main/admin-obj-clients/admin-clients/admin-clients.component';
 import {ImagesViewerModule} from '../imagesViewer/images-viewer.module';
+import { AdminSolutionsComponent } from './admin/admin-content/admin-main/admin-solutions/admin-solutions.component';
 
 const routes: Routes = [
-  {path: '', redirectTo: 'admin', pathMatch: 'full'},
+  {path: '', redirectTo: '', pathMatch: 'full'},
   {
-    path: 'admin', component: AdminComponent, children: [
+    path: '', component: AdminComponent, children: [
       {path: '', redirectTo: 'news', pathMatch: 'full'},
       {path: 'news', component: AdminNewsComponent},
       {path: 'campaign', component: AdminCampaignComponent},
       {path: 'products', component: AdminProductsComponent},
-      {path: 'building_objects_clients', component: AdminObjClientsComponent}
+      {path: 'building_objects_clients', component: AdminObjClientsComponent},
+      {path: 'solutions', component: AdminSolutionsComponent}
     ]
   }
 ];
@@ -46,7 +48,7 @@ const routes: Routes = [
     AdminProductsComponent,
     AdminApplBrandComponent,
     AdminObjClientsComponent,
-    AdminObjComponent, AdminClientsComponent],
+    AdminObjComponent, AdminClientsComponent, AdminSolutionsComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

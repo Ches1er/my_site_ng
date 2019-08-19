@@ -1,12 +1,14 @@
-@import "../../../../../../../../common";
+@import "../../../common";
 
-.solution_list{
+.news_events_list{
+  padding:0;
   list-style: none;
   .active{
     box-shadow: inset 0px 1px 2px 0px @main_left_side_list;
     border-radius: 3px;
   }
   li{
+    font-size: 1.1em;
     position: relative;
     padding: 10px 30px;
     background: linear-gradient(to left, #EFEFEF 0%, #FFF, #EFEFEF);
@@ -42,5 +44,17 @@
       width: 100%;
       opacity: 1;
     }
+    .news_event_name{
+      text-indent: 10px;
+      font-family: 'Roboto', sans-serif;
+      color: @main_left_side_list;
+      &:hover {color: @admin_button_background}
+      padding: 5px;
+      box-sizing: border-box;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+  }
 }
-}
+
+

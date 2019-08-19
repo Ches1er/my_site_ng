@@ -1,7 +1,8 @@
 <div class="main_content">
+  <div class="main_content_header">Акции</div>
   <div class="main_content_left">
     <ul class="news_events_list">
-      <li *ngFor="let campaign_unit of campaign" (click)="changeCurrentCampaign(campaign_unit)">
+      <li *ngFor="let campaign_unit of campaign; let i = index" (click)="changeCurrentCampaign(campaign_unit,i)" [class.active]="activeBlock===i">
         <div class="news_event_name">{{campaign_unit.name}}</div>
         <div class="news_event_short">{{campaign_unit.shortCampaign}}</div>
       </li>

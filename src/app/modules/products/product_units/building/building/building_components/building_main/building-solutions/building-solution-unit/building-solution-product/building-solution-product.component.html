@@ -1,1 +1,12 @@
-<p *ngIf="currentProduct">{{currentProduct.name}}!</p>
+<div *ngIf="currentProduct" class="product_block">
+  <div class = "product_block_img_name">
+    <div class = "product_block_img">
+      <img src="{{currentProduct.img}}" alt="">
+    </div>
+    <div class = "product_block_name">
+      {{currentProduct.name}}
+    </div>
+  </div>
+  <div class = "product_block_tech_info" [innerHTML] = currentProduct.techInfo></div>
+</div>
+

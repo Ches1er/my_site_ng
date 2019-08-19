@@ -14,6 +14,7 @@ export class CampaignContentComponent implements OnInit {
   private pSalesAreaDefiner = null;
   private pCampaign: Array<Campaign> = [];
   private pCurrentCampaign: Campaign = null;
+  private pActiveBlock = null;
 
   constructor(@Inject(CampaignService) private campaignService: CampaignService,
               @Inject(MessagesService) private messageService: MessagesService,
@@ -54,6 +55,13 @@ export class CampaignContentComponent implements OnInit {
   set currentCampaign(value: Campaign) {
     this.pCurrentCampaign = value;
   }
+  get activeBlock(): any {
+    return this.pActiveBlock;
+  }
+
+  set activeBlock(value: any) {
+    this.pActiveBlock = value;
+  }
 
   // Other Methods
 
@@ -70,8 +78,9 @@ export class CampaignContentComponent implements OnInit {
     });
   }
 
-  changeCurrentCampaign(campaignUnit: Campaign) {
+  changeCurrentCampaign(campaignUnit: Campaign, i) {
     this.messageService.changeCurrentCampaign(campaignUnit);
+    this.activeBlock = i;
   }
 
 }

@@ -6,7 +6,7 @@ import {MessagesService} from '../../../services/messages.service';
 @Component({
   selector: 'app-prod-by-menu-unit',
   templateUrl: './prod-by-menu-unit.component.html',
-  styleUrls: ['./prod-by-menu-unit.component.css']
+  styleUrls: ['./prod-by-menu-unit.component.less']
 })
 export class ProdByMenuUnitComponent implements OnInit {
 
@@ -14,6 +14,7 @@ export class ProdByMenuUnitComponent implements OnInit {
   @Input() pGroupDefiner: string;
   private pProducts: Array<Product> = [];
   private pVisible = false;
+  private pActiveBlock = null;
 
   constructor(private msgService: MessagesService,
               private productsService: ProductsService) {
@@ -58,9 +59,16 @@ export class ProdByMenuUnitComponent implements OnInit {
   set visible(value: any) {
     this.pVisible = value;
   }
+  get activeBlock(): any {
+    return this.pActiveBlock;
+  }
 
+  set activeBlock(value: any) {
+    this.pActiveBlock = value;
+  }
 
-  changeCurrentProduct(id: number) {
+  changeCurrentProduct(id: number, i) {
     this.msgService.setChangedCurrentProductId(id);
+    this.activeBlock = i;
   }
 }

@@ -8,6 +8,7 @@ export class UrlConfig {
   LOGIN_REMEMBER = this.base + 'login_remember';
   ROLES = this.base + 'roles';
   USER = this.base + 'user';
+  IS_ADMIN = this.base + 'is_admin';
 
   // CONTACTS
 
@@ -81,6 +82,7 @@ export class UrlConfig {
 
   private solutionsBase = this.base + 'solutions';
   SHOW_SOLUTIONS = this.solutionsBase;
+  ADD_SOLUTION = this.solutionsBase + '/add';
 
   // ADMIN
 

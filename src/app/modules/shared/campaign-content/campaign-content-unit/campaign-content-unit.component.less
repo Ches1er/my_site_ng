@@ -13,6 +13,8 @@
       display: inline-flex;
       flex-flow: column nowrap;
       .news_event_name {
+        font-family: 'Roboto', sans-serif;
+        color: @main_right_side_news_event_name;
         margin: 5px 0 10px 0;
         width: 100%;
         text-align: center;
@@ -22,7 +24,12 @@
         width: auto;
         margin-left: 10px;
         color: @main_right_side_date;
-        padding: 5px;
+      }
+      .news_event_short{
+        margin: 10px 0 0 10px;
+        color: @main_right_side_news_short;
+        font-weight: bold;
+        font-family: 'Roboto', sans-serif;
       }
       .news_event_expiration_date {
         width: auto;
@@ -43,6 +50,7 @@
     img {
       width: 150px;
       height: 150px;
+      border-radius: 10px;
     }
   }
   .news_event_full {
@@ -50,5 +58,6 @@
     text-indent: 20px;
     padding: 10px;
     box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
   }
 }

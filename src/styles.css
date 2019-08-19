@@ -3,7 +3,6 @@
 *{
   margin: 0;
   padding: 0;
-
 }
 .container{
   width: 100%;
@@ -21,10 +20,16 @@
   display: inline-flex;
   flex-flow: row;
 }
-header{
+header, footer{
   background-color: #fff;
   width: 100%;
   height: auto;
+}
+footer {
+  display: inline-flex;
+  flex-flow: row nowrap;
+  border-top: 1px solid #C0C0C0;
+  border-bottom: 1px solid #C0C0C0;
 }
 
 /* Main*/
@@ -32,9 +37,26 @@ header{
   width: 100%;
   box-sizing: border-box;
   display: inline-flex;
-  flex-flow: row nowrap;
+  flex-flow: row wrap;
   border: 1px solid rgba(0,0,0,.1);
   padding: 5px;
+}
+.main_content_header{
+  width: 100%;
+  padding: 0 0 10px 0;
+  font-size: 1.5em;
+  color: #505050;
+  font-family: 'Oswald', sans-serif;
+
+}
+.products_unit_header{
+  font-size: 2em;
+  width: 100%;
+  padding: 0 0 10px 0;
+  background-image: url('http://mydomain/img/bgc/white_wall_hash.png');
+  color: #505050;
+  font-family: 'Oswald', sans-serif;
+  font-weight: bold;
 }
 .main_nav{
   height: auto;
@@ -44,18 +66,14 @@ header{
 }
 .main_content_left{
   width: 30%;
-  border: 1px solid #E1F1FF;
 }
 .main_content_right{
   width: 70%;
-  border: 1px solid #E1F1FF;
+  border: 1px solid #C0C0C0;
+  box-sizing: border-box;
+  box-shadow: 0 5px 5px 0 rgba(0,0,0, .2);
 }
-.group_by_applying_header{
-  padding: 0 0 10px 0;
-  background-image: url('http://mydomain/img/bgc/white_wall_hash.png');
-  color: #505050;
-  font-family: 'Oswald', sans-serif;
-}
+
 button {
 
 }
@@ -121,6 +139,34 @@ button {
   color: #1d4ebe;
   cursor: pointer;
 }
+.product_block{
+  width: 100%;
+  padding: 5px;
+  display: inline-flex;
+  flex-flow: column nowrap;
+}
+.product_block_img_name{
+  width: 100%;
+  display: inline-flex;
+  flex-flow: row nowrap;
+}
+.product_block_img img{
+  width: 200px;
+  height: auto;
+}
+.product_block_name{
+  font-family: 'Roboto', sans-serif;
+  color: #505050;
+  margin: 5px 0 10px 0;
+  width: 100%;
+  text-align: center;
+  font-size: 28px;
+}
+.product_block_tech_info{
+  font-family: 'Roboto', sans-serif;
+  color: #505050;
+}
+
 
 /* Main right */
 

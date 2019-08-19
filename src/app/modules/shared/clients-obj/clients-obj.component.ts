@@ -12,6 +12,7 @@ export class ClientsObjComponent implements OnInit {
   @Input() private pParentComponentDefiner: string = null;
   @Input() private pClientsalesAreaDefiner: string = null;
   private pComponentUnits: Array<any> = [];
+  private pHeader: string;
 
   constructor(@Inject(ClientsService) private clientsService: ClientsService,
               @Inject(BuildingObjectsService) private buildObjService: BuildingObjectsService) {
@@ -40,13 +41,22 @@ export class ClientsObjComponent implements OnInit {
   set componentUnits(value: Array<any>) {
     this.pComponentUnits = value;
   }
+  get header(): string {
+    return this.pHeader;
+  }
+
+  set header(value: string) {
+    this.pHeader = value;
+  }
 
   ngOnInit() {
     if (this.parentComponentDefiner === 'clients') {
       this.clients();
+      this.header = 'Наши клиенты';
     }
     if (this.parentComponentDefiner === 'build_obj') {
       this.buildObj();
+      this.header = 'Наши объекты';
     }
   }
 

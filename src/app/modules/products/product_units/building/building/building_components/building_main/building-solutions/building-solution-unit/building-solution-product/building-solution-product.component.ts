@@ -5,7 +5,7 @@ import {MessagesService} from '../../../../../../../../../../services/messages.s
 @Component({
   selector: 'app-building-solution-product',
   templateUrl: './building-solution-product.component.html',
-  styleUrls: ['./building-solution-product.component.css']
+  styleUrls: ['./building-solution-product.component.less']
 })
 export class BuildingSolutionProductComponent implements OnInit {
 
@@ -15,7 +15,9 @@ export class BuildingSolutionProductComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.msgService.changeSolutionProduct.subscribe(product => this.currentProduct = product);
+    this.msgService.changeSolutionProduct.subscribe(product => {
+      this.currentProduct = product;
+    });
   }
 
   get currentProduct(): Product {

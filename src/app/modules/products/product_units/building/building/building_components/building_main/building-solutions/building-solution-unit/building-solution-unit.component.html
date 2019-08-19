@@ -1,8 +1,18 @@
-<img src="{{currentSolution.img}}" alt="">
-<div class="solution_products_block">
-  <div *ngFor="let product of products">
-    <div class="solution_product_name" (click)="showProduct(product)">{{product.name}}</div>
+<div *ngIf="currentSolution" class="solution_block">
+  <div class="solution_block_content">
+    <div class="solution_block_desc"  [innerHTML]=currentSolution.desc></div>
+      <ul class="solution_block_desc_items">
+        <li *ngFor="let item of items">{{item}}</li>
+      </ul>
   </div>
-  <app-building-solution-product></app-building-solution-product>
+  <div class="solution_block_img">
+      <img *ngIf="currentSolution" src="{{currentSolution.img}}" alt="">
+  </div>
+  <div class="solution_products_block">
+    <div *ngFor="let product of products">
+      <div class="solution_product_name" (click)="showProduct(product)">{{product.name}}</div>
+    </div>
+    <app-building-solution-product></app-building-solution-product>
+  </div>
 </div>
 

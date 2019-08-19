@@ -7,22 +7,45 @@ import {Product} from '../../../../../../../../../dto/products/Product';
 @Component({
   selector: 'app-building-solution-unit',
   templateUrl: './building-solution-unit.component.html',
-  styleUrls: ['./building-solution-unit.component.css']
+  styleUrls: ['./building-solution-unit.component.less']
 })
 export class BuildingSolutionUnitComponent implements OnInit {
 
   private pShowProductBlock: boolean = false;
-  currentSolution: Solution = null;
+  private pCurrentSolution: Solution = null;
+  private pItems: Array<string> = [];
   private pProducts: Array<Product> = [];
-  constructor(private msgService: MessagesService, private productsService: ProductsService) { }
+
+  constructor(private msgService: MessagesService, private productsService: ProductsService) {
+  }
 
   ngOnInit() {
     this.showProductBlock = false;
     this.msgService.changeCurrentSolution.subscribe(solution => {
       this.currentSolution = solution;
-      this.fillInProducts(solution.products.split(','));
-    } );
+      const i = this.currentSolution.items;
+      const p = this.currentSolution.products;
+      this.items = i.split(';');
+      this.fillInProducts(p.split(','));
+    });
   }
+
+  get currentSolution(): Solution {
+    return this.pCurrentSolution;
+  }
+
+  set currentSolution(value: Solution) {
+    this.pCurrentSolution = value;
+  }
+
+  get items(): any[] {
+    return this.pItems;
+  }
+
+  set items(value: any[]) {
+    this.pItems = value;
+  }
+
   get products(): Array<Product> {
     return this.pProducts;
   }
@@ -30,6 +53,7 @@ export class BuildingSolutionUnitComponent implements OnInit {
   set products(value: Array<Product>) {
     this.pProducts = value;
   }
+
   get showProductBlock(): boolean {
     return this.pShowProductBlock;
   }
@@ -37,10 +61,12 @@ export class BuildingSolutionUnitComponent implements OnInit {
   set showProductBlock(value: boolean) {
     this.pShowProductBlock = value;
   }
-  private fillInProducts(idArray: Array<number>) {
+
+  private fillInProducts(idArray: Array<string>) {
+    this.products = [];
     idArray.forEach(e => {
-      this.productsService.product(e).subscribe(product => {
-        this.products.push(product) ;
+      this.productsService.product(parseInt(e, 10)).subscribe(product => {
+        this.products.push(product);
       });
     });
   }

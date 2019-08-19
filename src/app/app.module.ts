@@ -4,6 +4,7 @@ import {CookieService} from 'ngx-cookie-service';
 import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import {AgmCoreModule} from '@agm/core';
 
+
 import { registerLocaleData } from '@angular/common';
 import localeRuUa from '@angular/common/locales/ru-UA';
 

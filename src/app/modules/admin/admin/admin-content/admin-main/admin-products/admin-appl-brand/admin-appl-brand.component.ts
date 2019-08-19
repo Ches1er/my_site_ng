@@ -21,6 +21,8 @@ export class AdminApplBrandComponent implements OnInit {
     salesArea: new FormControl(''),
     brands: new FormControl(''),
     active: new FormControl('true'),
+    official: new FormControl(''),
+    web: new FormControl(''),
   });
   addChangeApplGroup: FormGroup = new FormGroup({
     name: new FormControl('', Validators.required),
@@ -102,7 +104,7 @@ export class AdminApplBrandComponent implements OnInit {
     if (formGroup === 'addChangeBrand') {
       this.brands.forEach(e => {
         if (e.id == val) {
-          this.addChangeBrand.patchValue({name: e.name, id: e.id, salesArea: e.salesAreaId, active: e.active});
+          this.addChangeBrand.patchValue({name: e.name, id: e.id, salesArea: e.salesAreaId, active: e.active, official: e.official, web: e.web});
         }
       });
     }
@@ -138,7 +140,6 @@ export class AdminApplBrandComponent implements OnInit {
     this.brandsService.add(this.addChangeBrand.value, this.whatHaveToDo).subscribe(resp => {
       this.adminMessageService.brandAddedMessage();
       this.getResponse(resp);
-
     });
   }
 
@@ -152,7 +153,7 @@ export class AdminApplBrandComponent implements OnInit {
   clearBrandFields(event) {
     event.preventDefault();
     this.whatHaveToDo = 'add';
-    this.addChangeBrand.patchValue({name: '', salesArea: ''});
+    this.addChangeBrand.patchValue({name: '', salesArea: '', official: '', web: ''});
   }
   clearApplGroupields(event) {
     event.preventDefault();

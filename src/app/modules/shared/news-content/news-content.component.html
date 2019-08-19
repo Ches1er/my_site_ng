@@ -1,4 +1,5 @@
 <div class="main_content">
+  <div class="main_content_header">Новости</div>
   <div class="main_content_left">
     <ul class="news_events_list">
       <li *ngFor="let news_unit of news; let i = index" (click)="changeCurrentNews(news_unit,i)" [class.active]="activeBlock===i">

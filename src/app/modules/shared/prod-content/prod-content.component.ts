@@ -17,6 +17,7 @@ export class ProdContentComponent implements OnInit {
   private pSalesAreaDefiner: string;
   private pProdByDefiner: string;
   private pGroups;
+  private pHeader: string;
   @Input() product: Product = null;
 
   constructor(@Inject(MessagesService) private msgService: MessagesService,
@@ -32,6 +33,7 @@ export class ProdContentComponent implements OnInit {
     this.route.data.subscribe(value => this.salesAreaDefiner = value.definer);
     this.route.data.subscribe(value => this.prodByDefiner = value.prod_by);
     this.getProducts(this.prodByDefiner, this.salesAreaDefiner);
+    this.setHeader(this.prodByDefiner);
     this.msgService.changedCurrentProduct.subscribe(id => {
       this.prodService.product(id).subscribe(prod => this.currentProduct = prod);
     });
@@ -68,8 +70,16 @@ export class ProdContentComponent implements OnInit {
   set currentProduct(value: Product) {
     this.pCurrentProduct = value;
   }
+  get header(): string {
+    return this.pHeader;
+  }
+
+  set header(value: string) {
+    this.pHeader = value;
+  }
 
   private getProducts(prodByDefiner: string, salesAreaDefiner: string) {
+    this.groups = [];
     if (salesAreaDefiner === 'build') {
       if (prodByDefiner === 'appl') {
         this.updateBuildAppGroups();
@@ -118,6 +128,7 @@ export class ProdContentComponent implements OnInit {
   private updateBuildBrandGroups() {
     this.brandService.buildBrands.subscribe(brands => {
       this.groups = brands;
+      console.log(this.groups);
       if (brands.length > 0) {
         this.updateCurrentProductByBrand(brands[0].id);
       }
@@ -136,5 +147,10 @@ export class ProdContentComponent implements OnInit {
   private updateCurrentProductByBrand(id: any) {
     this.productService.productsByBrand(id)
       .subscribe(products => this.currentProduct = products[0]);
+  }
+
+  private setHeader(prodByDefiner: string) {
+    if (prodByDefiner === 'brand')this.header = 'Продукция по-брендам';
+    if (prodByDefiner === 'appl')this.header = 'Продукция по-применению';
   }
 }

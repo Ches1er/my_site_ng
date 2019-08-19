@@ -1,11 +1,11 @@
 import {Inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {ObserveOnMessage} from 'rxjs/internal/operators/observeOn';
 import {Observable} from 'rxjs';
 import {Solution} from '../../../dto/solutions/Solution';
 import {UrlConfig} from '../../../config/url-config';
 import {map} from 'rxjs/operators';
 import {SolutionsResponse} from '../../../dto/solutions/SolutionsResponse';
+import {ResultResponse} from '../../../dto/server_response/ResultResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -20,5 +20,19 @@ export class SolutionsService {
     return this.http.get(this.urlConfig.SHOW_SOLUTIONS)
       .pipe(map(resp => SolutionsResponse.fromJson(resp)))
       .pipe(map(sr => sr.data));
+  }
+  addSolution(data: any, action: string): Observable<string> {
+    const params = new FormData();
+    params.append('action', action);
+    params.append('id', data.id);
+    params.append('name', data.name);
+    params.append('desc', data.desc);
+    params.append('img', data.img);
+    // params.append('imgId', data.imgId);
+    params.append('products', data.products.join(','));
+    params.append('items', data.items.join(';'));
+    return this.http.post(this.urlConfig.ADD_SOLUTION, params)
+      .pipe(map(resp => ResultResponse.fromJson(resp)))
+      .pipe(map(ResResp => ResResp.response));
   }
 }

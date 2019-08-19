@@ -111,6 +111,7 @@ export class AdminNewsComponent implements OnInit {
   onSubmit() {
     this.newsService.addNews(this.addChangeNewsForm.value, this.whatHaveToDo).subscribe(resp => {
       this.adminMessageService.newsCampaignAddedMessage(resp);
+      this.clearFields();
     });
   }
 
@@ -140,10 +141,13 @@ export class AdminNewsComponent implements OnInit {
     this.whatHaveToDo = 'update';
   }
 
-  clearFields(e) {
+  clearFields() {
     this.addChangeNewsForm.patchValue({id: '', name: '', short_news: '', img: '', full_news: ''});
     this.whatHaveToDo = 'add';
     this.choosenImg = null;
+  }
+  clearFieldsByBtn(e){
     e.preventDefault();
+    this.clearFields();
   }
 }

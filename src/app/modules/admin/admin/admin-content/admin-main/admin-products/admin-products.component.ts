@@ -183,6 +183,7 @@ export class AdminProductsComponent implements OnInit {
   onSubmit() {
     this.productsService.addUpdateProduct(this.addChangeProductForm.value, this.whatHaveToDo).subscribe(resp => {
       this.adminMessageService.newsCampaignAddedMessage(resp);
+      this.clearFields();
     });
   }
 
@@ -203,8 +204,12 @@ export class AdminProductsComponent implements OnInit {
     });
   }
 
-  clearFields(e) {
+  clearFieldsByBtn(e) {
     e.preventDefault();
+    this.clearFields();
+  }
+
+  clearFields() {
     this.addChangeProductForm.patchValue({
       id: '',
       name: '',

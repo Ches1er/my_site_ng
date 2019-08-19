@@ -4,7 +4,7 @@ import {MessagesService} from '../../../services/messages.service';
 @Component({
   selector: 'app-prod-by-menu',
   templateUrl: './prod-by-menu.component.html',
-  styleUrls: ['./prod-by-menu.component.css']
+  styleUrls: ['./prod-by-menu.component.less']
 })
 export class ProdByMenuComponent implements OnInit {
 

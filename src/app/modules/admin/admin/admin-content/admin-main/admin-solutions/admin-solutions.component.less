@@ -1,0 +1,55 @@
+@import "../../../../../../common";
+
+.admin_unit_block{
+  display: inline-flex;
+  flex-flow: row wrap;
+  .admin_block_header {
+    color: @admin_label_header_color;
+  }
+  .admin_left_list_block{
+    width: 19%;
+    height: 100%;
+    overflow-y: auto;
+    border: 1px solid @main_content_border;
+    box-sizing: border-box;
+    padding: 10px;
+    margin-right: 5px;
+    .admin_left_list_unit_block {
+      padding: 5px;
+      box-sizing: border-box;
+      margin: 10px 0;
+      cursor: pointer;
+      box-shadow: 0px 1px 1px 0px @main_content_border;
+      &:hover {color: @admin_button_background}
+    }
+  }
+  .add_block {
+    width: 80%;
+    display: inline-flex;
+    flex-flow: column;
+    border: 1px solid @main_content_border;
+    box-sizing: border-box;
+    padding: 10px;
+    .add_block_unit {
+      border: 1px solid @main_content_border;
+      padding: 5px;
+      box-sizing: border-box;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+  }
+  .form-group{
+    margin: 5px 0;
+    .choosenImg {
+      width: 20%;
+      height: 20%;
+    }
+    .admin_content_block_label{
+      color: @admin_label_header_color;
+    }
+    .admin_content_block_label_small{
+      font-size: small;
+      color: @admin_label_header_color;
+    }
+  }
+}

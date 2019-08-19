@@ -30,7 +30,6 @@ export class HttpAuthService {
   }
 
   loginByRememberMeToken(rememberToken: string): Observable<any> {
-
     const params = new FormData();
     params.append('remember_token', rememberToken);
     return this.http.post(this.urlConfig.LOGIN_REMEMBER, params)
@@ -51,6 +50,13 @@ export class HttpAuthService {
     params.append('api_token', token);
     return this.http.post(this.urlConfig.USER, params)
       .pipe(map(resp => resp));
+  }
+  isAdmin(apiToken: string): Observable<any> {
+    const params = new FormData();
+    params.append('api_token', apiToken);
+    return this.http.post(this.urlConfig.IS_ADMIN, params)
+      .pipe(map(resp => ResultResponse.fromJson(resp)))
+      .pipe(map(ResResp => ResResp.response));
   }
 
   register(data: any): Observable<string> {
