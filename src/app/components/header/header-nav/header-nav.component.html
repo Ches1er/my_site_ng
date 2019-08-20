@@ -3,4 +3,5 @@
   <li><a routerLink="contacts" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}">Контакты</a></li>
   <li><a routerLink="about_us" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}">О нас</a></li>
   <li *ngIf="adminLoggedIn"><a routerLink="admin" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}">Админка</a></li>
+  <li *ngIf="userLoggedIn"><a routerLink="profile" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}">Профиль</a></li>
 </ul>

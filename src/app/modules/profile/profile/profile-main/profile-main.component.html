@@ -1,0 +1,49 @@
+<div *ngIf="currentUser" class="profile_content_block">
+  <div *ngIf="!currentUser.emailVerifiedAt" class="profile_content_block_unit">
+    <div class="info_message">
+      Ваша электронная почта не верифицирована, вы не сможете использовать порлный функционал ресурса!
+    </div>
+  </div>
+  <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+
+    <div class="info_message" *ngIf="onSubmitResponse">{{onSubmitResponse}}</div>
+
+    <div class="form-group">
+      <p class="admin_content_block_label">Форма для изменения логина.</p>
+      <input class="admin_content_input" type="text" id="name" formControlName = "name">
+      <div class="validation_error"
+           *ngIf="profileForm.get('name').getError('required') &&
+                (profileForm.get('name').dirty || profileForm.get('name').touched)">
+        Поле "логин" не может быть пустым.
+      </div>
+
+      <div class="form-group">
+        <p class="admin_content_block_label">Форма для изменения электронной почты.</p>
+        <input class="admin_content_input" type="text" id="email" formControlName = "email">
+        <div class="validation_error"
+             *ngIf="profileForm.get('email').getError('required') &&
+                (profileForm.get('email').dirty || profileForm.get('email').touched)">
+          Поле "электронная почта" не может быть пустым.
+        </div>
+
+        <div class="form-group" formArrayName="phones">
+          <label>Форма для изменения или добавления телефонов:</label>
+          <div class="form-group-unit"
+               *ngFor="let phone of profileForm.controls.phones.controls; let i = index">
+            <input formControlName = "{{i}}">
+            <button class="wnd-btn remove" (click)="DelPhone($event,i)">-</button>
+          </div>
+          <button class="wnd-btn add" (click)="AddPhone($event)">+</button>
+        </div>
+
+        <div class="admin_content_button_block">
+           <div *ngIf="profileForm.valid">
+            <button type="submit">Обновить информацию</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </form>
+</div>
+

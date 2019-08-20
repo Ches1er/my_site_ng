@@ -30,6 +30,7 @@ export class ProdContentComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.groups = [];
     this.route.data.subscribe(value => this.salesAreaDefiner = value.definer);
     this.route.data.subscribe(value => this.prodByDefiner = value.prod_by);
     this.getProducts(this.prodByDefiner, this.salesAreaDefiner);
@@ -37,7 +38,7 @@ export class ProdContentComponent implements OnInit {
     this.msgService.changedCurrentProduct.subscribe(id => {
       this.prodService.product(id).subscribe(prod => this.currentProduct = prod);
     });
-  }
+    }
 
   get prodByDefiner() {
     return this.pProdByDefiner;
@@ -79,7 +80,6 @@ export class ProdContentComponent implements OnInit {
   }
 
   private getProducts(prodByDefiner: string, salesAreaDefiner: string) {
-    this.groups = [];
     if (salesAreaDefiner === 'build') {
       if (prodByDefiner === 'appl') {
         this.updateBuildAppGroups();
@@ -91,9 +91,10 @@ export class ProdContentComponent implements OnInit {
     if (salesAreaDefiner === 'pack') {
       if (prodByDefiner === 'appl') {
         this.updatePackAppGroups();
-      }}
-    if (prodByDefiner === 'brand') {
-      this.updatePackBrandGroups();
+      }
+      if (prodByDefiner === 'brand') {
+        this.updatePackBrandGroups();
+      }
     }
   }
 

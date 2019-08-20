@@ -3,7 +3,6 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Campaign} from '../../../../../../dto/campaign/Campaign';
 import {SalesArea} from '../../../../../../dto/sales-area/Sales-area';
 import {Image} from '../../../../../../dto/images/Image';
-import {AngularEditorConfig} from '@kolkov/angular-editor';
 import {AdminMessagesService} from '../../../../../../services/admin/admin-messages.service';
 import {SalesAreaService} from '../../../../../../services/http/sales_area/sales-area.service';
 import {MessagesService} from '../../../../../../services/messages.service';

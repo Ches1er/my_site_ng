@@ -9,6 +9,7 @@ import {Product} from '../dto/products/Product';
 })
 export class MessagesService {
 
+
   private pLoginWindowShow: Subject<null> = new Subject<null>();
   private pRegisterWindowShow: Subject<null> = new Subject<null>();
   private pLoginSuccess: Subject<string> = new Subject<string>();
@@ -94,6 +95,7 @@ export class MessagesService {
   get changeCurrentSolution(): Subject<Solution> {
     return this.pChangeCurrentSolution;
   }
+
   get changeSolutionProduct(): Subject<Product> {
     return this.pChangeSolutionProduct;
   }
@@ -165,8 +167,10 @@ export class MessagesService {
   public changeCurrentSolutionMessage(solution: Solution) {
     this.pChangeCurrentSolution.next(solution);
   }
+
   public changeSolutionProductMessage(product: Product) {
     this.pChangeSolutionProduct.next(product);
   }
+
 
 }

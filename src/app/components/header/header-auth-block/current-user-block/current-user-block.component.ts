@@ -2,6 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {HttpAuthService} from '../../../../services/http/http-auth.service';
 import {MessagesService} from '../../../../services/messages.service';
 import {CookieService} from 'ngx-cookie-service';
+import {User} from '../../../../dto/User/User';
 
 @Component({
   selector: 'app-current-user-block',
@@ -9,7 +10,7 @@ import {CookieService} from 'ngx-cookie-service';
   styleUrls: ['./current-user-block.component.less']
 })
 export class CurrentUserBlockComponent implements OnInit {
-  currentUser = null;
+  currentUser: User = null;
   admin = false;
 
   constructor(@Inject(MessagesService) private msgService: MessagesService,
@@ -30,6 +31,7 @@ export class CurrentUserBlockComponent implements OnInit {
       this.httpAuthService.loginByRememberMeToken(this.cookieService.get('remember_token'))
         .subscribe(resp => {
           if (resp) {
+            this.msgService.loginSuccess(resp.api_token);
             this.httpAuthService.user(resp.api_token).subscribe(user => this.currentUser = user);
             this.httpAuthService.roles(resp.api_token).subscribe(roles => {
               if (CurrentUserBlockComponent.isAdmin(roles)) {

@@ -15,6 +15,7 @@ export class ProdByMenuComponent implements OnInit {
   }
 
   ngOnInit() {
+
   }
 
   showGroupContent(id: number) {

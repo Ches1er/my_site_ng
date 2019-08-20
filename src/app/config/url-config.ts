@@ -5,10 +5,12 @@ export class UrlConfig {
 
   LOGIN = this.base + 'login';
   REGISTER = this.base + 'register';
+  UPDATE_USER = this.base + 'update_user';
   LOGIN_REMEMBER = this.base + 'login_remember';
   ROLES = this.base + 'roles';
   USER = this.base + 'user';
   IS_ADMIN = this.base + 'is_admin';
+  IS_AUTH = this.base + 'is_auth';
 
   // CONTACTS
 
@@ -92,5 +94,11 @@ export class UrlConfig {
   SHOW_IMAGES = this.imagesBase;
   SHOW_IMAGE = this.base + 'image/';
   UPLOAD_IMAGE = this.imagesBase + '/upload_image';
+
+  // SALE
+  private saleBase = this.base + 'sales/';
+  // Products
+  SHOW_SALES_PRODUCTS = this.saleBase + 'products';
+  SHOW_SALES_PRODUCT = this.saleBase + 'product/';
 
 }

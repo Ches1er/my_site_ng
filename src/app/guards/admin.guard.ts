@@ -1,15 +1,14 @@
 import {Inject, Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
-import {Observable} from 'rxjs';
+import { Observable } from 'rxjs';
 import {HttpAuthService} from '../services/http/http-auth.service';
-import {CookieService} from 'ngx-cookie-service';
 import {MessagesService} from '../services/messages.service';
+import {CookieService} from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuardGuard implements CanActivate {
-
+export class AdminGuard implements CanActivate  {
   constructor(@Inject(HttpAuthService) private httpAuthService: HttpAuthService,
               @Inject(MessagesService) private msgService: MessagesService,
               @Inject(CookieService) private cookieService: CookieService, private pRouter: Router) {
@@ -18,9 +17,13 @@ export class AuthGuardGuard implements CanActivate {
     return this.pRouter;
   }
 
+  set Router(value: Router) {
+    this.pRouter = value;
+  }
+
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | boolean | UrlTree {
     if (this.cookieService.get('api_token')) {
-      if (this.isAuth()) {
+      if (this.isAdmin()) {
         return true;
       }
       this.msgService.loginWindowShow();
@@ -32,9 +35,9 @@ export class AuthGuardGuard implements CanActivate {
     return false;
   }
 
-  private isAuth() {
-    return this.httpAuthService.user(this.cookieService.get('api_token')).subscribe(u => {
-      if (u) { return true; }
+  private isAdmin() {
+    return this.httpAuthService.isAdmin(this.cookieService.get('api_token')).subscribe(r => {
+      return r;
     });
   }
 }

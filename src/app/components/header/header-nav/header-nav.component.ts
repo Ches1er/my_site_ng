@@ -8,13 +8,20 @@ import {MessagesService} from '../../../services/messages.service';
 })
 export class HeaderNavComponent implements OnInit {
 
+
   private pAdminLoggedIn;
-  constructor(@Inject(MessagesService) private msgService: MessagesService) { }
+  private pUserLoggedIn;
+
+  constructor(@Inject(MessagesService) private msgService: MessagesService) {
+  }
 
   ngOnInit() {
-    this.adminLoggedIn = false;
+    this.unlogUser();
     this.msgService.adminLoggedInMessage.subscribe(resp => this.adminLoggedIn = true);
-    this.msgService.logoutSuccessMessage.subscribe(m => this.adminLoggedIn = false);
+    this.msgService.loginSuccessMessage.subscribe(resp => this.userLoggedIn = true);
+    this.msgService.logoutSuccessMessage.subscribe(m => {
+      this.unlogUser();
+    });
   }
 
   get adminLoggedIn(): boolean {
@@ -23,6 +30,19 @@ export class HeaderNavComponent implements OnInit {
 
   set adminLoggedIn(value: boolean) {
     this.pAdminLoggedIn = value;
+  }
+
+  get userLoggedIn() {
+    return this.pUserLoggedIn;
+  }
+
+  set userLoggedIn(value) {
+    this.pUserLoggedIn = value;
+  }
+
+  unlogUser() {
+    this.adminLoggedIn = false;
+    this.userLoggedIn = false;
   }
 
 }
