@@ -12,6 +12,7 @@ import {ApplyingGroupsService} from '../../services/http/applying_groups/applyin
 import {BrandsService} from '../../services/http/brands/brands.service';
 import {ProductsService} from '../../services/http/products/products.service';
 import {MessagesService} from '../../services/messages.service';
+import {ImagesViewerModule} from '../imagesViewer/images-viewer.module';
 
 @NgModule({
   declarations: [ProdByMenuUnitComponent,
@@ -23,7 +24,7 @@ import {MessagesService} from '../../services/messages.service';
     CampaignContentComponent,
     CampaignContentUnitComponent],
   imports: [
-    CommonModule
+    CommonModule, ImagesViewerModule
   ],
   providers: [
     ApplyingGroupsService,

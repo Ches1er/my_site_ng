@@ -7,13 +7,20 @@ import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 @Component({
   selector: 'app-profile-main',
   templateUrl: './profile-main.component.html',
-  styleUrls: ['./profile-main.component.css']
+  styleUrls: ['./profile-main.component.less']
 })
 export class ProfileMainComponent implements OnInit {
   profileForm: FormGroup = new FormGroup({
     id: new FormControl(''),
-    name: new FormControl(''),
-    email: new FormControl(''),
+    name: new FormControl('', [
+      Validators.required,
+      Validators.pattern('[a-zA-Z0-9-_]+'),
+      Validators.minLength(3)
+    ]),
+    email: new FormControl('', [
+      Validators.required,
+      Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9]+\\.[.a-zA-Z0-9]+$')
+    ]),
     phones: new FormArray([]),
     confirmedClient: new FormControl(''),
     emailVerifiedAt: new FormControl('')
@@ -63,7 +70,7 @@ export class ProfileMainComponent implements OnInit {
     const phones = user.phones.split(',');
     const formPhones = this.profileForm.controls.phones as FormArray;
     phones.map(e => {
-      formPhones.push(new FormControl(e, Validators.required));
+      formPhones.push(new FormControl(e, [Validators.required, Validators.pattern('\\+[0-9]{12}')]));
     });
   }
 
@@ -84,6 +91,14 @@ export class ProfileMainComponent implements OnInit {
   AddPhone(event) {
     event.preventDefault();
     (this.profileForm.controls.phones as FormArray)
-      .push(new FormControl('+380', Validators.required));
+      .push(new FormControl('+380', [Validators.required, Validators.pattern('\\+[0-9]{12}')]));
+  }
+
+  sendVerificationEmail(event) {
+    event.preventDefault();
+    this.httpAuthService.rememberVerification().subscribe(resp => {
+      if (resp === 'Letter has sent') this.onSubmitResponse = 'Повторное письмо отправлено';
+      // if (resp === 'error') this.onSubmitResponse = 'Ой! Что-то пошло не так, повторите процедуру позже.';
+    });
   }
 }

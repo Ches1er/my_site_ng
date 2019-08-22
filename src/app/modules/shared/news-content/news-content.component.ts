@@ -3,6 +3,7 @@ import {HttpNewsService} from '../../../services/http/news/http-news.service';
 import {MessagesService} from '../../../services/messages.service';
 import {News} from '../../../dto/news/News';
 import {ActivatedRoute} from '@angular/router';
+import {HttpUrlEncodingCodec} from '@angular/common/http';
 
 @Component({
   selector: 'app-news-content',

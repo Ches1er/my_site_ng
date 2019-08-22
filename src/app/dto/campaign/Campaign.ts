@@ -1,5 +1,7 @@
-export class Campaign {
+import {HttpUrlEncodingCodec} from '@angular/common/http';
 
+export class Campaign {
+  private urlEncode = new HttpUrlEncodingCodec();
   constructor(private pId: number,
               private pName: string,
               private pShortCampaign: string,
@@ -35,7 +37,7 @@ export class Campaign {
   }
 
   get shortCampaign(): string {
-    return this.pShortCampaign;
+    return this.urlEncode.decodeValue(this.pShortCampaign);
   }
 
   set shortCampaign(value: string) {
@@ -43,7 +45,7 @@ export class Campaign {
   }
 
   get fullCampaign(): string {
-    return this.pFullCampaign;
+    return this.urlEncode.decodeValue(this.pFullCampaign);
   }
 
   set fullCampaign(value: string) {

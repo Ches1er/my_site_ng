@@ -1,8 +1,10 @@
-<div *ngIf="currentUser" class="admin">
-  <div class="main_content_header">Профиль пользователя {{currentUser.name}}</div>
-  <div class="admin_content">
-    <div class="nav"><app-profile-nav></app-profile-nav></div>
-    <div class="content"><router-outlet></router-outlet></div>
+<div class="profile_block">
+  <div *ngIf="currentUser" class="admin">
+    <div class="main_content_header">Профиль пользователя {{currentUser.name}}</div>
+    <div class="admin_content">
+      <div class="nav"><app-profile-nav></app-profile-nav></div>
+      <div class="content"><router-outlet></router-outlet></div>
+    </div>
   </div>
 </div>
 

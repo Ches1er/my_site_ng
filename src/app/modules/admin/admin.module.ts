@@ -25,6 +25,9 @@ import {AdminObjComponent} from './admin/admin-content/admin-main/admin-obj-clie
 import {AdminClientsComponent} from './admin/admin-content/admin-main/admin-obj-clients/admin-clients/admin-clients.component';
 import {ImagesViewerModule} from '../imagesViewer/images-viewer.module';
 import { AdminSolutionsComponent } from './admin/admin-content/admin-main/admin-solutions/admin-solutions.component';
+import {CookieService} from 'ngx-cookie-service';
+import {InputActiveBorderDirective} from '../../directives/input-active-border.directive';
+import {InputChangeWidthDirective} from '../../directives/input-change-width.directive';
 
 const routes: Routes = [
   {path: '', redirectTo: '', pathMatch: 'full'},
@@ -42,6 +45,8 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [AdminComponent,
+    InputChangeWidthDirective,
+    InputActiveBorderDirective,
     AdminNavComponent,
     AdminNewsComponent,
     AdminCampaignComponent,
@@ -67,6 +72,7 @@ const routes: Routes = [
     ProductsService,
     ApplyingGroupsService,
     ClientsService,
+    CookieService,
     BuildingObjectsService]
 })
 export class AdminModule {

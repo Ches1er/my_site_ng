@@ -27,6 +27,7 @@ export class BuildingSolutionUnitComponent implements OnInit {
       const p = this.currentSolution.products;
       this.items = i.split(';');
       this.fillInProducts(p.split(','));
+      this.msgService.changeSolutionProductMessage(null);
     });
   }
 

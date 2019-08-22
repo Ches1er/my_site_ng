@@ -8,6 +8,7 @@ import {MessagesService} from '../../../../../../services/messages.service';
 import {AdminMessagesService} from '../../../../../../services/admin/admin-messages.service';
 import {Image} from '../../../../../../dto/images/Image';
 import {AngularEditorCfg} from '../../../../../../config/angularEditorCfg';
+import {HttpUrlEncodingCodec} from '@angular/common/http';
 
 @Component({
   selector: 'app-admin-news',
@@ -30,6 +31,7 @@ export class AdminNewsComponent implements OnInit {
   private pChoosenImg: Image = null;
   private pWhatHaveToDo: string;
   private pOnSubmitResponse: string;
+  urlEncode = new HttpUrlEncodingCodec();
   config = this.angularEditorCfg.CONFIG;
 
   constructor(private msgService: MessagesService,
@@ -111,7 +113,6 @@ export class AdminNewsComponent implements OnInit {
   onSubmit() {
     this.newsService.addNews(this.addChangeNewsForm.value, this.whatHaveToDo).subscribe(resp => {
       this.adminMessageService.newsCampaignAddedMessage(resp);
-      this.clearFields();
     });
   }
 
@@ -130,9 +131,9 @@ export class AdminNewsComponent implements OnInit {
     this.addChangeNewsForm.patchValue({
       id: news.id,
       name: news.name,
-      short_news: news.shortNews,
+      short_news: this.urlEncode.decodeValue(news.shortNews),
       img: news.imgId,
-      full_news: news.fullNews,
+      full_news: this.urlEncode.decodeValue(news.fullNews),
       salesArea: news.salesAreaId
     });
     this.choosenImg = new Image(news.imgId, 'name', news.img);

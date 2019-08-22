@@ -7,8 +7,11 @@
   display: inline-flex;
   flex-flow: column;
   width: 100%;
-  border: 1px solid @main_border;
+  padding: 5px;
+  box-sizing: border-box;
+
   .clients_objs_unit{
+    box-shadow: 0 5px 5px 0 rgba(0,0,0, .2);
     box-sizing: border-box;
     display: inline-flex;
     flex-flow: column;
@@ -17,22 +20,68 @@
     margin-bottom: 10px;
     padding: 5px;
     .clients_objs_unit_name{
+      font-family: 'Oswald', sans-serif;
+      color: @header_second_color;
       width: 100%;
       text-align: center;
       margin-bottom: 10px;
+      font-size: 1.3em;
     }
-    .clients_objs_unit_desc{
-      img{
-        float: left;
+    .clients_objs_unit_content{
+      display: inline-flex;
+      flex-flow: row nowrap;
+      width: 100%;
+      .clients_objs_unit_img {
+        border: 1px solid @main_content_border;
+        width: 200px;
+        height: 200px;
+        display: inline-flex;
+        flex-flow: column;
+        justify-content: center;
+        align-content: center;
+        img {
+          width: 200px;
+          height: auto;
+          border-radius: 3px;
+        }
+      }
+      .clients_objs_unit_desc{
+          padding: 20px;
+        .clients_objs_unit_desc_text{
+          color: @main_right_side_news_short;
+          font-size: 1.1em;
+          text-indent: 10px;
+          font-family: 'Roboto', sans-serif;
+        }
+        ul {
+          list-style: none;
+          font-family: 'Roboto', sans-serif;
+          color: @main_right_side_news_short;
+          margin-top: 10px;
+          li {
+            font-family: 'Roboto', sans-serif;
+            color: @main_right_side_news_short;
+            font-weight: bold;
+            display: inline;
+            margin-top: 5px;
+          }
+        }
       }
     }
     .clients_objs_unit_photo{
+      margin-top: 5px;
       display: inline-flex;
       flex-flow: row;
+      border: 1px solid @main_content_border;
+      box-sizing: border-box;
+      padding: 5px;
+      justify-content: flex-start;
+      align-items: center;
       img {
         width: 50px;
-        height: 50px;
+        height: auto;
         margin-right: 10px;
+        cursor: pointer;
       }
     }
   }

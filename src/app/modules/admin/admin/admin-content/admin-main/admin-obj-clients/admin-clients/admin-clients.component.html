@@ -20,7 +20,7 @@
 
     <div class="form-group">
       <p class="admin_content_block_label">Введите название клиента</p>
-      <input type="text" id="name" formControlName = "name">
+      <input class="admin_content_input" type="text" id="name" formControlName = "name" appInputChangeWidth>
       <div class="validation_error"
            *ngIf="addChangeClientForm.get('name').getError('required') &&
                 (addChangeClientForm.get('name').dirty || addChangeClientForm.get('name').touched)">
@@ -48,6 +48,18 @@
       </div>
     </div>
 
+    <div class="form-group" formArrayName="products">
+      <label>Материалы, которые использует клиент:</label>
+      <div class="form-group-unit"
+           *ngFor="let product of addChangeClientForm.controls.products.controls; let i = index">
+        <select name="" id="products" formControlName = "{{i}}">
+          <option *ngFor="let product of products" value="{{product.id}}">{{product.name}}</option>
+        </select>
+        <button class="wnd-btn remove" (click)="DelProduct(i,$event)">-</button>
+      </div>
+      <button class="wnd-btn add" (click)="AddProduct($event)">+</button>
+    </div>
+
     <div class="admin_content_button_block">
       <div *ngIf="addChangeClientForm.valid">
         <button type="submit" *ngIf="whatHaveToDo==='add'">Добавить клиента</button>
@@ -57,8 +69,6 @@
       </div>
       <button type="submit" (click)="clearFields($event)">Очистить поля</button>
     </div>
-
   </form>
 </div>
-<app-images-picker></app-images-picker>
 

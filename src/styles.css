@@ -415,9 +415,23 @@ button {
 }
 .form-group {
   margin-bottom: 5px;
+  display: inline-flex;
+  flex-flow: column nowrap;
+}
+.form-group-unit{
+  display: inline-flex;
+  flex-flow: column nowrap;
+  margin-bottom: 3px;
+}
+.form_group_unit_imput_btn_block{
+  display: inline-flex;
+  flex-flow: row;
+}
+.array_validation_error{
+  width: 100%;
 }
 .admin_content_input {
-  width: 100%;
+  width: 150px;
 }
 .admin_content_input[type='number'] {
   width: 50px;

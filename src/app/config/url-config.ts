@@ -11,6 +11,7 @@ export class UrlConfig {
   USER = this.base + 'user';
   IS_ADMIN = this.base + 'is_admin';
   IS_AUTH = this.base + 'is_auth';
+  REPEAT_VERIFICATION = this.base + 'repeat_verification_letter';
 
   // CONTACTS
 

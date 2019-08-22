@@ -1,5 +1,7 @@
-export class News {
+import {HttpUrlEncodingCodec} from '@angular/common/http';
 
+export class News {
+  private urlEncode = new HttpUrlEncodingCodec();
   constructor(private pId: number,
               private pName: string,
               private pShortNews: string,
@@ -35,7 +37,7 @@ export class News {
   }
 
   get shortNews(): string {
-    return this.pShortNews;
+    return this.urlEncode.decodeValue(this.pShortNews);
   }
 
   set shortNews(value: string) {
@@ -43,7 +45,7 @@ export class News {
   }
 
   get fullNews(): string {
-    return this.pFullNews;
+    return this.urlEncode.decodeValue(this.pFullNews);
   }
 
   set fullNews(value: string) {

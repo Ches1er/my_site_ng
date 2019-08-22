@@ -28,7 +28,7 @@
 
       <div class="form-group">
         <p class="admin_content_block_label">Введите название акции</p>
-        <input class="admin_content_input" type="text" id="name" formControlName = "name">
+        <input type="text" id="name" formControlName = "name" appInputChangeWidth>
         <div class="validation_error"
              *ngIf="addChangeCampaignForm.get('name').getError('required') &&
                 (addChangeCampaignForm.get('name').dirty || addChangeCampaignForm.get('name').touched)">

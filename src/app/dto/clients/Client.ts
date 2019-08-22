@@ -1,11 +1,15 @@
-export class Client {
+import {HttpUrlEncodingCodec} from '@angular/common/http';
 
+export class Client {
+  private urlEncode = new HttpUrlEncodingCodec();
   constructor(private pId: number,
               private pName: string,
               private pImg: string,
               private pDesc: string,
               private pSalesAreaId: number,
-              private pImgId: number) {
+              private pImgId: number,
+              private pProducts: string,
+              private pProductsName: string) {
   }
 
   get id(): number {
@@ -41,7 +45,7 @@ export class Client {
   }
 
   get desc(): string {
-    return this.pDesc;
+    return this.urlEncode.decodeValue(this.pDesc);
   }
 
   set desc(value: string) {
@@ -56,7 +60,32 @@ export class Client {
     this.pImg = value;
   }
 
+  get products(): string {
+    return this.pProducts;
+  }
+
+  set products(value: string) {
+    this.pProducts = value;
+  }
+
+  get productsName(): string {
+    return this.pProductsName;
+  }
+
+  set productsName(value: string) {
+    this.pProductsName = value;
+  }
+
+
   public static fromJson(jsonObj: any): Client {
-    return new Client(jsonObj.id, jsonObj.name, jsonObj.img, jsonObj.desc, jsonObj.sales_area_id, jsonObj.img_id);
+    return new Client(
+      jsonObj.id,
+      jsonObj.name,
+      jsonObj.img,
+      jsonObj.desc,
+      jsonObj.sales_area_id,
+      jsonObj.img_id,
+      jsonObj.products,
+      jsonObj.products_name);
   }
 }

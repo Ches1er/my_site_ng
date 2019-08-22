@@ -75,6 +75,14 @@ export class HttpAuthService {
       .pipe(map(ResResp => ResResp.response));
   }
 
+  rememberVerification(): Observable<string> {
+    const params = new FormData();
+    params.append('api_token', this.cookieService.get('api_token'));
+    return this.http.post(this.urlConfig.REPEAT_VERIFICATION, params)
+      .pipe(map(resp => ResultResponse.fromJson(resp)))
+      .pipe(map(ResResp => ResResp.response));
+  }
+
   updateUser(data: any): Observable<string> {
     const params = new FormData();
     params.append('api_token', this.cookieService.get('api_token'));

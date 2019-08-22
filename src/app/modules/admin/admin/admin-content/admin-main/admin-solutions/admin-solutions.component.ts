@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {SalesArea} from '../../../../../../dto/sales-area/Sales-area';
+
 import {AdminMessagesService} from '../../../../../../services/admin/admin-messages.service';
 import {MessagesService} from '../../../../../../services/messages.service';
-import {News} from '../../../../../../dto/news/News';
+
 import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Image} from '../../../../../../dto/images/Image';
 import {AngularEditorCfg} from '../../../../../../config/angularEditorCfg';

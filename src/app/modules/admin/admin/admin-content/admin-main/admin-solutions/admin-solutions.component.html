@@ -16,7 +16,7 @@
 
         <div class="form-group">
           <p class="admin_content_block_label">Введите название готового решения</p>
-          <input type="text" id="name" formControlName = "name">
+          <input class="admin_content_input" type="text" id="name" formControlName = "name" appInputChangeWidth>
           <div class="validation_error"
                *ngIf="addChangeSolutionForm.get('name').getError('required') &&
                 (addChangeSolutionForm.get('name').dirty || addChangeSolutionForm.get('name').touched)">

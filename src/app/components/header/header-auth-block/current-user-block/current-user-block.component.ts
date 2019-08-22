@@ -26,8 +26,7 @@ export class CurrentUserBlockComponent implements OnInit {
     this.msgService.logoutSuccessMessage.subscribe(m => {
       this.currentUser = null;
     });
-
-    if (this.cookieService.check('remember_token')) {
+    if (!this.cookieService.get('remember_token') === null) {
       this.httpAuthService.loginByRememberMeToken(this.cookieService.get('remember_token'))
         .subscribe(resp => {
           if (resp) {

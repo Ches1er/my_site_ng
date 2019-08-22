@@ -12,6 +12,16 @@
                 (registerForm.get('name').dirty || registerForm.get('name').touched)">
             Поле "Логин" необходимо для заполнения
           </div>
+          <div class="validation_error"
+               *ngIf="registerForm.get('name').getError('pattern') &&
+                (registerForm.get('name').dirty || registerForm.get('name').touched)">
+            В логине допускаются только буквы, цифры и знаки "-","_".
+          </div>
+          <div class="validation_error"
+               *ngIf="registerForm.get('name').getError('minlength') &&
+                (registerForm.get('name').dirty || registerForm.get('name').touched)">
+            Логин должен содержать не менее, чем 3 символа!
+          </div>
         </div>
 
         <div class="form-group">
@@ -31,12 +41,28 @@
 
         <div class="form-group" formArrayName="phones">
           <label>Телефон:</label>
+          <div class="not_required_info">*Введите телефон в формате +380501111111</div>
           <div class="form-group-unit"
                *ngFor="let phone of registerForm.controls.phones.controls; let i = index">
-            <input formControlName = "{{i}}">
-            <button class="wnd-btn remove" (click)="DelPhone(i,$event)">-</button>
+            <div class="form_group_unit_imput_btn_block">
+              <input formControlName = "{{i}}">
+              <button class="wnd-btn remove" (click)="DelPhone(i,$event)">-</button>
+            </div>
+            <div class="array_validation_error">
+              <div class="validation_error"
+                   *ngIf="registerForm.controls.phones.controls[i].getError('required') &&
+                (registerForm.controls.phones.controls[i].dirty || registerForm.controls.phones.controls[i].touched)">
+                Поле "Телефон" необходимо для заполнения
+              </div>
+              <div class="validation_error"
+                   *ngIf="registerForm.controls.phones.controls[i].getError('pattern') &&
+                (registerForm.controls.phones.controls[i].dirty || registerForm.controls.phones.controls[i].touched)">
+                Некорректный формат номера телефона. Формат должен соответствовать +380501111111.
+              </div>
+            </div>
           </div>
           <button class="wnd-btn add" (click)="AddPhone($event)">+</button>
+
         </div>
 
         <div class="form-group">
@@ -52,6 +78,11 @@
                *ngIf="registerForm.get('password').getError('required') &&
                 (registerForm.get('password').dirty || registerForm.get('password').touched)">
             Поле "Пароль" необходимо для заполнения
+          </div>
+          <div class="validation_error"
+               *ngIf="registerForm.get('password').getError('minlength') &&
+                (registerForm.get('name').dirty || registerForm.get('name').touched)">
+            Пароль должен содержать не менее, чем 3 символа!
           </div>
         </div>
 

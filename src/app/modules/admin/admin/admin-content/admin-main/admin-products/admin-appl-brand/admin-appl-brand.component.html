@@ -30,7 +30,7 @@
 
       <div class="form-group">
       <p class="admin_content_block_label">Введите название нового бренда, который вы хотите добавить</p>
-      <input type="text" id="name" formControlName = "name">
+      <input class="admin_content_input" type="text" id="name" formControlName = "name" appInputChangeWidth>
       <div class="validation_error"
            *ngIf="addChangeBrand.get('name').getError('required') &&
                 (addChangeBrand.get('name').dirty || addChangeBrand.get('name').touched)">
@@ -91,7 +91,7 @@
 
       <div class="form-group">
         <p class="admin_content_block_label">Введите название группы, которую вы хотите добавить</p>
-        <input type="text" id="appl_name" formControlName = "name">
+        <input class="admin_content_input" type="text" id="appl_name" formControlName = "name" appInputChangeWidth>
         <div class="validation_error"
              *ngIf="addChangeApplGroup.get('name').getError('required') &&
                 (addChangeApplGroup.get('name').dirty || addChangeApplGroup.get('name').touched)">

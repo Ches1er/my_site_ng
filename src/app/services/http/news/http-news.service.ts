@@ -1,11 +1,12 @@
 import {Inject, Injectable} from '@angular/core';
 import {UrlConfig} from '../../../config/url-config';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpUrlEncodingCodec} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {News} from '../../../dto/news/News';
 import {NewsResponse} from '../../../dto/news/NewsResponse';
 import {map} from 'rxjs/operators';
 import {ResultResponse} from '../../../dto/server_response/ResultResponse';
+import {CookieService} from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,9 +14,10 @@ import {ResultResponse} from '../../../dto/server_response/ResultResponse';
 export class HttpNewsService {
 
   urlConfig: UrlConfig = new UrlConfig();
+  urlEncode = new HttpUrlEncodingCodec();
 
   constructor(
-    @Inject(HttpClient) private http: HttpClient) {
+    @Inject(HttpClient) private http: HttpClient, private cookieService: CookieService) {
   }
 
   get allNews(): Observable<Array<News>> {
@@ -38,19 +40,16 @@ export class HttpNewsService {
 
   addNews(data: any, action: string): Observable<any> {
     const params = new FormData();
+    params.append('api_token', this.cookieService.get('api_token'));
     params.append('action', action);
     params.append('id', data.id);
     params.append('name', data.name);
-    params.append('short_news', data.short_news);
-    params.append('full_news', data.full_news);
+    params.append('short_news', this.urlEncode.encodeValue(data.short_news));
+    params.append('full_news', this.urlEncode.encodeValue(data.full_news));
     params.append('img', data.img);
     params.append('salesArea', data.salesArea);
     return this.http.post(this.urlConfig.ADD_NEWS, params)
       .pipe(map(resp => ResultResponse.fromJson(resp)))
       .pipe(map(ResResp => ResResp.response));
   }
-/*  addNews(data: any, action: string): Observable<any> {
-    console.log(data);
-    console.log(action);
-  }*/
 }

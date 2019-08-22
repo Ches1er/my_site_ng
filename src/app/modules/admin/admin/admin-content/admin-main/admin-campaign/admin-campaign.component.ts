@@ -9,6 +9,7 @@ import {MessagesService} from '../../../../../../services/messages.service';
 import {CampaignService} from '../../../../../../services/http/campaign/campaign.service';
 import {DatePipe} from '@angular/common';
 import {AngularEditorCfg} from '../../../../../../config/angularEditorCfg';
+import {HttpUrlEncodingCodec} from '@angular/common/http';
 
 @Component({
   selector: 'app-admin-campaign',
@@ -34,6 +35,7 @@ export class AdminCampaignComponent implements OnInit {
   private pChoosenImg: Image = null;
   private pWhatHaveToDo: string;
   private pOnSubmitResponse: string;
+  urlEncode = new HttpUrlEncodingCodec();
   config = this.angularEditorCfg.CONFIG;
 
   constructor(private msgService: MessagesService,
@@ -152,9 +154,9 @@ export class AdminCampaignComponent implements OnInit {
     this.addChangeCampaignForm.patchValue({
         id: campaign.id,
         name: campaign.name,
-        short_campaign: campaign.shortCampaign,
+        short_campaign: this.urlEncode.decodeValue(campaign.shortCampaign),
         img: campaign.imgId,
-        full_campaign: campaign.fullCampaign,
+        full_campaign: this.urlEncode.decodeValue(campaign.fullCampaign),
         expiration: campaign.expiration,
         date: campaign.date,
         salesArea: campaign.salesAreaId

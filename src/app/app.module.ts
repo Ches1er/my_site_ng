@@ -32,6 +32,8 @@ import {SharedModule} from './modules/shared/shared.module';
 import {ContactsService} from './services/http/contacts/contacts.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { AuthResultComponent } from './components/windows/auth-result/auth-result.component';
+import { InputActiveBorderDirective } from './directives/input-active-border.directive';
+import {InputChangeWidthDirective} from './directives/input-change-width.directive';
 
 registerLocaleData(localeRuUa, 'RuUa');
 

@@ -2,15 +2,26 @@
   <div class="main_content_header">{{header}}</div>
   <div *ngFor="let unit of componentUnits" class="clients_objs_unit">
     <div class="clients_objs_unit_name">{{unit.name}}</div>
-    <div class="clients_objs_unit_desc">
-      <div *ngIf="unit.photo"><img src="{{unit.photo[0]}}" alt=""></div>
-      <div *ngIf="unit.logo"><img src="{{unit.logo}}" alt=""></div>
-      {{unit.desc}}
+    <div class="clients_objs_unit_content">
+      <div class="clients_objs_unit_img" *ngIf="unit.photo">
+        <img src="{{unit.photo[0]}}" alt="">
+      </div>
+      <div class="clients_objs_unit_img" *ngIf="unit.img && parentComponentDefiner === 'clients'">
+        <img src="{{unit.img}}" alt="">
+      </div>
+      <div class="clients_objs_unit_desc">
+        <div class="clients_objs_unit_desc_text">{{unit.desc}}</div>
+        <ul class="clients_objs_unit_desc_products">
+          В производстве используется следующая продукция:
+          <li *ngFor="let product of unit.productsName">{{product}}. </li>
+        </ul>
+      </div>
     </div>
     <div *ngIf="unit.photo" class="clients_objs_unit_photo">
       <div *ngFor="let photo of unit.photo">
-        <img src="{{photo}}" alt="">
+        <img src="{{photo}}" alt="" (click)="imageViewerShow(photo)">
       </div>
     </div>
   </div>
 </div>
+<app-images-viewer></app-images-viewer>

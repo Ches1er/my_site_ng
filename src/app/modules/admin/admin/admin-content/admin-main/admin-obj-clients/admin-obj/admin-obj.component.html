@@ -2,17 +2,17 @@
   <div class="admin_block_header_small">
     Добавление-изменение объектов.
   </div>
-  <form [formGroup]="addChangeObjForm">
+  <form [formGroup]="addChangeObjForm" (ngSubmit)="onSubmit()">
 
     <div class="info_message" *ngIf="onSubmitResponse">{{onSubmitResponse}}</div>
 
     <div class="form-group">
       <p class="admin_content_block_label">Введите название объекта</p>
-      <input type="text" id="name" formControlName = "name">
+      <input class="admin_content_input" type="text" id="name" formControlName = "name" appInputChangeWidth>
       <div class="validation_error"
            *ngIf="addChangeObjForm.get('name').getError('required') &&
                 (addChangeObjForm.get('name').dirty || addChangeObjForm.get('name').touched)">
-        Введите пожалуйста заголовок новости.
+        Введите пожалуйста название объекта.
       </div>
     </div>
 
@@ -22,7 +22,7 @@
       <div class="validation_error"
            *ngIf="addChangeObjForm.get('desc').getError('required') &&
                 (addChangeObjForm.get('desc').dirty || addChangeObjForm.get('desc').touched)">
-        Добавьте пожалуйста текст новости.
+        Добавьте пожалуйста описание объекта.
       </div>
     </div>
 
@@ -33,12 +33,20 @@
              *ngFor="let img_unit of addChangeObjForm.controls.img.controls; let i = index">
           <img class="admin_block_min_image" src="{{img_unit.value}}" (click)="showFullImage(img_unit.value)">
           <button class="wnd-btn remove" (click)="DelImg(i,$event)">-</button>
-          <button (click)="imagesPickerShow($event)">+</button>
         </div>
-        <button class="wnd-btn add" (click)="AddImg($event)">Добавить еще картинку</button>
+        <button class="wnd-btn add" (click)="AddImg($event)">+</button>
     </div>
+    </div>
+
+    <div class="admin_content_button_block">
+      <div *ngIf="addChangeObjForm.valid">
+        <button type="submit" *ngIf="whatHaveToDo==='add'">Добавить объект</button>
+      </div>
+      <div *ngIf="addChangeObjForm.valid">
+        <button type="submit" *ngIf="whatHaveToDo==='update'">Обновить информацию</button>
+      </div>
+      <button type="submit" (click)="clearFields($event)">Очистить поля</button>
     </div>
   </form>
 </div>
-<app-images-viewer></app-images-viewer>
-<app-images-picker></app-images-picker>
+

@@ -63,7 +63,7 @@
 
       <div class="form-group" *ngIf="brands">
         <p class="admin_content_block_label">Введите название продукции</p>
-        <input class="admin_content_input" type="text" id="name" formControlName = "name">
+        <input class="admin_content_input" type="text" id="name" formControlName = "name" appInputChangeWidth>
         <div class="validation_error"
              *ngIf="addChangeProductForm.get('name').getError('required') &&
                 (addChangeProductForm.get('name').dirty || addChangeProductForm.get('name').touched)">

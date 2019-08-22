@@ -12,13 +12,25 @@ import {HttpAuthService} from '../../../services/http/http-auth.service';
 export class RegisterComponent implements OnInit {
 
   registerForm: FormGroup = new FormGroup({
-    name: new FormControl('', Validators.required),
-    email: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9]+\\.[.a-zA-Z0-9]+$')]),
+    name: new FormControl('',
+      [
+        Validators.required,
+        Validators.pattern('[a-zA-Z0-9-_]+'),
+        Validators.minLength(3)
+      ]
+    ),
+    email: new FormControl('', [
+      Validators.required,
+      Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9]+\\.[.a-zA-Z0-9]+$')
+    ]),
     phones: new FormArray([
-      new FormControl('+380', Validators.required)
+      new FormControl('+380', [Validators.required, Validators.pattern('\\+[0-9]{12}')])
     ]),
     confirmedClient: new FormControl(''),
-    password: new FormControl('', Validators.required),
+    password: new FormControl('', [
+      Validators.required,
+      Validators.minLength(3)
+    ]),
     confirmPassword: new FormControl('', [Validators.required])
   });
   visible = false;
@@ -27,6 +39,7 @@ export class RegisterComponent implements OnInit {
   constructor(@Inject(MessagesService) private msgService: MessagesService,
               @Inject(HttpAuthService) private httpAuthService: HttpAuthService) {
   }
+
   get authMessage(): string {
     return this.pAuthMessage;
   }
@@ -55,7 +68,7 @@ export class RegisterComponent implements OnInit {
 
   AddPhone(e) {
     (this.registerForm.controls.phones as FormArray)
-      .push(new FormControl('+380', Validators.required));
+      .push(new FormControl('+380', [Validators.required, Validators.pattern('\\+[0-9]{12}')]));
     e.preventDefault();
   }
 
@@ -65,19 +78,19 @@ export class RegisterComponent implements OnInit {
     e.preventDefault();
   }
 
-/*  private responseHandler(resp: string) {
-    if (resp === 'User exists') {
-      this.authMessage = 'Такой пользователь уже существует';
-    }
-    if (resp === 'Registration succeed') {
-      const data = ['register', resp];
-      this.msgService.registerSuccessMessage(data);
-      this.cancel();
-    }
-    if (resp === 'Registration error') {
-      this.authMessage = 'Ошибка при регистрации! Попробуйте еще раз';
-    }
-  }*/
+  /*  private responseHandler(resp: string) {
+      if (resp === 'User exists') {
+        this.authMessage = 'Такой пользователь уже существует';
+      }
+      if (resp === 'Registration succeed') {
+        const data = ['register', resp];
+        this.msgService.registerSuccessMessage(data);
+        this.cancel();
+      }
+      if (resp === 'Registration error') {
+        this.authMessage = 'Ошибка при регистрации! Попробуйте еще раз';
+      }
+    }*/
   private responseHandler(resp: string) {
     const data = ['register', resp];
     this.msgService.registerSuccessMessage(data);

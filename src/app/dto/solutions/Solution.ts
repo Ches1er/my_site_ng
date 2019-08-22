@@ -1,5 +1,7 @@
-export class Solution {
+import {HttpUrlEncodingCodec} from '@angular/common/http';
 
+export class Solution {
+  private urlEncode = new HttpUrlEncodingCodec();
   constructor(private pId: number,
               private pName: string,
               private pDesc: string,
@@ -26,7 +28,7 @@ export class Solution {
   }
 
   get desc(): string {
-    return this.pDesc;
+    return this.urlEncode.decodeValue(this.pDesc);
   }
 
   set desc(value: string) {

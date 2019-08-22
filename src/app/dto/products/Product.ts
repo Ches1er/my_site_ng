@@ -1,6 +1,7 @@
+import {HttpUrlEncodingCodec} from '@angular/common/http';
+
 export class Product {
-
-
+  private urlEncode = new HttpUrlEncodingCodec();
   constructor(private pId: number,
               private pName: string,
               private pBrandId: number,
@@ -70,7 +71,7 @@ export class Product {
   }
 
   get techInfo(): string {
-    return this.pTechInfo;
+    return this.urlEncode.decodeValue(this.pTechInfo);
   }
 
   set techInfo(value: string) {

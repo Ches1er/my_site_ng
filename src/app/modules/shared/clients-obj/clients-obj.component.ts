@@ -1,6 +1,9 @@
 import {Component, Inject, Input, OnInit} from '@angular/core';
 import {ClientsService} from '../../../services/http/clients/clients.service';
 import {BuildingObjectsService} from '../../../services/http/building_objects/building-objects.service';
+import {Client} from '../../../dto/clients/Client';
+import {BuildObject} from '../../../dto/objects/Build_object';
+import {MessagesService} from '../../../services/messages.service';
 
 
 @Component({
@@ -15,23 +18,16 @@ export class ClientsObjComponent implements OnInit {
   private pHeader: string;
 
   constructor(@Inject(ClientsService) private clientsService: ClientsService,
-              @Inject(BuildingObjectsService) private buildObjService: BuildingObjectsService) {
+              @Inject(BuildingObjectsService) private buildObjService: BuildingObjectsService,
+              private msgService: MessagesService) {
   }
 
   get parentComponentDefiner(): string {
     return this.pParentComponentDefiner;
   }
 
-  set parentComponentDefiner(value: string) {
-    this.pParentComponentDefiner = value;
-  }
-
   get clientsalesAreaDefiner(): string {
     return this.pClientsalesAreaDefiner;
-  }
-
-  set clientsalesAreaDefiner(value: string) {
-    this.pClientsalesAreaDefiner = value;
   }
 
   get componentUnits(): Array<any> {
@@ -41,6 +37,7 @@ export class ClientsObjComponent implements OnInit {
   set componentUnits(value: Array<any>) {
     this.pComponentUnits = value;
   }
+
   get header(): string {
     return this.pHeader;
   }
@@ -62,15 +59,40 @@ export class ClientsObjComponent implements OnInit {
 
   private clients() {
     if (this.clientsalesAreaDefiner === 'pack') {
-      this.clientsService.packClients().subscribe(clients => this.componentUnits = clients);
+      this.clientsService.packClients().subscribe(clients => {
+        this.componentUnits = clients;
+        this.fillInClients(clients);
+      });
     }
     if (this.clientsalesAreaDefiner === 'building') {
-      this.clientsService.buildClients().subscribe(clients => this.componentUnits = clients);
+      this.clientsService.buildClients().subscribe(clients => {
+        this.componentUnits = clients;
+        console.log(clients.products);
+      });
     }
+  }
+
+  private fillInClients(clients: Array<Client>): void {
+    clients.forEach((e, i) => {
+      this.componentUnits[i].products = e.products.split(',');
+      this.componentUnits[i].productsName = e.productsName.split(',');
+    });
   }
 
   private buildObj() {
-     this.buildObjService.buildObjs().subscribe(objs => this.componentUnits = objs);
+    this.buildObjService.buildObjs().subscribe(objs => {
+      this.componentUnits = objs;
+      this.fillInObj(objs);
+    });
   }
 
+  private fillInObj(objects: Array<BuildObject>) {
+    objects.forEach((e, i) => {
+      this.componentUnits[i].photo = e.img.split(',');
+    });
+  }
+
+  imageViewerShow(photo) {
+    this.msgService.imagesViewerShowMessage(photo);
+  }
 }
