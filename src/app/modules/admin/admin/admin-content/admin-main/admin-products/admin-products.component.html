@@ -18,7 +18,7 @@
       Добавление-изменение продукции.
     </div>
     <div class="admin-content-form">
-    <form [formGroup]="addChangeProductForm" (ngSubmit)="onSubmit()">
+    <form class="admin_content_form" [formGroup]="addChangeProductForm" (ngSubmit)="onSubmit()">
 
       <div class="info_message" *ngIf="onSubmitResponse">{{onSubmitResponse}}</div>
 
@@ -79,7 +79,7 @@
       <div class="form-group">
         <p class="admin_content_block_label">Выберите картинку для продукции</p>
         <p class="admin_content_block_label_small">*Если картинка не будет выбрана, то будет установлена картинка по-умолчанию</p>
-        <button (click)="imagesPickerShow($event)">Выберите картинку продукции</button>
+        <button class="admin-btn" (click)="imagesPickerShow($event)">Выберите картинку продукции</button>
       </div>
 
       <div class="form-group" *ngIf="whatHaveToDo==='update'">
@@ -89,7 +89,7 @@
 
       <div class="form-group">
         <p class="admin_content_block_label">Введите описание продукции</p>
-        <angular-editor formControlName="tech_info" [config]="config"></angular-editor>
+        <angular-editor formControlName="tech_info" [config]="config" style="background-color: white"></angular-editor>
         <div class="validation_error"
              *ngIf="addChangeProductForm.get('tech_info').getError('required') &&
                      (addChangeProductForm.get('tech_info').dirty || addChangeProductForm.get('tech_info').touched)">
@@ -99,12 +99,12 @@
 
       <div class="admin_content_button_block" >
         <div class="div" *ngIf="addChangeProductForm.valid">
-          <button type="submit" *ngIf="whatHaveToDo==='add'">Добавить продукцию</button>
+          <button class="admin-btn" type="submit" *ngIf="whatHaveToDo==='add'">Добавить продукцию</button>
         </div>
         <div class="div" *ngIf="addChangeProductForm.valid">
-          <button type="submit" *ngIf="whatHaveToDo==='update'">Обновить продукцию</button>
+          <button class="admin-btn" type="submit" *ngIf="whatHaveToDo==='update'">Обновить продукцию</button>
         </div>
-        <button type="submit" (click)="clearFieldsByBtn($event)">Очистить поля</button>
+        <button class="admin-btn" type="submit" (click)="clearFieldsByBtn($event)">Очистить поля</button>
       </div>
     </form>
     </div>

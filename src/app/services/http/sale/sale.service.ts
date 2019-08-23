@@ -12,8 +12,13 @@ import {SaleProductsResponse} from '../../../dto/sale_products/SaleProductsRespo
 export class SaleService {
   urlConfig: UrlConfig = new UrlConfig();
   constructor(@Inject(HttpClient) private http: HttpClient) { }
-  get saleProducts(): Observable<Array<SaleProduct>>{
+  get saleProducts(): Observable<Array<SaleProduct>> {
     return this.http.get(this.urlConfig.SHOW_SALES_PRODUCTS)
+      .pipe(map(resp => SaleProductsResponse.fromJson(resp)))
+      .pipe(map(spr => spr.data));
+  }
+  saleProductsByBrand(brandId: number){
+    return this.http.get(this.urlConfig.SHOW_SALES_PRODUCT_BY_BRAND + brandId)
       .pipe(map(resp => SaleProductsResponse.fromJson(resp)))
       .pipe(map(spr => spr.data));
   }

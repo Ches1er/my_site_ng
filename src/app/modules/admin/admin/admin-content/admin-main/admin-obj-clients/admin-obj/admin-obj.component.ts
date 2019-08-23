@@ -38,8 +38,8 @@ export class AdminObjComponent implements OnInit {
     this.whatHaveToDo = 'add';
     this.adminMsgService.objectHasChoosen.subscribe(obj => {
       this.whatHaveToDo = 'update';
-      this.addChangeObjForm.get('img').reset();
-      this.addChangeObjForm.get('imgId').reset();
+      (this.addChangeObjForm.controls.img as FormArray).clear();
+      (this.addChangeObjForm.controls.imgId as FormArray).clear();
       this.addChangeObjForm.patchValue({id: obj.id, name: obj.name, desc: obj.desc});
       this.pushImagesToTheForm(obj);
     });
@@ -129,8 +129,8 @@ export class AdminObjComponent implements OnInit {
   clearFields(e) {
     e.preventDefault();
     this.addChangeObjForm.patchValue({id: '', name: '', desc: ''});
-    this.addChangeObjForm.controls.img.clear();
-    this.addChangeObjForm.controls.imgId.clear();
+    (this.addChangeObjForm.controls.img as FormArray).clear();
+    (this.addChangeObjForm.controls.imgId as FormArray).clear();
     this.whatHaveToDo = 'add';
     this.onSubmitResponse = null;
   }

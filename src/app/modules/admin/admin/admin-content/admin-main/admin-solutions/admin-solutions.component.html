@@ -10,7 +10,7 @@
   </div>
   <div class="add_block">
     <div class="add_block_unit">
-      <form [formGroup]="addChangeSolutionForm" (ngSubmit)="onSubmit()">
+      <form class="admin_content_form" [formGroup]="addChangeSolutionForm" (ngSubmit)="onSubmit()">
 
         <div class="info_message" *ngIf="onSubmitResponse">{{onSubmitResponse}}</div>
 
@@ -31,12 +31,12 @@
         <div class="form-group">
           <p class="admin_content_block_label">Выберите картинку для готового решения</p>
           <p class="admin_content_block_label_small">*Если картинка не будет выбрана, то будет установлена картинка по-умолчанию</p>
-          <button (click)="imagesPickerShow($event)">Выберите картинку готового решения</button>
+          <button class="admin-btn" (click)="imagesPickerShow($event)">Выберите картинку готового решения</button>
         </div>
 
         <div class="form-group">
           <p class="admin_content_block_label">Введите описание готового решения</p>
-          <angular-editor formControlName="desc" [config]="config"></angular-editor>
+          <angular-editor formControlName="desc" [config]="config" style="background-color: white"></angular-editor>
           <div class="validation_error"
                *ngIf="addChangeSolutionForm.get('desc').getError('required') &&
                 (addChangeSolutionForm.get('desc').dirty || addChangeSolutionForm.get('desc').touched)">
@@ -48,8 +48,11 @@
           <label>Перечислите пункты, которые указаны на картинке готового решения:</label>
           <div class="form-group-unit"
                *ngFor="let item of addChangeSolutionForm.controls.items.controls; let i = index">
-            <input formControlName = "{{i}}">
-            <button class="wnd-btn remove" (click)="DelItem(i,$event)">-</button>
+            <div class="form-group-unit-input-btn-block">
+              <input formControlName = "{{i}}">
+              <button class="wnd-btn remove" (click)="DelItem(i,$event)">-</button>
+            </div>
+
           </div>
           <button class="wnd-btn add" (click)="AddItem($event)">+</button>
         </div>
@@ -58,22 +61,24 @@
           <label>Материалы, которые используются в готовом решении:</label>
           <div class="form-group-unit"
                *ngFor="let product of addChangeSolutionForm.controls.products.controls; let i = index">
-            <select name="" id="products" formControlName = "{{i}}">
-              <option *ngFor="let product of products" value="{{product.id}}">{{product.name}}</option>
-            </select>
-            <button class="wnd-btn remove" (click)="DelProduct(i,$event)">-</button>
+            <div class="form-group-unit-input-btn-block">
+              <select name="" id="products" formControlName = "{{i}}">
+                <option *ngFor="let product of products" value="{{product.id}}">{{product.name}}</option>
+              </select>
+              <button class="wnd-btn remove" (click)="DelProduct(i,$event)">-</button>
+            </div>
           </div>
           <button class="wnd-btn add" (click)="AddProduct($event)">+</button>
         </div>
 
         <div class="admin_content_button_block">
           <div *ngIf="addChangeSolutionForm.valid">
-            <button type="submit" *ngIf="whatHaveToDo==='add'">Добавить решение</button>
+            <button class="admin-btn" type="submit" *ngIf="whatHaveToDo==='add'">Добавить решение</button>
           </div>
           <div *ngIf="addChangeSolutionForm.valid">
-            <button type="submit" *ngIf="whatHaveToDo==='update'">Обновить информацию</button>
+            <button class="admin-btn" type="submit" *ngIf="whatHaveToDo==='update'">Обновить информацию</button>
           </div>
-          <button type="submit" (click)="clearFields($event)">Очистить поля</button>
+          <button class="admin-btn" type="submit" (click)="clearFields($event)">Очистить поля</button>
         </div>
       </form>
     </div>

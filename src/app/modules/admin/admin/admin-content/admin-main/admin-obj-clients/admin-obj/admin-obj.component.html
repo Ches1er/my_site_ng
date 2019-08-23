@@ -18,7 +18,7 @@
 
     <div class="form-group">
       <p class="admin_content_block_label">Введите описание объекта</p>
-      <angular-editor formControlName="desc" [config]="config"></angular-editor>
+      <angular-editor formControlName="desc" [config]="config" style="background-color: white"></angular-editor>
       <div class="validation_error"
            *ngIf="addChangeObjForm.get('desc').getError('required') &&
                 (addChangeObjForm.get('desc').dirty || addChangeObjForm.get('desc').touched)">
@@ -31,8 +31,10 @@
         <div class="form-group-images-block">
         <div class="form-group-unit"
              *ngFor="let img_unit of addChangeObjForm.controls.img.controls; let i = index">
-          <img class="admin_block_min_image" src="{{img_unit.value}}" (click)="showFullImage(img_unit.value)">
-          <button class="wnd-btn remove" (click)="DelImg(i,$event)">-</button>
+          <div class="form-group-unit-input-btn-block">
+            <img class="admin_block_min_image" src="{{img_unit.value}}" (click)="showFullImage(img_unit.value)">
+            <button class="wnd-btn remove" (click)="DelImg(i,$event)">-</button>
+          </div>
         </div>
         <button class="wnd-btn add" (click)="AddImg($event)">+</button>
     </div>

@@ -14,6 +14,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     this.imgService.image('logo.png').subscribe(image => this.logo = image);
+
   }
 
   get logo() {

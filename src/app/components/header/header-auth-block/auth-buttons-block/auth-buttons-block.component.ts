@@ -19,7 +19,9 @@ export class AuthButtonsBlockComponent implements OnInit {
     this.ifUserLoggedIn = false;
     this.cookieService.get('remember_token') !== null ? this.cookieService.delete('api_token') : this.cookieService.check('api_token');
     this.msgService.loginSuccessMessage.subscribe(m => this.ifUserLoggedIn = true);
-    this.msgService.logoutSuccessMessage.subscribe(m => this.ifUserLoggedIn = false);
+    this.msgService.logoutSuccessMessage.subscribe(m => {
+      this.ifUserLoggedIn = false;
+    });
     this.ifUserLoggedIn = this.cookieService.check('api_token') && this.cookieService.get('remember_token') === null;
   }
 

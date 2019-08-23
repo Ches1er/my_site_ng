@@ -1,6 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MessagesService} from '../../../services/messages.service';
 import {HttpAuthService} from '../../../services/http/http-auth.service';
+import {CookieService} from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-header-auth-block',
@@ -10,7 +11,8 @@ import {HttpAuthService} from '../../../services/http/http-auth.service';
 export class HeaderAuthBlockComponent implements OnInit {
 
   constructor(@Inject(MessagesService) private msgService: MessagesService,
-              @Inject(HttpAuthService) private httpAuthService: HttpAuthService) {
+              @Inject(HttpAuthService) private httpAuthService: HttpAuthService,
+              @Inject(CookieService) private cookieService: CookieService) {
   }
 
   ngOnInit() {

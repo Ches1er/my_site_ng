@@ -26,30 +26,28 @@ export class CurrentUserBlockComponent implements OnInit {
     this.msgService.logoutSuccessMessage.subscribe(m => {
       this.currentUser = null;
     });
-    if (!this.cookieService.get('remember_token') === null) {
+    if (this.cookieService.get('remember_token') !== null && this.cookieService.check('remember_token')) {
       this.httpAuthService.loginByRememberMeToken(this.cookieService.get('remember_token'))
         .subscribe(resp => {
           if (resp) {
+            if (!this.cookieService.check('api_token')) {this.cookieService.set('api_token', resp.api_token, 0.02); }
             this.msgService.loginSuccess(resp.api_token);
-            this.httpAuthService.user(resp.api_token).subscribe(user => this.currentUser = user);
-            this.httpAuthService.roles(resp.api_token).subscribe(roles => {
-              if (CurrentUserBlockComponent.isAdmin(roles)) {
-                this.msgService.adminLoggedIn();
-              }
-            });
+            this.getUserAndRoles(resp.api_token);
           }
         });
     }
     this.msgService.loginSuccessMessage.subscribe(token => {
-        this.httpAuthService.user(token).subscribe(user => this.currentUser = user);
-        this.httpAuthService.roles(token).subscribe(roles => {
-          if (CurrentUserBlockComponent.isAdmin(roles)) {
-            this.msgService.adminLoggedIn();
-          }
-        });
+      this.getUserAndRoles(token);
       }
     );
   }
 
-
+  private getUserAndRoles(apiToken: string) {
+    this.httpAuthService.user(apiToken).subscribe(user => this.currentUser = user);
+    this.httpAuthService.roles(apiToken).subscribe(roles => {
+      if (CurrentUserBlockComponent.isAdmin(roles)) {
+        this.msgService.adminLoggedIn();
+      }
+    });
+  }
 }

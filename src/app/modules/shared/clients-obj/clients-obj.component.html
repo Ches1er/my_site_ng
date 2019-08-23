@@ -10,8 +10,8 @@
         <img src="{{unit.img}}" alt="">
       </div>
       <div class="clients_objs_unit_desc">
-        <div class="clients_objs_unit_desc_text">{{unit.desc}}</div>
-        <ul class="clients_objs_unit_desc_products">
+        <div class="clients_objs_unit_desc_text" [innerHTML]= unit.desc></div>
+        <ul class="clients_objs_unit_desc_products" *ngIf="parentComponentDefiner === 'clients'">
           В производстве используется следующая продукция:
           <li *ngFor="let product of unit.productsName">{{product}}. </li>
         </ul>

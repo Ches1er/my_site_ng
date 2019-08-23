@@ -13,11 +13,50 @@
   top: 0;
   bottom: 0;
   right: 0;
-  .img_picker_window{
+  .window-header{
+    padding: 0 20px;
+    height: 50px;
+    line-height: 50px;
+    background-color: #eee;
+    font-weight: bold;
+    font-family: 'Raleway', sans-serif;
+    color: #325c8e;
+  }
+  .window-footer {
+    padding: 0 20px;
+    height: 50px;
+    line-height: 50px;
+    background-color: #eee;
+    font-weight: bold;
+    .images-picker-button-block {
+      display: inline-flex;
+      flex-flow: row nowrap;
+      justify-content: flex-start;
+      .images-picker-button {
+        margin: 5px 5px 5px 0;
+        height: 30px;
+        line-height: 30px;
+        background-color: #a5d7ff;
+        color: white;
+        cursor: pointer;
+        padding: 0 10px;
+        border: 1px solid rgba(0, 0, 0, .1);
+        border-radius: 2px;
+        transition: all .218s ease 0s;
+        &:hover {  background-color: #86b0d3;}
+      }
+      .images-picker-message {
+        margin: 5px 0;
+        color: @messages_color;
+        font-family: 'Raleway', sans-serif;
+      }
+    }
+  }
+  .img_picker_window {
     width: 80%;
     height: auto;
     background-color: #fff;
-    .images_picker_all{
+    .images_picker_all {
       border: 1px solid @main_content_border;
       overflow-y: scroll;
       height: 300px;
@@ -27,8 +66,8 @@
       margin-top: 10px;
       margin-bottom: 10px;
       padding: 10px;
-      .images_picker_image{
-        width: 30%;
+      .images_picker_image {
+        width: 20%;
         height: auto;
         margin: 5px;
         display: inline-flex;
@@ -36,37 +75,18 @@
         justify-content: center;
         align-content: center;
         padding: 5px;
-        img{
+        box-sizing: border-box;
+        &:hover {
+          border: 1px solid lightblue;
+          box-sizing: border-box;
+        }
+        img {
           width: 100%;
           height: auto;
         }
       }
     }
-    .images-picker-button {
-      margin-bottom: 5px;
-      width: auto;
-      user-select: none;
-      padding: .5em 1.3em;
-      outline: none;
-      color: @admin_button_color;
-      background-color: @admin_button_background;
-      &:hover {
-        background-color: @admin_button_background_hover;
-      }
+
   }
-}
-
-.images-picker-message {
-  margin: 5px 0;
-  color: @messages_color;
-  font-family: 'Raleway', sans-serif;
-}
-.images-picker-button-block{
-  display: inline-flex;
-  flex-flow: column nowrap;
-  align-items: center;
-
-}
-
 }
 

@@ -10,7 +10,7 @@
   </div>
   <div class="add_block">
     <div class="add_block_unit">
-    <form [formGroup]="addChangeCampaignForm" (ngSubmit)="onSubmit()">
+    <form class="admin_content_form" [formGroup]="addChangeCampaignForm" (ngSubmit)="onSubmit()">
 
       <div class="info_message" *ngIf="onSubmitResponse">{{onSubmitResponse}}</div>
 
@@ -28,7 +28,7 @@
 
       <div class="form-group">
         <p class="admin_content_block_label">Введите название акции</p>
-        <input type="text" id="name" formControlName = "name" appInputChangeWidth>
+        <input class="admin_content_input" type="text" id="name" formControlName = "name" appInputChangeWidth>
         <div class="validation_error"
              *ngIf="addChangeCampaignForm.get('name').getError('required') &&
                 (addChangeCampaignForm.get('name').dirty || addChangeCampaignForm.get('name').touched)">
@@ -38,7 +38,7 @@
 
       <div class="form-group" *ngIf="whatHaveToDo==='add'">
         <p class="admin_content_block_label">Количество дней, сколько будет длиться акция.</p>
-        <input class="admin_content_input" type="number" id="expiration" formControlName = "expiration">
+        <input class="admin_content_input_number" type="number" id="expiration" formControlName = "expiration">
         <div class="validation_error"
              *ngIf="addChangeCampaignForm.get('expiration').getError('required') &&
                 (addChangeCampaignForm.get('expiration').dirty || addChangeCampaignForm.get('expiration').touched)">
@@ -54,7 +54,7 @@
       <div class="form-group">
         <p class="admin_content_block_label">Выберите заглавную картинку для акции</p>
         <p class="admin_content_block_label_small">*Если картинка не будет выбрана, то будет установлена картинка по-умолчанию</p>
-        <button (click)="imagesPickerShow($event)">Выберите картинку акции</button>
+        <button class="admin-btn" (click)="imagesPickerShow($event)">Выберите картинку акции</button>
       </div>
 
       <div class="form-group">
@@ -69,7 +69,7 @@
 
       <div class="form-group">
         <p class="admin_content_block_label">Введите полный текст новости</p>
-        <angular-editor formControlName="full_campaign" [config]="config"></angular-editor>
+        <angular-editor formControlName="full_campaign" [config]="config" style="background-color: white"></angular-editor>
         <div class="validation_error"
              *ngIf="addChangeCampaignForm.get('full_campaign').getError('required') &&
                 (addChangeCampaignForm.get('full_campaign').dirty || addChangeCampaignForm.get('full_campaign').touched)">
@@ -79,12 +79,12 @@
 
       <div class="admin_content_button_block" >
         <div class="div" *ngIf="addChangeCampaignForm.valid">
-          <button type="submit" *ngIf="whatHaveToDo==='add'">Добавить акцию</button>
+          <button class="admin-btn" type="submit" *ngIf="whatHaveToDo==='add'">Добавить акцию</button>
         </div>
         <div class="div" *ngIf="addChangeCampaignForm.valid">
-          <button type="submit" *ngIf="whatHaveToDo==='update'">Обновить акцию</button>
+          <button class="admin-btn" type="submit" *ngIf="whatHaveToDo==='update'">Обновить акцию</button>
         </div>
-        <button type="submit" (click)="clearFields($event)">Очистить поля</button>
+        <button class="admin-btn" type="submit" (click)="clearFields($event)">Очистить поля</button>
       </div>
     </form>
   </div>

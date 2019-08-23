@@ -1,6 +1,6 @@
 export class SaleProduct {
 
-  constructor(private pId: number, private pName: string, private pPrice: number, private pMeasure: string) {
+  constructor(private pId: number, private pName: string, private pPrice: number, private pBrandId: number, private pMeasure: string) {
   }
 
   get id(): number {
@@ -26,6 +26,13 @@ export class SaleProduct {
   set price(value: number) {
     this.pPrice = value;
   }
+  get brandId(): number {
+    return this.pBrandId;
+  }
+
+  set brandId(value: number) {
+    this.pBrandId = value;
+  }
 
   get measure(): string {
     return this.pMeasure;
@@ -35,6 +42,6 @@ export class SaleProduct {
     this.pMeasure = value;
   }
   public static fromJson(jsonObj: any): SaleProduct {
-    return new SaleProduct(jsonObj.id, jsonObj.name, jsonObj.price, jsonObj.measure);
+    return new SaleProduct(jsonObj.id, jsonObj.name, jsonObj.price, jsonObj.brand_id, jsonObj.measure);
   }
 }

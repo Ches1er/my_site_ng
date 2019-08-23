@@ -67,7 +67,6 @@ export class ClientsObjComponent implements OnInit {
     if (this.clientsalesAreaDefiner === 'building') {
       this.clientsService.buildClients().subscribe(clients => {
         this.componentUnits = clients;
-        console.log(clients.products);
       });
     }
   }

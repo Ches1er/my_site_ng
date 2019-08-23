@@ -36,7 +36,7 @@ export class ProfileMainComponent implements OnInit {
   }
 
   private updateUser() {
-    this.profileForm.get('phones').clear();
+    (this.profileForm.controls.phones as FormArray).clear();
     this.httpAuthService.user(this.cookieService.get('api_token')).subscribe(user => {
       this.currentUser = user;
       this.fillInForm(user);

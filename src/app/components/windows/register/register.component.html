@@ -44,7 +44,7 @@
           <div class="not_required_info">*Введите телефон в формате +380501111111</div>
           <div class="form-group-unit"
                *ngFor="let phone of registerForm.controls.phones.controls; let i = index">
-            <div class="form_group_unit_imput_btn_block">
+            <div class="form_group_unit_input_btn_block">
               <input formControlName = "{{i}}">
               <button class="wnd-btn remove" (click)="DelPhone(i,$event)">-</button>
             </div>

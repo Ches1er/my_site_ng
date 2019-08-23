@@ -101,5 +101,6 @@ export class UrlConfig {
   // Products
   SHOW_SALES_PRODUCTS = this.saleBase + 'products';
   SHOW_SALES_PRODUCT = this.saleBase + 'product/';
+  SHOW_SALES_PRODUCT_BY_BRAND = this.saleBase + 'products/';
 
 }

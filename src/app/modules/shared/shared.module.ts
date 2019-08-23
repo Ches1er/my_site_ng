@@ -13,6 +13,10 @@ import {BrandsService} from '../../services/http/brands/brands.service';
 import {ProductsService} from '../../services/http/products/products.service';
 import {MessagesService} from '../../services/messages.service';
 import {ImagesViewerModule} from '../imagesViewer/images-viewer.module';
+import { OrderComponent } from './order/order.component';
+import {SaleService} from '../../services/http/sale/sale.service';
+import {SalesAreaService} from '../../services/http/sales_area/sales-area.service';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [ProdByMenuUnitComponent,
@@ -22,15 +26,17 @@ import {ImagesViewerModule} from '../imagesViewer/images-viewer.module';
     NewsContentComponent,
     NewsContentUnitComponent,
     CampaignContentComponent,
-    CampaignContentUnitComponent],
+    CampaignContentUnitComponent,
+    OrderComponent],
   imports: [
-    CommonModule, ImagesViewerModule
+    CommonModule, ImagesViewerModule, ReactiveFormsModule, FormsModule
   ],
   providers: [
     ApplyingGroupsService,
     BrandsService,
     ProductsService,
-    MessagesService
+    MessagesService,
+    SaleService, SalesAreaService
   ],
   exports: [ProdByMenuUnitComponent,
     ProdContentComponent,
@@ -40,6 +46,7 @@ import {ImagesViewerModule} from '../imagesViewer/images-viewer.module';
     NewsContentUnitComponent,
     CampaignContentComponent,
     CampaignContentUnitComponent,
+    OrderComponent
     ]
 })
 export class SharedModule {

@@ -5,6 +5,7 @@
         <p class="images-picker-message">Для выбора картинки, нажмите на нее в списке</p>
 
         <div class = "images_picker_all" *ngIf="images">
+
           <div class="images_picker_image" *ngFor="let image of images">
             <img src="{{image.path}}" alt="" (click)="chooseImage(image)">
           </div>
@@ -12,20 +13,18 @@
 
         <div class="images-picker-message" *ngIf="imageUploaded==='success'">Картинка успешно загружена</div>
         <div class="images-picker-message" *ngIf="imageUploaded==='error'">Картинка не загружена</div>
-
-        <div class="images-picker-button-block">
-          <input
-            style="display: none"
-            type="file" (change)="onFileChanged($event)"
-            #fileInput>
-          <button class="images-picker-button" (click)="fileInput.click()">Выберите картинку для загрузки на сервер</button>
-          <button class="images-picker-button" *ngIf="selectedFile" (click)="onUpload()">Загрузить картинку на сервер</button>
-        </div>
       </div>
-      <div class="window-footer">
+    <div class="window-footer">
+      <div class="images-picker-button-block">
         <button class="images-picker-button" (click)="cancel()">Отмена</button>
+        <input
+          style="display: none"
+          type="file" (change)="onFileChanged($event)"
+          #fileInput>
+        <button class="images-picker-button" (click)="fileInput.click()">Выберите картинку для загрузки на сервер</button>
+        <button class="images-picker-button" *ngIf="selectedFile" (click)="onUpload()">Загрузить картинку на сервер</button>
       </div>
-
+    </div>
   </div>
 </div>
 

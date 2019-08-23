@@ -115,7 +115,7 @@ export class AdminClientsComponent implements OnInit {
 
   clearFields(e) {
     this.addChangeClientForm.patchValue({id: '', name: '', desc: '', img: '', salesArea: ''});
-    this.addChangeClientForm.controls.products.clear();
+    (this.addChangeClientForm.controls.products as FormArray).clear();
     this.whatHaveToDo = 'add';
     this.choosenImg = null;
     this.onSubmitResponse = null;
