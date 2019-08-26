@@ -9,9 +9,10 @@ import {CookieService} from 'ngx-cookie-service';
   providedIn: 'root'
 })
 export class AdminGuard implements CanActivate  {
+
+  private pToken;
   constructor(@Inject(HttpAuthService) private httpAuthService: HttpAuthService,
-              @Inject(MessagesService) private msgService: MessagesService,
-              @Inject(CookieService) private cookieService: CookieService, private pRouter: Router) {
+              @Inject(MessagesService) private msgService: MessagesService, private pRouter: Router) {
   }
   get Router(): Router {
     return this.pRouter;
@@ -20,9 +21,20 @@ export class AdminGuard implements CanActivate  {
   set Router(value: Router) {
     this.pRouter = value;
   }
+  get token() {
+    return this.pToken;
+  }
+
+  set token(value) {
+    this.pToken = value;
+  }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | boolean | UrlTree {
-    if (this.cookieService.get('api_token')) {
+    if (localStorage.length > 0) {
+      const data = JSON.parse(localStorage.getItem('tokenData'));
+      this.token = data.api_token;
+    }
+    if (this.token) {
       if (this.isAdmin()) {
         return true;
       }
@@ -36,7 +48,7 @@ export class AdminGuard implements CanActivate  {
   }
 
   private isAdmin() {
-    return this.httpAuthService.isAdmin(this.cookieService.get('api_token')).subscribe(r => {
+    return this.httpAuthService.isAdmin(this.token).subscribe(r => {
       return r;
     });
   }

@@ -17,6 +17,7 @@ import { OrderComponent } from './order/order.component';
 import {SaleService} from '../../services/http/sale/sale.service';
 import {SalesAreaService} from '../../services/http/sales_area/sales-area.service';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {HttpAuthService} from '../../services/http/http-auth.service';
 
 @NgModule({
   declarations: [ProdByMenuUnitComponent,
@@ -36,7 +37,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     BrandsService,
     ProductsService,
     MessagesService,
-    SaleService, SalesAreaService
+    SaleService, SalesAreaService, HttpAuthService
   ],
   exports: [ProdByMenuUnitComponent,
     ProdContentComponent,

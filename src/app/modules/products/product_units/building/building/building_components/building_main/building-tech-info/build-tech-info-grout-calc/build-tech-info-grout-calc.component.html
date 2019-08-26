@@ -1,6 +1,6 @@
 <div class="grout_calc_main" *ngIf="calcDefiner">
   <div class="grout_calc_header">Расчитываем расход для затирки {{calcDefiner}}</div>
-  <form [formGroup]="groutCalc">
+  <form class="grout_calc_form" [formGroup]="groutCalc">
     <div class="form-group">
       <p class="grout_calc_label">Ширина плитки:</p>
       <input class="grout_calc_input" type="number" formControlName="width">
@@ -53,7 +53,7 @@
 
     <div class="form-group">
       <p class="grout_calc_label">Расход затирки, кг</p>
-      <input type="text" formControlName="result" disabled>
+      <input class ="grout_calc_input" type="text" formControlName="result" disabled>
     </div>
 
   </form>

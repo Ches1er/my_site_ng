@@ -41,9 +41,15 @@ export class LoginComponent implements OnInit {
           this.error = resp;
         } else {
           this.msgService.loginSuccess(resp.api_token);
-          // 30 min expiration time. 1/24/60*30
-          this.cookieService.set('api_token', resp.api_token, 0.02);
-          this.cookieService.set('remember_token', resp.remember_token, 0.02);
+          // 30 min expiration time. 1*24*60*30
+          const tokenData = {
+            api_token: resp.api_token,
+            remember_token: resp.remember_token,
+            expiration: Date.now() + (30 * 60 * 1000)
+          };
+          localStorage.setItem('tokenData', JSON.stringify(tokenData));
+          /*          this.cookieService.set('api_token', resp.api_token, 0.02);
+                    this.cookieService.set('remember_token', resp.remember_token, 0.02);*/
           this.visible = false;
         }
       });

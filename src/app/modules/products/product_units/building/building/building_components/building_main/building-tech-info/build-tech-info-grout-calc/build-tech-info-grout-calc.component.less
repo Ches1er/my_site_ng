@@ -1,5 +1,7 @@
 @import "../../../../../../../../../common";
-
+:host {
+  width: 100%;
+}
 .grout_calc_main{
   width: 100%;
   display: inline-flex;
@@ -12,8 +14,17 @@
     color: @main_left_side_list;
     font-family: 'Oswald', sans-serif;
   }
-  form{
+  .grout_calc_form{
+    display: inline-flex;
+    flex-flow: column nowrap;
+    width: 100%;
     .form-group{
+      width: 100%;
+      align-items: center;
+      .grout_calc_input{
+        padding: 5px;
+        color: #505050;
+      }
       .grout_calc_label{
         font-family: 'Scada', sans-serif;
         color: @main_left_side_list;

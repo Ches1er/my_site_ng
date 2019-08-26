@@ -10,7 +10,16 @@ import {User} from '../../../../dto/User/User';
   styleUrls: ['./current-user-block.component.less']
 })
 export class CurrentUserBlockComponent implements OnInit {
+  get tokenData() {
+    return this.pTokenData;
+  }
+
+  set tokenData(value) {
+    this.pTokenData = value;
+  }
+
   currentUser: User = null;
+  private pTokenData;
   admin = false;
 
   constructor(@Inject(MessagesService) private msgService: MessagesService,
@@ -26,18 +35,21 @@ export class CurrentUserBlockComponent implements OnInit {
     this.msgService.logoutSuccessMessage.subscribe(m => {
       this.currentUser = null;
     });
-    if (this.cookieService.get('remember_token') !== null && this.cookieService.check('remember_token')) {
-      this.httpAuthService.loginByRememberMeToken(this.cookieService.get('remember_token'))
+    if (localStorage.length > 0) {
+      this.tokenData = JSON.parse(localStorage.getItem('tokenData'));
+      if (this.tokenData.expiration < Date.now()) {localStorage.clear(); }
+    }
+    if (localStorage.length > 0 && this.tokenData.remember_token !== null) {
+      this.httpAuthService.loginByRememberMeToken(this.tokenData.remember_token)
         .subscribe(resp => {
           if (resp) {
-            if (!this.cookieService.check('api_token')) {this.cookieService.set('api_token', resp.api_token, 0.02); }
             this.msgService.loginSuccess(resp.api_token);
             this.getUserAndRoles(resp.api_token);
           }
         });
     }
     this.msgService.loginSuccessMessage.subscribe(token => {
-      this.getUserAndRoles(token);
+        this.getUserAndRoles(token);
       }
     );
   }

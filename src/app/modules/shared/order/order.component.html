@@ -1,25 +1,62 @@
-<form [formGroup]="orderForm"></form>
-  <div class="form-group">
-    <p class="admin_content_block_label">Выберите бренд</p>
-    <select name="" id="brands" (change)="salesAreaChoosen($event.target.value)">
-      <option *ngFor="let brand of brands" value="{{brand.id}}">{{brand.name}}</option>
-    </select>
+<div class="main_content">
+  <div class="main_content_header">Блок заказа</div>
+  <form class="order_form" [formGroup]="orderForm" (ngSubmit)="addToOrder()">
+    <div class="input_block">
+      <div class="form-group">
+        <p class="admin_content_block_label">Выберите бренд</p>
+        <select name="" id="brands" (change)="salesAreaChoosen($event.target.value)" formControlName="brands">
+          <option *ngFor="let brand of brands" value="{{brand.id}}">{{brand.name}}</option>
+        </select>
+      </div>
+      <div class="form-group" *ngIf="products">
+        <p class="admin_content_block_label">Выберите продукт</p>
+        <select name="" id="products" (change)="productChoosen($event.target.value)" formControlName="productId">
+          <option *ngFor="let product of products" value="{{product.id}}">{{product.name}}</option>
+        </select>
+      </div>
+      <div class="form-group" *ngIf="products">
+        <p class="admin_content_block_label">Цена</p>
+        <input class="order_form_number" type="number" formControlName="price" disabled>
+      </div>
+      <div class="form-group" *ngIf="products">
+        <p class="admin_content_block_label">Кол-во</p>
+        <input class="order_form_number" type="number" formControlName="qty">
+      </div>
+    </div>
+    <div class="order_button_block">
+      <button class="admin-btn">Добавить позицию</button>
+      <button class="admin-btn" *ngIf="orderPosition !== null" (click)="updateOrder($event)">Обновить заказ</button>
+    </div>
+  </form>
+
+  <div class="order" *ngIf="order.length>0">
+    <table>
+      <caption>Ваш заказ</caption>
+      <tr>
+        <th>Бренд</th>
+        <th>Номенклатура</th>
+        <th>Стоимость, грн</th>
+        <th>Кол-во, шт</th>
+        <th>Всего</th>
+      </tr>
+      <tr *ngFor="let orderItem of order; let i = index" (click)="changeOrderItem(orderItem.productId)">
+        <td>{{orderItem.brand}}</td>
+        <td>{{orderItem.productName}}</td>
+        <td>{{orderItem.price}}</td>
+        <td>{{orderItem.qty}}</td>
+        <td>{{orderItem.amount}}</td>
+        <td><button class="admin-btn" (click)="delOrderPos(i)">-</button></td>
+      </tr>
+    </table>
+    <div class="sum_amount">Итого: {{sumAmount}} грн.</div>
+    <div class="order_button_block">
+      <button class="admin-btn" (click)="saveOrder($event)">Сохранить заказ</button>
+      <button class="admin-btn" (click)="sendByEmail($event)">Отправить на почту</button>
+    </div>
   </div>
-  <div class="form-group" *ngIf="products">
-    <p class="admin_content_block_label">Выберите продукт</p>
-    <select name="" id="products" (change)="productChoosen($event.target.value)">
-      <option *ngFor="let product of products" value="{{product.id}}">{{product.name}}</option>
-    </select>
-  </div>
-  <div class="form-group" *ngIf="currentProduct">
-    <p class="admin_content_block_label">Цена</p>
-    <input type="number" [ngModel]="currentProduct.price" >
-  </div>
-  <div class="form-group" *ngIf="currentProduct">
-    <p class="admin_content_block_label">Кол-во</p>
-    <input type="number" [(ngModel)]="currentQty" (change)="calculateAmount()">
-  </div>
-  <div>Текущая сумма: {{amount}}</div>
+</div>
+
+
 
 
 
