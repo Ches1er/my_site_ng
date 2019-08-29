@@ -22,7 +22,13 @@ export class AuthButtonsBlockComponent implements OnInit {
     this.msgService.logoutSuccessMessage.subscribe(m => {
       this.ifUserLoggedIn = false;
     });
-    this.ifUserLoggedIn = this.cookieService.check('api_token') && this.cookieService.get('remember_token') === null;
+    if (localStorage.length > 0) {
+      const tokenData = JSON.parse(localStorage.getItem('tokenData'));
+      if (tokenData.remember_token === null) {
+        this.ifUserLoggedIn = false;
+        localStorage.clear();
+      }
+    }
   }
 
   loginWindowShow() {

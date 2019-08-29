@@ -39,9 +39,17 @@ export class ProductsService {
       .pipe(map(resp => ProductsResponse.fromJson(resp)))
       .pipe(map(productsResponse => productsResponse.data));
   }
+  private getApiToken(): any {
+    if (localStorage.length > 0) {
+      const data = JSON.parse(localStorage.getItem('tokenData'));
+      return data.api_token;
+    }
+    return false;
+  }
 
   addUpdateProduct(data: any, action: string): Observable<any> {
     const params = new FormData();
+    params.append('api_token', this.getApiToken());
     params.append('action', action);
     params.append('id', data.id);
     params.append('name', data.name);

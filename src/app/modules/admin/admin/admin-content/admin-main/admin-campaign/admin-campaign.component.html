@@ -17,6 +17,7 @@
       <div class="form-group">
         <p class="admin_content_block_label">Выберите группу, в которой будет размещена акция</p>
         <select name="" id="salesArea" formControlName = "salesArea">
+          <option disabled selected value> -- Выберите группу -- </option>
           <option *ngFor="let salesArea of salesAreas" value="{{salesArea.id}}">{{salesArea.name}}</option>
         </select>
         <div class="validation_error"

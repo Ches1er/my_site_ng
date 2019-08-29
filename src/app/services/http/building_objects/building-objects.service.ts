@@ -29,9 +29,16 @@ export class BuildingObjectsService {
     return this.http.get(this.urlConfig.SHOW_BUILD_OBJS + 'build')
       .pipe(map(resp => BuildObject.fromJson(resp)));
   }
+  private getApiToken(): any {
+    if (localStorage.length > 0) {
+      const data = JSON.parse(localStorage.getItem('tokenData'));
+      return data.api_token;
+    }
+    return false;
+  }
   add(data: any, action: string): Observable<string> {
     const params = new FormData();
-    params.append('api_token', this.cookieService.get('api_token'));
+    params.append('api_token', this.getApiToken());
     params.append('action', action);
     params.append('id', data.id);
     params.append('name', data.name);

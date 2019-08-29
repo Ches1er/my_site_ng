@@ -28,6 +28,8 @@ import { AdminSolutionsComponent } from './admin/admin-content/admin-main/admin-
 import {CookieService} from 'ngx-cookie-service';
 import {InputActiveBorderDirective} from '../../directives/input-active-border.directive';
 import {InputChangeWidthDirective} from '../../directives/input-change-width.directive';
+import { AdminSaleProductComponent } from './admin/admin-content/admin-main/admin-sale-product/admin-sale-product.component';
+import {SaleService} from '../../services/http/sale/sale.service';
 
 const routes: Routes = [
   {path: '', redirectTo: '', pathMatch: 'full'},
@@ -38,7 +40,8 @@ const routes: Routes = [
       {path: 'campaign', component: AdminCampaignComponent},
       {path: 'products', component: AdminProductsComponent},
       {path: 'building_objects_clients', component: AdminObjClientsComponent},
-      {path: 'solutions', component: AdminSolutionsComponent}
+      {path: 'solutions', component: AdminSolutionsComponent},
+      {path: 'sale_products', component: AdminSaleProductComponent}
     ]
   }
 ];
@@ -53,7 +56,7 @@ const routes: Routes = [
     AdminProductsComponent,
     AdminApplBrandComponent,
     AdminObjClientsComponent,
-    AdminObjComponent, AdminClientsComponent, AdminSolutionsComponent],
+    AdminObjComponent, AdminClientsComponent, AdminSolutionsComponent, AdminSaleProductComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
@@ -73,7 +76,7 @@ const routes: Routes = [
     ApplyingGroupsService,
     ClientsService,
     CookieService,
-    BuildingObjectsService]
+    BuildingObjectsService, SaleService]
 })
 export class AdminModule {
 }

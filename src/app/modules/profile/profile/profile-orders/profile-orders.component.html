@@ -1,1 +1,28 @@
-<p>profile-orders works!</p>
+<div class="order_main_content">
+  <div class="main_content_header">Ваши заказы:</div>
+  <div class="order_main_content_block">
+    <div class="order_content_block_header" *ngIf="!ordersArr">У вас пока нет ни одного заказа.</div>
+    <div class="order_content_block_header" *ngIf="ordersArr">У вас есть следующие заказы:</div>
+    <div class="orders_content_all_orders" *ngIf="ordersArr">
+      <table class="orders_content_all_order" *ngFor="let order of ordersArr; let i = index">
+        <caption>Ваш заказ № {{i+1}}</caption>
+        <tr>
+          <th>Бренд</th>
+          <th>Номенклатура</th>
+          <th>Стоимость, грн</th>
+          <th>Кол-во, шт</th>
+          <th>Всего</th>
+        </tr>
+        <tr *ngFor="let orderItem of order">
+          <td>{{orderItem.brand}}</td>
+          <td>{{orderItem.productName}}</td>
+          <td>{{orderItem.price}}</td>
+          <td>{{orderItem.qty}}</td>
+          <td>{{orderItem.amount}}</td>
+          <!--<td class="td-btn"><button class="btn" (click)="delOrderPos(i)"><i class="fa fa-trash"></i></button></td> -->
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+

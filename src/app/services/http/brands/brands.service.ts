@@ -30,10 +30,16 @@ export class BrandsService {
       .pipe(map(resp => BrandsResponse.fromJson(resp)))
       .pipe(map(brandResponse => brandResponse.data));
   }
+  private getApiToken(): any {
+    if (localStorage.length > 0) {
+      const data = JSON.parse(localStorage.getItem('tokenData'));
+      return data.api_token;
+    }
+    return false;
+  }
   add(data: any, action: string): Observable<string> {
-    console.log(data);
-    console.log(action);
     const params = new FormData();
+    params.append('api_token', this.getApiToken());
     params.append('name', data.name);
     params.append('sales_area', data.salesArea);
     params.append('id', data.id);

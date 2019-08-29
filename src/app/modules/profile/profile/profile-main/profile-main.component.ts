@@ -1,7 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {User} from '../../../../dto/User/User';
 import {HttpAuthService} from '../../../../services/http/http-auth.service';
-import {CookieService} from 'ngx-cookie-service';
 import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
@@ -10,6 +9,14 @@ import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
   styleUrls: ['./profile-main.component.less']
 })
 export class ProfileMainComponent implements OnInit {
+  get token(): string {
+    return this.pToken;
+  }
+
+  set token(value: string) {
+    this.pToken = value;
+  }
+
   profileForm: FormGroup = new FormGroup({
     id: new FormControl(''),
     name: new FormControl('', [
@@ -25,22 +32,33 @@ export class ProfileMainComponent implements OnInit {
     confirmedClient: new FormControl(''),
     emailVerifiedAt: new FormControl('')
   });
-  private pCurrentUser: User = null;
+  private pCurrentUser: User;
   private pOnSubmitResponse: string;
+  private pToken: string = null;
 
-  constructor(private httpAuthService: HttpAuthService, private cookieService: CookieService) {
+  constructor(private httpAuthService: HttpAuthService) {
   }
 
   ngOnInit() {
+    this.getToken();
     this.updateUser();
   }
 
   private updateUser() {
     (this.profileForm.controls.phones as FormArray).clear();
-    this.httpAuthService.user(this.cookieService.get('api_token')).subscribe(user => {
+    this.httpAuthService.user(this.token).subscribe(user => {
       this.currentUser = user;
       this.fillInForm(user);
     });
+  }
+
+  private getToken() {
+    if (localStorage.length > 0) {
+      const data = JSON.parse(localStorage.getItem('tokenData'));
+      if (data.api_token) {
+        this.token = data.api_token;
+      }
+    }
   }
 
   get currentUser(): User {

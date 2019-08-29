@@ -29,8 +29,16 @@ export class ApplyingGroupsService {
       .pipe(map(resp => ApplyingGroupsResponse.fromJson(resp)))
       .pipe(map(appGroupResponse => appGroupResponse.data));
   }
+  private getApiToken(): any {
+    if (localStorage.length > 0) {
+      const data = JSON.parse(localStorage.getItem('tokenData'));
+      return data.api_token;
+    }
+    return false;
+  }
   add(data: any, action: string): Observable<string> {
     const params = new FormData();
+    params.append('api_token', this.getApiToken());
     params.append('name', data.name);
     params.append('id', data.id);
     params.append('sales_area', data.salesArea);

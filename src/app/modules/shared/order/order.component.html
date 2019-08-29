@@ -1,60 +1,66 @@
 <div class="main_content">
   <div class="main_content_header">Блок заказа</div>
-  <form class="order_form" [formGroup]="orderForm" (ngSubmit)="addToOrder()">
-    <div class="input_block">
-      <div class="form-group">
-        <p class="admin_content_block_label">Выберите бренд</p>
-        <select name="" id="brands" (change)="salesAreaChoosen($event.target.value)" formControlName="brands">
-          <option *ngFor="let brand of brands" value="{{brand.id}}">{{brand.name}}</option>
-        </select>
+  <div class="order_block">
+    <form class="order_form" [formGroup]="orderForm" (ngSubmit)="addToOrder()">
+      <div class="input_block">
+        <div class="form-group">
+          <p class="admin_content_block_label">Выберите бренд</p>
+          <select name="" id="brands" formControlName="brands">
+            <option disabled selected value> -- Выберите бренд -- </option>
+            <option *ngFor="let brand of brands" value="{{brand.id}}">{{brand.name}}</option>
+          </select>
+        </div>
+        <div class="form-group" *ngIf="products">
+          <p class="admin_content_block_label">Выберите материал</p>
+          <select name="" id="products" formControlName="productId">
+            <option disabled selected value> -- Выберите материал -- </option>
+            <option *ngFor="let product of products" value="{{product.id}}">{{product.name}}</option>
+          </select>
+        </div>
+        <div class="form-group" *ngIf="products">
+          <p class="admin_content_block_label">Цена</p>
+          <input class="order_form_number" type="number" formControlName="price" disabled>
+        </div>
+        <div class="form-group" *ngIf="products">
+          <p class="admin_content_block_label">Кол-во</p>
+          <input class="order_form_number" type="number" formControlName="qty">
+        </div>
       </div>
-      <div class="form-group" *ngIf="products">
-        <p class="admin_content_block_label">Выберите продукт</p>
-        <select name="" id="products" (change)="productChoosen($event.target.value)" formControlName="productId">
-          <option *ngFor="let product of products" value="{{product.id}}">{{product.name}}</option>
-        </select>
+      <div class="order_button_block">
+        <button class="admin-btn">Добавить позицию</button>
+        <button class="admin-btn" *ngIf="orderPosition !== null" (click)="updateOrder($event)">Обновить заказ</button>
       </div>
-      <div class="form-group" *ngIf="products">
-        <p class="admin_content_block_label">Цена</p>
-        <input class="order_form_number" type="number" formControlName="price" disabled>
-      </div>
-      <div class="form-group" *ngIf="products">
-        <p class="admin_content_block_label">Кол-во</p>
-        <input class="order_form_number" type="number" formControlName="qty">
-      </div>
-    </div>
-    <div class="order_button_block">
-      <button class="admin-btn">Добавить позицию</button>
-      <button class="admin-btn" *ngIf="orderPosition !== null" (click)="updateOrder($event)">Обновить заказ</button>
-    </div>
-  </form>
+    </form>
 
-  <div class="order" *ngIf="order.length>0">
-    <table>
-      <caption>Ваш заказ</caption>
-      <tr>
-        <th>Бренд</th>
-        <th>Номенклатура</th>
-        <th>Стоимость, грн</th>
-        <th>Кол-во, шт</th>
-        <th>Всего</th>
-      </tr>
-      <tr *ngFor="let orderItem of order; let i = index" (click)="changeOrderItem(orderItem.productId)">
-        <td>{{orderItem.brand}}</td>
-        <td>{{orderItem.productName}}</td>
-        <td>{{orderItem.price}}</td>
-        <td>{{orderItem.qty}}</td>
-        <td>{{orderItem.amount}}</td>
-        <td><button class="admin-btn" (click)="delOrderPos(i)">-</button></td>
-      </tr>
-    </table>
-    <div class="sum_amount">Итого: {{sumAmount}} грн.</div>
-    <div class="order_button_block">
-      <button class="admin-btn" (click)="saveOrder($event)">Сохранить заказ</button>
-      <button class="admin-btn" (click)="sendByEmail($event)">Отправить на почту</button>
+    <div class="order" *ngIf="order.length>0">
+      <table>
+        <caption>Ваш заказ</caption>
+        <tr>
+          <th>Бренд</th>
+          <th>Номенклатура</th>
+          <th>Стоимость, грн</th>
+          <th>Кол-во, шт</th>
+          <th>Всего</th>
+        </tr>
+        <tr *ngFor="let orderItem of order; let i = index">
+          <td>{{orderItem.brand}}</td>
+          <td>{{orderItem.productName}}</td>
+          <td>{{orderItem.price}}</td>
+          <td>{{orderItem.qty}}</td>
+          <td>{{orderItem.amount}}</td>
+          <td class="td-btn"><button class="btn" (click)="delOrderPos(i)"><i class="fa fa-trash"></i></button></td>
+          <td class="td-btn"><button class="btn" (click)="changeOrderItem(orderItem.productId)"><i class="fa fa-edit"></i></button></td>
+        </tr>
+      </table>
+      <div class="sum_amount">Итого: {{sumAmount}} грн.</div>
+      <div class="order_button_block">
+        <button class="admin-btn" (click)="saveOrder($event)">Сохранить заказ</button>
+        <button class="admin-btn" (click)="sendByEmail($event)">Отправить на почту</button>
+      </div>
     </div>
   </div>
 </div>
+<app-info-window></app-info-window>
 
 
 

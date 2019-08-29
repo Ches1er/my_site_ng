@@ -21,8 +21,16 @@ export class SolutionsService {
       .pipe(map(resp => SolutionsResponse.fromJson(resp)))
       .pipe(map(sr => sr.data));
   }
+  private getApiToken(): any {
+    if (localStorage.length > 0) {
+      const data = JSON.parse(localStorage.getItem('tokenData'));
+      return data.api_token;
+    }
+    return false;
+  }
   addSolution(data: any, action: string): Observable<string> {
     const params = new FormData();
+    params.append('api_token', this.getApiToken());
     params.append('action', action);
     params.append('id', data.id);
     params.append('name', data.name);

@@ -3,9 +3,10 @@ import {SaleService} from '../../../services/http/sale/sale.service';
 import {FormControl, FormGroup} from '@angular/forms';
 import {BrandsService} from '../../../services/http/brands/brands.service';
 import {SaleProduct} from '../../../dto/sale_products/SaleProduct';
-import {stringify} from 'querystring';
 import {User} from '../../../dto/User/User';
 import {HttpAuthService} from '../../../services/http/http-auth.service';
+import {MessagesService} from '../../../services/messages.service';
+import {OrderUnit} from './OrderUnit';
 
 @Component({
   selector: 'app-order',
@@ -13,21 +14,6 @@ import {HttpAuthService} from '../../../services/http/http-auth.service';
   styleUrls: ['./order.component.less']
 })
 export class OrderComponent implements OnInit {
-  get user(): User {
-    return this.pUser;
-  }
-
-  set user(value: User) {
-    this.pUser = value;
-  }
-
-  get orderPosition(): number {
-    return this.pOrderPosition;
-  }
-
-  set orderPosition(value: number) {
-    this.pOrderPosition = value;
-  }
 
   private pBrands;
   private pProducts: Array<SaleProduct> = null;
@@ -36,8 +22,8 @@ export class OrderComponent implements OnInit {
   private pOrderPosition: number;
   private pUser: User = null;
   orderForm: FormGroup = new FormGroup({
-      brands: new FormControl(),
-      productId: new FormControl(),
+      brands: new FormControl(''),
+      productId: new FormControl(''),
       productName: new FormControl(''),
       price: new FormControl(''),
       measure: new FormControl(),
@@ -45,19 +31,12 @@ export class OrderComponent implements OnInit {
       amount: new FormControl()
     }
   );
-  order = [];
+  order: Array<OrderUnit> = [];
 
   constructor(private brandService: BrandsService,
               private saleService: SaleService,
-              private authService: HttpAuthService) {
-  }
-
-  private getUser(): void {
-    if (localStorage.length > 0) {
-      const data = JSON.parse(localStorage.getItem('tokenData'));
-      this.authService.user(data.api_token)
-        .subscribe(u => this.user = u);
-    }
+              private authService: HttpAuthService,
+              private msgService: MessagesService) {
   }
 
   ngOnInit() {
@@ -73,15 +52,11 @@ export class OrderComponent implements OnInit {
       this.saleService.saleProductsByBrand(this.brands[value - 1].id).subscribe(p => {
         this.products = null;
         this.products = p;
-        this.currentProduct = p[0];
-        if (!this.orderPosition) {
-          this.orderForm.patchValue({
-              productName: this.currentProduct.name,
-              productId: this.currentProduct.id,
-              price: this.currentProduct.price
-            }
-          );
-        }
+        this.orderForm.patchValue({
+          productName: '',
+          productId: '',
+          price: ''
+        }, {emitEvent: false});
       });
     });
     this.orderForm.get('productId').valueChanges.subscribe(value => {
@@ -89,13 +64,29 @@ export class OrderComponent implements OnInit {
         if (e.id == value) {
           this.currentProduct = e;
           this.orderForm.patchValue({
-            productName: e.name,
-            productId: e.id,
-            price: e.price
+            productName: this.currentProduct.name,
+            productId: this.currentProduct.id,
+            price: this.currentProduct.price
           }, {emitEvent: false});
         }
       });
     });
+  }
+
+  get user(): User {
+    return this.pUser;
+  }
+
+  set user(value: User) {
+    this.pUser = value;
+  }
+
+  get orderPosition(): number {
+    return this.pOrderPosition;
+  }
+
+  set orderPosition(value: number) {
+    this.pOrderPosition = value;
   }
 
   get sumAmount(): number {
@@ -130,29 +121,28 @@ export class OrderComponent implements OnInit {
     this.pCurrentProduct = value;
   }
 
-  salesAreaChoosen(value) {
-    this.saleService.saleProductsByBrand(value).subscribe(p => {
-      this.products = p;
-    });
-  }
-
-  productChoosen(value) {
-    this.currentProduct = this.products[parseInt(value) - 1];
+  private getUser(): void {
+    if (localStorage.length > 0) {
+      const data = JSON.parse(localStorage.getItem('tokenData'));
+      this.authService.user(data.api_token)
+        .subscribe(u => this.user = u);
+    }
   }
 
   addToOrder() {
-    this.sumAmount = (this.sumAmount + parseInt(this.orderForm.value.qty) * parseInt(this.orderForm.value.price));
-    const a = parseInt(this.orderForm.value.qty) * parseInt(this.orderForm.value.price);
+    this.sumAmount = (this.sumAmount + parseInt(this.orderForm.value.qty, 10) * parseInt(this.orderForm.value.price, 10));
+    const a = parseInt(this.orderForm.value.qty, 10) * parseInt(this.orderForm.value.price, 10);
     this.orderForm.patchValue({amount: a.toString()});
-    this.order.push({
-      brandId: parseInt(this.orderForm.value.brands),
-      brand: this.brands[this.orderForm.value.brands - 1].name,
-      productId: parseInt(this.orderForm.value.productId),
-      productName: this.orderForm.value.productName,
-      price: this.orderForm.value.price,
-      qty: this.orderForm.value.qty,
-      amount: this.orderForm.value.amount
-    });
+    const orderUnit = new OrderUnit(
+      parseInt(this.orderForm.value.brands, 10),
+      this.brands[this.orderForm.value.brands - 1].name,
+      parseInt(this.orderForm.value.productId, 10),
+      this.orderForm.value.productName,
+      this.orderForm.value.price,
+      this.orderForm.value.qty,
+      parseInt(this.orderForm.value.amount, 10)
+    );
+    this.order.push(orderUnit);
   }
 
   changeOrderItem(i) {
@@ -160,14 +150,15 @@ export class OrderComponent implements OnInit {
     this.order.map(e => {
       if (e.productId === i) {
         this.orderForm.patchValue({
-          brands: e.brandId,
-          productId: e.productId,
-          productName: e.productName,
-          price: e.price,
+          brands: e.brandId.toString(),
+          productId: e.productId.toString(),
+          productName: e.productName.toString(),
+          price: e.price.toString(),
           measure: '',
-          qty: e.qty,
-          amount: e.amount
-        });
+          qty: e.qty.toString(),
+          amount: e.amount.toString()
+        }, {emitEvent: false});
+        this.saleService.saleProductsByBrand(e.brandId).subscribe(p => this.products = p);
       }
     });
   }
@@ -178,21 +169,20 @@ export class OrderComponent implements OnInit {
 
   updateOrder(event) {
     event.preventDefault();
-    this.sumAmount = 0;
     this.order.map(e => {
-      this.sumAmount = this.sumAmount + parseInt(e.amount);
       if (e.productId === this.orderPosition) {
-        const a = parseInt(this.orderForm.value.qty) * parseInt(this.orderForm.value.price);
+        const a = parseInt(this.orderForm.value.qty, 10) * parseInt(this.orderForm.value.price, 10);
         this.orderForm.patchValue({amount: a.toString()});
-        e.brandId = parseInt(this.orderForm.value.brands),
+        e.brandId = parseInt(this.orderForm.value.brands, 10),
           e.brand = this.brands[this.orderForm.value.brands - 1].name,
-          e.productId = parseInt(this.orderForm.value.productId),
+          e.productId = parseInt(this.orderForm.value.productId, 10),
           e.productName = this.orderForm.value.productName,
           e.price = this.orderForm.value.price,
           e.qty = this.orderForm.value.qty,
-          e.amount = this.orderForm.value.amount;
+          e.amount = parseInt(this.orderForm.value.amount, 10);
       }
     });
+    this.sumAmount = this.order.reduce((sum, current) => sum + current.amount, 0);
   }
 
   sendByEmail(event) {
@@ -200,7 +190,12 @@ export class OrderComponent implements OnInit {
     this.checkUser();
     const strOrder = this.convertOrderToStr();
     this.saleService.sendOrderByEmail(strOrder, this.user.id, this.sumAmount)
-      .subscribe(resp => console.log(resp));
+      .subscribe(resp => {
+        if (resp === 'email send') {
+          const message = 'Уважаемый ' + this.user.name + ', Ваш заказ отправлен на вашу почту. Наш менеджер свяжется с вами, для подтверждения заказа.';
+          this.msgService.infoWindowShowMessage(message);
+        }
+      });
   }
 
   saveOrder(event) {
@@ -208,7 +203,12 @@ export class OrderComponent implements OnInit {
     event.preventDefault();
     const strOrder = this.convertOrderToStr();
     this.saleService.saveOrder(strOrder, this.user.id)
-      .subscribe(resp => console.log(resp));
+      .subscribe(resp => {
+        if (resp === 'insert success') {
+          const message = 'Уважаемый ' + this.user.name + ', Ваш заказ успешно сохранен. Для просмотра своих заказов, зайдите в Профиль->Заказы';
+          this.msgService.infoWindowShowMessage(message);
+        }
+      });
   }
 
   private checkUser() {

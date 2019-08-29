@@ -27,8 +27,6 @@ export class CampaignContentUnitComponent implements OnInit {
   private ifExpired() {
     const now = Date.now();
     this.campaignExpired = this.campaign.expiration < now;
-    console.log(now);
-    console.log(this.campaign.expiration);
   }
 
   ngOnInit() {

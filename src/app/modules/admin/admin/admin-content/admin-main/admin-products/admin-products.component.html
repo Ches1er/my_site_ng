@@ -5,7 +5,6 @@
       <div class="admin_left_list_unit_block">
         <div class="admin_left_list_unit_name" (click)="fillInProduct(product)">{{product.name}}</div>
       </div>
-
     </div>
   </div>
   <div class="add_block">
@@ -23,8 +22,9 @@
       <div class="info_message" *ngIf="onSubmitResponse">{{onSubmitResponse}}</div>
 
       <div class="form-group">
-        <p class="admin_content_block_label">Выберите группу, в которой будет размещена продукция</p>
+        <p class="admin_content_block_label">Выберите сферу применения продукции</p>
         <select name="" id="salesArea" formControlName = "salesArea">
+          <option disabled selected value> -- Выберите сферу применения -- </option>
           <option *ngFor="let salesArea of salesAreas" value="{{salesArea.id}}">{{salesArea.name}}</option>
         </select>
 

@@ -7,8 +7,9 @@
     <div class="info_message" *ngIf="onSubmitResponse">{{onSubmitResponse}}</div>
 
     <div class="form-group">
-      <p class="admin_content_block_label">Выберите группу, которой будет принадлежать клиент</p>
+      <p class="admin_content_block_label">Выберите сферу, в которой работает клиент</p>
       <select name="" id="salesArea" formControlName = "salesArea">
+        <option disabled selected value> -- Выберите сферу применения -- </option>
         <option *ngFor="let salesArea of salesAreas" value="{{salesArea.id}}">{{salesArea.name}}</option>
       </select>
       <div class="validation_error"

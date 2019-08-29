@@ -7,6 +7,6 @@
     <li><a routerLink="building_objects" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}">Объекты</a></li>
     <li><a routerLink="solutions" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}">Готовые решения</a></li>
     <li><a routerLink="tech_info" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}">Техническая информация</a></li>
-    <li><a routerLink="order" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}">Сформировать заказ</a></li>
+    <li *ngIf="user"><a routerLink="order" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}">Сформировать заказ</a></li>
   </ul>
 </div>

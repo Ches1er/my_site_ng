@@ -47,7 +47,6 @@ footer {
   font-size: 1.5em;
   color: #505050;
   font-family: 'Oswald', sans-serif;
-
 }
 .products_unit_header{
   font-size: 2em;
@@ -514,5 +513,20 @@ footer {
 agm-map{
   width: 500px;
   height: 400px;
+}
+.btn {
+  background-color: #a5d7ff;
+  border: none; /* Remove borders */
+  color: white; /* White text */
+  padding: 12px 16px; /* Some padding */
+  font-size: 16px; /* Set a font size */
+  cursor: pointer; /* Mouse pointer on hover */
+  transition: 0.5s;
+}
+
+/* Darker background on mouse-over */
+.btn:hover {
+  background-color: #325c8e;
+  transition: 0.5s;
 }
 

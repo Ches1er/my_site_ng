@@ -5,8 +5,6 @@ import {ProfileComponent} from './profile/profile.component';
 import {ProfileMainComponent} from './profile/profile-main/profile-main.component';
 import {ProfileOrdersComponent} from './profile/profile-orders/profile-orders.component';
 import {ProfileNavComponent} from './profile/profile-nav/profile-nav.component';
-import {HttpAuthService} from '../../services/http/http-auth.service';
-import {CookieService} from 'ngx-cookie-service';
 import {ReactiveFormsModule} from '@angular/forms';
 
 const routes: Routes = [
@@ -24,6 +22,6 @@ const routes: Routes = [
   imports: [
     CommonModule, RouterModule.forChild(routes), ReactiveFormsModule
   ],
-  providers: [HttpAuthService, CookieService]
+  providers: []
 })
 export class ProfileModule { }

@@ -100,9 +100,11 @@ export class UrlConfig {
   private saleBase = this.base + 'sales/';
   // Products
   SHOW_SALES_PRODUCTS = this.saleBase + 'products';
+  SHOW_SALES_PRODUCTS_FOR_ADMIN = this.saleBase + 'products/admin';
+  ADD_SALES_PRODUCT = this.saleBase + 'products/add';
   SHOW_SALES_PRODUCT = this.saleBase + 'product/';
   SHOW_SALES_PRODUCT_BY_BRAND = this.saleBase + 'products/';
   SAVE_ORDER = this.saleBase + 'save';
   SEND_ORDER_BY_EMAIL = this.saleBase + 'sendorder';
-
+  SHOW_ORDERS = this.saleBase + 'orders/';
 }

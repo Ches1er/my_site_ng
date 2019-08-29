@@ -12,6 +12,6 @@ import {AdminMessagesService} from '../../services/admin/admin-messages.service'
     CommonModule, ReactiveFormsModule
   ],
   exports: [ImagesPickerComponent],
-  providers: [MessagesService, ImagesService, AdminMessagesService]
+  providers: [ ImagesService, AdminMessagesService]
 })
 export class ImagesPickerModule { }

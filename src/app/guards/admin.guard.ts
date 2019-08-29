@@ -3,7 +3,6 @@ import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTre
 import { Observable } from 'rxjs';
 import {HttpAuthService} from '../services/http/http-auth.service';
 import {MessagesService} from '../services/messages.service';
-import {CookieService} from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,20 +12,6 @@ export class AdminGuard implements CanActivate  {
   private pToken;
   constructor(@Inject(HttpAuthService) private httpAuthService: HttpAuthService,
               @Inject(MessagesService) private msgService: MessagesService, private pRouter: Router) {
-  }
-  get Router(): Router {
-    return this.pRouter;
-  }
-
-  set Router(value: Router) {
-    this.pRouter = value;
-  }
-  get token() {
-    return this.pToken;
-  }
-
-  set token(value) {
-    this.pToken = value;
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | boolean | UrlTree {
@@ -51,5 +36,19 @@ export class AdminGuard implements CanActivate  {
     return this.httpAuthService.isAdmin(this.token).subscribe(r => {
       return r;
     });
+  }
+  get Router(): Router {
+    return this.pRouter;
+  }
+
+  set Router(value: Router) {
+    this.pRouter = value;
+  }
+  get token() {
+    return this.pToken;
+  }
+
+  set token(value) {
+    this.pToken = value;
   }
 }

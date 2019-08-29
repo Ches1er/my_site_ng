@@ -2,7 +2,6 @@ import {Inject, Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
 import {Observable} from 'rxjs';
 import {HttpAuthService} from '../services/http/http-auth.service';
-import {CookieService} from 'ngx-cookie-service';
 import {MessagesService} from '../services/messages.service';
 
 @Injectable({

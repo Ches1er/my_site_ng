@@ -11,10 +11,10 @@ import {User} from '../../../dto/User/User';
 export class ProfileComponent implements OnInit {
 
   private pCurrentUser: User = null;
-  constructor(private httpAuthService: HttpAuthService, private cookieService: CookieService) { }
+  constructor(private httpAuthService: HttpAuthService) { }
 
   ngOnInit() {
-    this.httpAuthService.user(this.cookieService.get('api_token')).subscribe(user => this.currentUser = user);
+    this.getUser();
   }
   get currentUser(): User {
     return this.pCurrentUser;
@@ -23,5 +23,15 @@ export class ProfileComponent implements OnInit {
   set currentUser(value: User) {
     this.pCurrentUser = value;
   }
-
+  private getUser(): void {
+    if (localStorage.length > 0) {
+      const data = JSON.parse(localStorage.getItem('tokenData'));
+      this.httpAuthService.user(data.api_token)
+        .subscribe(u => {
+          if (u) {
+            this.currentUser = u;
+          }
+        });
+    }
+  }
 }

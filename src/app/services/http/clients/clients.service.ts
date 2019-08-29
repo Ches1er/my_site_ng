@@ -40,9 +40,16 @@ export class ClientsService {
       .pipe(map(resp => ClientsResponse.fromJson(resp)))
       .pipe(map(clientResponse => clientResponse.data));
   }
+  private getApiToken(): any {
+    if (localStorage.length > 0) {
+      const data = JSON.parse(localStorage.getItem('tokenData'));
+      return data.api_token;
+    }
+    return false;
+  }
   add(data: any, action: string): Observable<string> {
     const params = new FormData();
-    params.append('api_token', this.cookieService.get('api_token'));
+    params.append('api_token', this.getApiToken());
     params.append('action', action);
     params.append('id', data.id);
     params.append('name', data.name);

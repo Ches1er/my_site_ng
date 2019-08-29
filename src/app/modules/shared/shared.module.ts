@@ -18,6 +18,8 @@ import {SaleService} from '../../services/http/sale/sale.service';
 import {SalesAreaService} from '../../services/http/sales_area/sales-area.service';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpAuthService} from '../../services/http/http-auth.service';
+import {InfoWindowComponent} from '../../components/windows/info-window/info-window.component';
+
 
 @NgModule({
   declarations: [ProdByMenuUnitComponent,
@@ -28,7 +30,7 @@ import {HttpAuthService} from '../../services/http/http-auth.service';
     NewsContentUnitComponent,
     CampaignContentComponent,
     CampaignContentUnitComponent,
-    OrderComponent],
+    OrderComponent, InfoWindowComponent],
   imports: [
     CommonModule, ImagesViewerModule, ReactiveFormsModule, FormsModule
   ],
@@ -36,7 +38,6 @@ import {HttpAuthService} from '../../services/http/http-auth.service';
     ApplyingGroupsService,
     BrandsService,
     ProductsService,
-    MessagesService,
     SaleService, SalesAreaService, HttpAuthService
   ],
   exports: [ProdByMenuUnitComponent,

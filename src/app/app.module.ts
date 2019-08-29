@@ -5,7 +5,7 @@ import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import {AgmCoreModule} from '@agm/core';
 
 
-import { registerLocaleData } from '@angular/common';
+import {registerLocaleData} from '@angular/common';
 import localeRuUa from '@angular/common/locales/ru-UA';
 
 import {AppRoutingModule} from './app-routing.module';
@@ -18,7 +18,7 @@ import {AboutUsComponent} from './components/main/about-us/about-us.component';
 import {HeaderNavComponent} from './components/header/header-nav/header-nav.component';
 import {HeaderAuthBlockComponent} from './components/header/header-auth-block/header-auth-block.component';
 import {PageNotFoundComponent} from './components/main/page-not-found/page-not-found.component';
-import { AngularEditorModule } from '@kolkov/angular-editor';
+import {AngularEditorModule} from '@kolkov/angular-editor';
 
 import {ProductsModule} from './modules/products/products.module';
 import {AdminModule} from './modules/admin/admin.module';
@@ -31,9 +31,10 @@ import {RegisterComponent} from './components/windows/register/register.componen
 import {SharedModule} from './modules/shared/shared.module';
 import {ContactsService} from './services/http/contacts/contacts.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { AuthResultComponent } from './components/windows/auth-result/auth-result.component';
-import { InputActiveBorderDirective } from './directives/input-active-border.directive';
-import {InputChangeWidthDirective} from './directives/input-change-width.directive';
+import {AuthResultComponent} from './components/windows/auth-result/auth-result.component';
+import {MessagesService} from './services/messages.service';
+import {SaleService} from './services/http/sale/sale.service';
+import {HttpAuthService} from './services/http/http-auth.service';
 
 registerLocaleData(localeRuUa, 'RuUa');
 
@@ -68,7 +69,9 @@ registerLocaleData(localeRuUa, 'RuUa');
       apiKey: 'AIzaSyCgMofhJxwMZCzZoIass33M98elHnblts8'
     })
   ],
-  providers: [CookieService, { provide: LOCALE_ID, useValue: 'RuUa' }, ContactsService
+  providers: [MessagesService, SaleService,
+    CookieService, {provide: LOCALE_ID, useValue: 'RuUa'},
+    ContactsService, HttpAuthService
   ],
   bootstrap: [AppComponent]
 })

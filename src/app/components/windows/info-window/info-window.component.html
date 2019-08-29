@@ -1,0 +1,15 @@
+<div class="fade" *ngIf="visible">
+  <div class="auth_window">
+    <div class="auth_window-header">Сохранение заказа</div>
+    <div class="auth_window-main">
+      <div class="auth_result_block" *ngIf="message">
+        {{message}}
+      </div>
+    </div>
+    <div class="auth_window-footer">
+      <div class="auth_window_btn_block">
+        <button class = 'wnd-btn' (click)="cancel()">Ок</button>
+      </div>
+    </div>
+  </div>
+</div>

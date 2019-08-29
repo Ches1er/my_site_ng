@@ -4,11 +4,10 @@ import {Campaign} from '../dto/campaign/Campaign';
 import {Solution} from '../dto/solutions/Solution';
 import {Product} from '../dto/products/Product';
 
-@Injectable({
+/*@Injectable({
   providedIn: 'root'
-})
+})*/
 export class MessagesService {
-
 
   private pLoginWindowShow: Subject<null> = new Subject<null>();
   private pRegisterWindowShow: Subject<null> = new Subject<null>();
@@ -24,8 +23,10 @@ export class MessagesService {
   private pAdminLoggedIn: Subject<null> = new Subject<null>();
   private pImagesViewerShow: Subject<string> = new Subject<string>();
   private pGroutCalcShow: Subject<string> = new Subject<string>();
+  private pInfoWindowShow: Subject<string> = new Subject<string>();
 
   constructor() {
+    console.log('1');
   }
 
   // GETTERS
@@ -99,6 +100,10 @@ export class MessagesService {
   get changeSolutionProduct(): Subject<Product> {
     return this.pChangeSolutionProduct;
   }
+  get infoWindowShow(): Subject<string> {
+    return this.pInfoWindowShow;
+  }
+
 
   // FUNCTIONS
 
@@ -170,6 +175,9 @@ export class MessagesService {
 
   public changeSolutionProductMessage(product: Product) {
     this.pChangeSolutionProduct.next(product);
+  }
+  public infoWindowShowMessage(message: string) {
+    this.pInfoWindowShow.next(message);
   }
 
 

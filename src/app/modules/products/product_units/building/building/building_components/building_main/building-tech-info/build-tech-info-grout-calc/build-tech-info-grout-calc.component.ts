@@ -22,10 +22,9 @@ export class BuildTechInfoGroutCalcComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.calcDefiner = null
+    this.calcDefiner = null;
     this.msgService.groutCalcShow.subscribe(definer => {
       this.calcDefiner = definer;
-      console.log(definer)
       this.groutCalc.reset();
     });
     this.onChanges();
@@ -56,22 +55,21 @@ export class BuildTechInfoGroutCalcComponent implements OnInit {
 
   private ul_ep() {
     const result = this.getResult(1.6);
-    this.groutCalc.patchValue({result: result}, {emitEvent: false});
+    this.groutCalc.patchValue({result}, {emitEvent: false});
   }
 
   private ker() {
     const result = this.getResult(1.5);
-    this.groutCalc.patchValue({result: result}, {emitEvent: false});
+    this.groutCalc.patchValue({result}, {emitEvent: false});
   }
 
-  private getResult(rate): number{
-    const width = parseFloat(this.groutCalc.get('width').value);
-    const height = parseFloat(this.groutCalc.get('height').value);
-    const thickness = parseFloat(this.groutCalc.get('thickness').value);
-    const seam = parseFloat(this.groutCalc.get('seam').value);
-    const square = parseFloat(this.groutCalc.get('square').value);
-    const result: number = ((width + height) / (width * height)) * thickness * seam * rate * square;
-    return result;
+  private getResult(rate): string {
+    const width = parseInt(this.groutCalc.get('width').value, 10);
+    const height = parseInt(this.groutCalc.get('height').value, 10);
+    const thickness = parseInt(this.groutCalc.get('thickness').value, 10);
+    const seam = parseInt(this.groutCalc.get('seam').value, 10);
+    const square = parseInt(this.groutCalc.get('square').value, 10);
+    return (((width + height) / (width * height)) * thickness * seam * rate * square).toFixed(2);
   }
 
 }

@@ -13,12 +13,14 @@
       <div class="form-group">
         <p class="admin_content_block_label">Список всех брендов, выберите, если хотите изменить</p>
         <select name="" id="brands" formControlName = "brands">
+          <option disabled selected value> -- Выберите бренд -- </option>
           <option *ngFor="let brand of brands" value="{{brand.id}}">{{brand.name}}</option>
         </select>
       </div>
       <div class="form-group">
         <p class="admin_content_block_label">Выберите сферу применения.</p>
         <select name="" id="sales_areas" formControlName = "salesArea">
+          <option disabled selected value> -- Выберите сферу применения -- </option>
           <option *ngFor="let sales_area of salesAreas" value="{{sales_area.id}}">{{sales_area.name}}</option>
         </select>
         <div class="validation_error"
@@ -73,6 +75,7 @@
       <div class="form-group">
         <p class="admin_content_block_label">Список всех групп по-применению, выберите, если хотите изменить</p>
         <select name="" id="groups" formControlName = "groups">
+          <option disabled selected value> -- Выберите группу по-применению -- </option>
           <option *ngFor="let group of applGroups" value="{{group.id}}">{{group.name}}</option>
         </select>
       </div>
@@ -80,6 +83,7 @@
       <div class="form-group">
         <p class="admin_content_block_label">Выберите сферу применения.</p>
         <select name="" id="apl_sales_areas" formControlName = "salesArea">
+          <option disabled selected value> -- Выберите сферу применения -- </option>
           <option *ngFor="let sales_area of salesAreas" value="{{sales_area.id}}">{{sales_area.name}}</option>
         </select>
         <div class="validation_error"

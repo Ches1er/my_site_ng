@@ -9,6 +9,6 @@ import {MessagesService} from '../../services/messages.service';
     CommonModule
   ],
   exports: [ImagesViewerComponent],
-  providers: [MessagesService]
+  providers: []
 })
 export class ImagesViewerModule { }

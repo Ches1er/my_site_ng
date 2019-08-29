@@ -48,8 +48,6 @@ export class LoginComponent implements OnInit {
             expiration: Date.now() + (30 * 60 * 1000)
           };
           localStorage.setItem('tokenData', JSON.stringify(tokenData));
-          /*          this.cookieService.set('api_token', resp.api_token, 0.02);
-                    this.cookieService.set('remember_token', resp.remember_token, 0.02);*/
           this.visible = false;
         }
       });
