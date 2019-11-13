@@ -72,6 +72,13 @@ footer {
   box-sizing: border-box;
   box-shadow: 0 5px 5px 0 rgba(0,0,0, .2);
 }
+.tip{
+  width: 70%;
+  font-size: small;
+  color: #325c8e;
+  margin: 5px 0;
+  text-indent: 5px;
+}
 
 /* Main content nav */
 

@@ -64,7 +64,7 @@ export class ProfileOrdersComponent implements OnInit {
     }
   }
   private updateUser() {
-    this.httpAuthService.user(this.token).subscribe(user => {
+    this.httpAuthService.user().subscribe(user => {
       this.currentUser = user;
       // Get orders
       this.saleService.showOrders(user.id).subscribe(resp => {

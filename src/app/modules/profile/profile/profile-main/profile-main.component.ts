@@ -46,7 +46,7 @@ export class ProfileMainComponent implements OnInit {
 
   private updateUser() {
     (this.profileForm.controls.phones as FormArray).clear();
-    this.httpAuthService.user(this.token).subscribe(user => {
+    this.httpAuthService.user().subscribe(user => {
       this.currentUser = user;
       this.fillInForm(user);
     });
@@ -93,7 +93,7 @@ export class ProfileMainComponent implements OnInit {
   }
 
   onSubmit() {
-    this.httpAuthService.updateUser(this.profileForm.value).subscribe(resp => {
+    this.httpAuthService.updateUser(this.profileForm.value, this.token).subscribe(resp => {
       this.updateUser();
       if (resp === 'update success') this.onSubmitResponse = 'Данные успешно обновлены';
       if (resp === 'error') this.onSubmitResponse = 'Ой! Что-то пошло не так, повторите процедуру позже.';
@@ -114,7 +114,7 @@ export class ProfileMainComponent implements OnInit {
 
   sendVerificationEmail(event) {
     event.preventDefault();
-    this.httpAuthService.rememberVerification().subscribe(resp => {
+    this.httpAuthService.rememberVerification(this.token).subscribe(resp => {
       if (resp === 'Letter has sent') this.onSubmitResponse = 'Повторное письмо отправлено';
       // if (resp === 'error') this.onSubmitResponse = 'Ой! Что-то пошло не так, повторите процедуру позже.';
     });

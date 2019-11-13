@@ -1,15 +1,14 @@
 import {Inject, Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
-import {Observable, pipe} from 'rxjs';
-import {HttpAuthService} from '../services/http/http-auth.service';
+import {Observable} from 'rxjs';
+import {JwtHelperService} from '@auth0/angular-jwt';
 import {MessagesService} from '../services/messages.service';
-import {map, tap} from 'rxjs/operators';
-import {JwtHelperService, JwtModule} from '@auth0/angular-jwt';
+import {HttpAuthService} from '../services/http/http-auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AdminGuard implements CanActivate {
+export class RoleGuardGuard implements CanActivate {
   private pToken;
 
   constructor(private httpAuthService: HttpAuthService, private jwtHelperService: JwtHelperService,
@@ -17,15 +16,33 @@ export class AdminGuard implements CanActivate {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | boolean | UrlTree {
+    const expectedRole: Array<string> = route.data.expectedRole;
+    if (this.hasToken()) {
+      if (this.checkRoles(expectedRole, this.jwtHelperService.decodeToken(this.token).roles)) {
+        return true;
+      }
+      this.redirectAndLogin();
+    }
+    this.redirectAndLogin();
+  }
+
+  private hasToken(): boolean {
     if (localStorage.length > 0) {
       const data = JSON.parse(localStorage.getItem('tokenData'));
       this.token = data.api_token;
-    }
-    if (this.token) {
-      console.log(this.jwtHelperService.decodeToken(this.token).roles);
       return true;
+    }
+    return false;
   }
-    this.redirectAndLogin();
+
+  private checkRoles(expectedRoles: Array<string>, userRoles: Array<string>): boolean {
+    let result = false;
+    expectedRoles.map(e => {
+      if (userRoles.includes(e)) {
+        result = true;
+      }
+    });
+    return result;
   }
 
   private redirectAndLogin() {
@@ -45,4 +62,5 @@ export class AdminGuard implements CanActivate {
   set token(value) {
     this.pToken = value;
   }
+
 }

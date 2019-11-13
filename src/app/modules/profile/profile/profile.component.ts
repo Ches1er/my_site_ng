@@ -25,8 +25,7 @@ export class ProfileComponent implements OnInit {
   }
   private getUser(): void {
     if (localStorage.length > 0) {
-      const data = JSON.parse(localStorage.getItem('tokenData'));
-      this.httpAuthService.user(data.api_token)
+      this.httpAuthService.user()
         .subscribe(u => {
           if (u) {
             this.currentUser = u;

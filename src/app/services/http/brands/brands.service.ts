@@ -6,6 +6,8 @@ import {HttpClient} from '@angular/common/http';
 import {Brand} from '../../../dto/Brand/Brand';
 import {BrandsResponse} from '../../../dto/Brand/BrandsResponse';
 import {ResultResponse} from '../../../dto/server_response/ResultResponse';
+import {BrandExchange} from '../../../dto/brand_exchange/Brand_exchange';
+import {BrandExchangeResponse} from '../../../dto/brand_exchange/Brand_exchange_response';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +32,11 @@ export class BrandsService {
       .pipe(map(resp => BrandsResponse.fromJson(resp)))
       .pipe(map(brandResponse => brandResponse.data));
   }
+  get exchanges(): Observable<Array<BrandExchange>> {
+    return this.http.get(this.urlConfig.SHOW_EXCHANGES)
+      .pipe(map(resp => BrandExchangeResponse.fromJson(resp)))
+      .pipe(map(ber => ber.data));
+  }
   private getApiToken(): any {
     if (localStorage.length > 0) {
       const data = JSON.parse(localStorage.getItem('tokenData'));
@@ -38,6 +45,7 @@ export class BrandsService {
     return false;
   }
   add(data: any, action: string): Observable<string> {
+    console.log(data);
     const params = new FormData();
     params.append('api_token', this.getApiToken());
     params.append('name', data.name);
@@ -47,6 +55,7 @@ export class BrandsService {
     params.append('active', data.active);
     params.append('official', data.official);
     params.append('web', data.web);
+    params.append('exchange', data.exchange);
     return this.http.post(this.urlConfig.ADD_BRAND, params)
       .pipe(map(resp => ResultResponse.fromJson(resp)))
       .pipe(map(ResResp => ResResp.response));

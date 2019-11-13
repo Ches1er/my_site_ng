@@ -45,6 +45,11 @@
         <input type="text" id="web" formControlName = "web">
       </div>
 
+      <div class="form-group">
+        <p class="admin_content_block_label">Введите курс валюты (это поле не является обязательным)</p>
+        <input type="text" id="exchange" formControlName = "exchange">
+      </div>
+
       <div class="form-group" *ngIf="whatHaveToDo==='update'">
         <p class="admin_content_block_label">Поставьте "галочку", если бренд "активный"</p>
         <input type="checkbox" id="active" formControlName = "active">

@@ -8,6 +8,8 @@ import {SaleProductsResponse} from '../../../dto/sale_products/SaleProductsRespo
 import {ResultResponse} from '../../../dto/server_response/ResultResponse';
 import {OrderResponse} from '../../../dto/Order/Order_response';
 import {Order} from '../../../dto/Order/Order';
+import {ClientDiscountResponse} from '../../../dto/clientDiscounts/ClientDiscountResponse';
+import {UserResponse} from '../../../dto/User/UserResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -77,5 +79,30 @@ export class SaleService {
       .pipe(map(resp => {
         return OrderResponse.fromJson(resp);
       }));
+  }
+  getClientDiscount(clientId: number): Observable<any> {
+    const params = new FormData();
+    params.append('client_id', clientId.toString());
+    return this.http.post(this.urlConfig.SHOW_DISCOUNT, params)
+      .pipe(map(resp => ClientDiscountResponse.fromJson(resp)))
+      .pipe(map(cdr => cdr.data));
+  }
+  updateDiscount(data: any, clientId: number): Observable<any> {
+    const params = new FormData();
+    const id = data.id.join(';');
+    const brandId = data.brandId.join(';');
+    const discount = data.discount.join(';');
+    params.append('clientId', clientId.toString());
+    params.append('id', id);
+    params.append('brandId', brandId);
+    params.append('discount', discount);
+    return this.http.post(this.urlConfig.UPDATE_DISCOUNT, params)
+      .pipe(map(resp => ResultResponse.fromJson(resp)))
+      .pipe(map(rp => rp.response));
+  }
+  getClients(): Observable<any> {
+    return this.http.get(this.urlConfig.SHOW_SALE_CLIENTS)
+      .pipe(map(resp => UserResponse.fromJson(resp)))
+      .pipe(map(ur => ur.data));
   }
 }

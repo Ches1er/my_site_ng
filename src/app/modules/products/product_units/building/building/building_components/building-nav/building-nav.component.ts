@@ -34,7 +34,7 @@ export class BuildingNavComponent implements OnInit {
   private getUser(): void {
     if (localStorage.length > 0) {
       const data = JSON.parse(localStorage.getItem('tokenData'));
-      this.authService.user(data.api_token)
+      this.authService.user()
         .subscribe(u => {
           if (u) {
             this.user = u;

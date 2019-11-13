@@ -17,6 +17,7 @@ export class AdminMessagesService {
   private pClientHasChoosen: Subject<Client> = new Subject<Client>();
   private pObjectHasChoosen: Subject<BuildObject> = new Subject<BuildObject>();
   private pClientObjHasAddedUpdated: Subject<null> = new Subject<null>();
+  private pDiscountsUpdated: Subject<null> = new Subject<null>();
 
   constructor() {
   }
@@ -60,6 +61,9 @@ export class AdminMessagesService {
   get clientObjHasAddedUpdated(): Subject<null> {
     return this.pClientObjHasAddedUpdated;
   }
+  get discountsUpdated(): Subject<null> {
+    return this.pDiscountsUpdated;
+  }
 
   // FUNCTIONS
 
@@ -99,6 +103,12 @@ export class AdminMessagesService {
   }
   public clientObjHasAddedUpdatedMessage(){
     this.pClientObjHasAddedUpdated.next();
+  }
+
+  // Discounts
+
+  public discountsHasUpdatedMessage() {
+    this.pDiscountsUpdated.next();
   }
 
 }

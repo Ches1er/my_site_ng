@@ -30,6 +30,7 @@ import {InputActiveBorderDirective} from '../../directives/input-active-border.d
 import {InputChangeWidthDirective} from '../../directives/input-change-width.directive';
 import { AdminSaleProductComponent } from './admin/admin-content/admin-main/admin-sale-product/admin-sale-product.component';
 import {SaleService} from '../../services/http/sale/sale.service';
+import {AdminSaleClientsComponent} from './admin/admin-content/admin-main/admin-sale-clients/admin-sale-clients.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '', pathMatch: 'full'},
@@ -41,7 +42,8 @@ const routes: Routes = [
       {path: 'products', component: AdminProductsComponent},
       {path: 'building_objects_clients', component: AdminObjClientsComponent},
       {path: 'solutions', component: AdminSolutionsComponent},
-      {path: 'sale_products', component: AdminSaleProductComponent}
+      {path: 'sale_products', component: AdminSaleProductComponent},
+      {path: 'clients', component: AdminSaleClientsComponent}
     ]
   }
 ];
@@ -56,7 +58,7 @@ const routes: Routes = [
     AdminProductsComponent,
     AdminApplBrandComponent,
     AdminObjClientsComponent,
-    AdminObjComponent, AdminClientsComponent, AdminSolutionsComponent, AdminSaleProductComponent],
+    AdminObjComponent, AdminSaleClientsComponent, AdminSolutionsComponent, AdminSaleProductComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

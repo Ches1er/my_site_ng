@@ -78,19 +78,6 @@ export class RegisterComponent implements OnInit {
     e.preventDefault();
   }
 
-  /*  private responseHandler(resp: string) {
-      if (resp === 'User exists') {
-        this.authMessage = 'Такой пользователь уже существует';
-      }
-      if (resp === 'Registration succeed') {
-        const data = ['register', resp];
-        this.msgService.registerSuccessMessage(data);
-        this.cancel();
-      }
-      if (resp === 'Registration error') {
-        this.authMessage = 'Ошибка при регистрации! Попробуйте еще раз';
-      }
-    }*/
   private responseHandler(resp: string) {
     const data = ['register', resp];
     this.msgService.registerSuccessMessage(data);

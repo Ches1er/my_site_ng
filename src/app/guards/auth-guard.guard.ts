@@ -42,7 +42,7 @@ export class AuthGuardGuard implements CanActivate {
   }
 
   private isAuth() {
-    return this.httpAuthService.user(this.token).subscribe(u => {
+    return this.httpAuthService.user().subscribe(u => {
       if (u) { return true; }
     });
   }

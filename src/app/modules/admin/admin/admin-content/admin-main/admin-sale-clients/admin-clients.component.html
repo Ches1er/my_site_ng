@@ -1,0 +1,141 @@
+<div class="admin_unit_block">
+  <div class="admin_block_header">В данном блоке вы можете просматривать клиентов и добавлять или изменять их скидки</div>
+  <div class="admin_left_list_block">
+    <div *ngFor="let client of clients">
+      <div class="admin_left_list_unit_block">
+        <div class="admin_left_list_unit_name" (click)="fillInClient(client)">{{client.name}}</div>
+      </div>
+    </div>
+  </div>
+  <div class="add_block">
+    <div class="add_block_unit">
+    <!-- Client profile info -->
+    <div class="admin_block_header_small" *ngIf="!currentUser">
+      Для просмотра информации о пользователе, нажмите на него в списке слева.
+    </div>
+
+    <form [formGroup]="profileForm" class="admin_content_form" (ngSubmit)="onSubmit()" *ngIf="currentUser">
+
+      <div class="info_message" *ngIf="onSubmitResponse">{{onSubmitResponse}}</div>
+      <div *ngIf="!currentUser.emailVerifiedAt" class="form-group">
+        <p class="admin_content_block_label">Электронная почта пользователя не верифицирована.</p>
+        <button (click)="sendVerificationEmail($event)" class="admin-btn">Отправить повторное письмо о верификации.</button>
+      </div>
+      <div class="form-group">
+        <p class="admin_content_block_label">Логин пользователя.</p>
+        <input class="admin_content_input" type="text" id="name" formControlName = "name" disabled>
+      </div>
+      <div class="form-group">
+        <p class="admin_content_block_label">Электронная почта.</p>
+        <input class="admin_content_input" type="text" id="email" formControlName = "email" disabled>
+      </div>
+      <div class="form-group" formArrayName="phones">
+        <p class="admin_content_block_label">Телефонные номера пользователя:</p>
+        <div class="form-group-unit"
+             *ngFor="let phone of profileForm.controls.phones.controls; let i = index">
+          <div class="form_group_unit_imput_btn_block">
+            <input formControlName = "{{i}}" disabled>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <p class="admin_content_block_label">Форма для изменения информации о подтвержденном клиенте.</p>
+        <input class="admin_content_input" type="text" id="confirmedClient" formControlName = "confirmedClient">
+      </div>
+      <div class="admin_content_button_block">
+        <div *ngIf="profileForm.valid">
+          <button type="submit" class="admin-btn">Обновить информацию</button>
+        </div>
+      </div>
+    </form>
+  </div>
+    <div class="add_block_unit">
+      <div *ngIf="currentUser">
+        <div class="admin_block_header_small">
+          Скидки клиента.
+        </div>
+        <div class="tip">В данном блоке вы можете менять существующие скидки клиента, или обновлять информацию о скидках, после того, как вы добавили новую.</div>
+        <form [formGroup]="discountForm" class="admin_content_form_discount" (ngSubmit)="onUpdateDiscountSubmit()">
+          <div class="info_message" *ngIf="onUpdateSubmitResponse">{{onUpdateSubmitResponse}}</div>
+          <div class="form-group" formArrayName="brand">
+            <p class="admin_content_block_label">Бренд:</p>
+            <div class="form-group-unit"
+                 *ngFor="let brand of discountForm.controls.brand.controls; let i = index">
+              <div class="form_group_unit_imput_btn_block">
+                <input formControlName = "{{i}}" disabled>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group" formArrayName="discount">
+            <p class="admin_content_block_label">Скидка:</p>
+            <div class="form-group-unit"
+                 *ngFor="let discount of discountForm.controls.discount.controls; let i = index">
+              <div class="form_group_unit_imput_btn_block">
+                <input formControlName = "{{i}}">
+              </div>
+              <div class="array_validation_error">
+                <div class="validation_error"
+                     *ngIf="discountForm.controls.discount.controls[i].getError('required') &&
+                  (discountForm.controls.discount.controls[i].dirty || discountForm.controls.discount.controls[i].touched)">
+                  Поле "Скидка" необходимо для заполнения
+                </div>
+                <div class="validation_error"
+                     *ngIf="discountForm.controls.discount.controls[i].getError('pattern') &&
+                  (discountForm.controls.discount.controls[i].dirty || discountForm.controls.discount.controls[i].touched)">
+                  Данные которые вы ввели, не являются корректными, введите число вида - "15".
+                </div>
+              </div>
+              </div>
+          </div>
+
+          <div class="admin_content_button_block">
+            <div *ngIf="discountForm.valid">
+              <button type="submit" class="admin-btn">Обновить информацию</button>
+            </div>
+          </div>
+        </form>
+        <div class="add_discount">
+          <div class="admin_block_header_small">
+            Добавление скидки.
+          </div>
+          <div class="tip">В данном блоке вы можете только добавлять скидки для новых брендов. После нажатия кнопки "Добавить скидку", она
+          появится в блоке "Скидки клиента". После этого, надо обязательно нажать кнопку "Обновить информацию".
+          </div>
+          <form [formGroup] = "addDiscountForm" (ngSubmit)="addNewDiscount()">
+            <div class="form-group">
+              <p class="admin_content_block_label">Выберите бренд.</p>
+              <select name="" id="salesArea" formControlName = "brand">
+                <option disabled selected value> -- Выберите бренд -- </option>
+                <option *ngFor="let brand of brands" value="{{brand.id}}">{{brand.name}}</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <p class="admin_content_block_label">Скидка.</p>
+              <input class="admin_content_input" type="text" id="discount" formControlName = "discount">
+              <div class="validation_error"
+                   *ngIf="addDiscountForm.get('discount').getError('required') &&
+                (addDiscountForm.get('discount').dirty || addDiscountForm.get('discount').touched)">
+                Поле "Скидка" необходимо для заполнения
+              </div>
+              <div class="validation_error"
+                   *ngIf="addDiscountForm.get('discount').getError('pattern') &&
+                (addDiscountForm.get('discount').dirty || addDiscountForm.get('discount').touched)">
+                Данные которые вы ввели, не являются корректными, введите число вида - "15".
+              </div>
+            </div>
+
+            <div class="admin_content_button_block">
+              <div *ngIf="addDiscountForm.valid">
+                <button type="submit" class="admin-btn">Установите скидку</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

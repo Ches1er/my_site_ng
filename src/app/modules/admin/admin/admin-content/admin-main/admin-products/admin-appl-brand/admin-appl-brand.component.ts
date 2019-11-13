@@ -7,6 +7,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {SalesAreaService} from '../../../../../../../services/http/sales_area/sales-area.service';
 import {SalesArea} from '../../../../../../../dto/sales-area/Sales-area';
 import {AdminMessagesService} from '../../../../../../../services/admin/admin-messages.service';
+import {BrandExchange} from '../../../../../../../dto/brand_exchange/Brand_exchange';
 
 @Component({
   selector: 'app-admin-appl-brand',
@@ -15,6 +16,7 @@ import {AdminMessagesService} from '../../../../../../../services/admin/admin-me
 })
 export class AdminApplBrandComponent implements OnInit {
 
+
   addChangeBrand: FormGroup = new FormGroup({
     name: new FormControl('', Validators.required),
     id: new FormControl(''),
@@ -22,6 +24,7 @@ export class AdminApplBrandComponent implements OnInit {
     brands: new FormControl(''),
     active: new FormControl('true'),
     official: new FormControl(''),
+    exchange: new FormControl(''),
     web: new FormControl(''),
   });
   addChangeApplGroup: FormGroup = new FormGroup({
@@ -32,6 +35,7 @@ export class AdminApplBrandComponent implements OnInit {
   });
   private pSalesAreas: Array<SalesArea> = [];
   private pBrands: Array<Brand>;
+  private pExchanges: Array<BrandExchange> = [];
   private pApplGroups: Array<ApplyingGroup>;
   private pWhatHaveToDo = 'add';
   private pOnSubmitResponse: string;
@@ -52,6 +56,7 @@ export class AdminApplBrandComponent implements OnInit {
     });
     this.salesAreaService.getSalesAreas().subscribe(salesAreas => this.salesAreas = salesAreas);
     this.brandsService.allBrands.subscribe(b => this.brands = b);
+    this.brandsService.exchanges.subscribe(exchanges => this.exchanges = exchanges);
     this.applGroupSerive.allAppGroups.subscribe(g => this.applGroups = g);
     const brand = this.addChangeBrand.get('brands');
     brand.valueChanges.subscribe(val => this.fillNameField(val, 'addChangeBrand'));
@@ -83,6 +88,14 @@ export class AdminApplBrandComponent implements OnInit {
     this.pBrands = value;
   }
 
+  get exchanges(): Array<BrandExchange> {
+    return this.pExchanges;
+  }
+
+  set exchanges(value: Array<BrandExchange>) {
+    this.pExchanges = value;
+  }
+
   get whatHaveToDo(): string {
     return this.pWhatHaveToDo;
   }
@@ -104,7 +117,21 @@ export class AdminApplBrandComponent implements OnInit {
     if (formGroup === 'addChangeBrand') {
       this.brands.forEach(e => {
         if (e.id == val) {
-          this.addChangeBrand.patchValue({name: e.name, id: e.id, salesArea: e.salesAreaId, active: e.active, official: e.official, web: e.web});
+          let exchange = 0;
+          this.exchanges.forEach(exc => {
+            if (exc.brandId == e.id) {
+              exchange = exc.exchange;
+            }
+          })
+          this.addChangeBrand.patchValue({
+            name: e.name,
+            id: e.id,
+            salesArea: e.salesAreaId,
+            active: e.active,
+            official: e.official,
+            web: e.web,
+            exchange: exchange
+          });
         }
       });
     }

@@ -35,6 +35,8 @@ import {AuthResultComponent} from './components/windows/auth-result/auth-result.
 import {MessagesService} from './services/messages.service';
 import {SaleService} from './services/http/sale/sale.service';
 import {HttpAuthService} from './services/http/http-auth.service';
+import {JwtModule} from '@auth0/angular-jwt';
+import {AuthHeaderInterceptor} from './http-interceptors/auth-header-interceptor';
 
 registerLocaleData(localeRuUa, 'RuUa');
 
@@ -56,6 +58,19 @@ registerLocaleData(localeRuUa, 'RuUa');
     AuthResultComponent
   ],
   imports: [
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => {
+          return localStorage.getItem('api_token');
+        },
+        whitelistedDomains: ['http://localhost:4200'],
+        blacklistedRoutes: [
+          'http://mydomain/api/login',
+          'http://mydomain/api/login_remember'
+        ]
+      }
+    }),
+    BrowserAnimationsModule,
     BrowserModule,
     AppRoutingModule,
     ProductsModule,
@@ -71,7 +86,8 @@ registerLocaleData(localeRuUa, 'RuUa');
   ],
   providers: [MessagesService, SaleService,
     CookieService, {provide: LOCALE_ID, useValue: 'RuUa'},
-    ContactsService, HttpAuthService
+    ContactsService, HttpAuthService,
+    {provide: HTTP_INTERCEPTORS, useClass: AuthHeaderInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
 })

@@ -26,7 +26,6 @@ export class MessagesService {
   private pInfoWindowShow: Subject<string> = new Subject<string>();
 
   constructor() {
-    console.log('1');
   }
 
   // GETTERS

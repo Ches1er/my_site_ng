@@ -1,5 +1,6 @@
 export class UrlConfig {
   private base = 'http://mydomain/api/';
+  CORE = this.base;
 
   // AUTH
 
@@ -58,6 +59,7 @@ export class UrlConfig {
   SHOW_BUILDING_BRANDS = this.brandsBase + 'building';
   SHOW_ALL_BRANDS = this.brandsBase + 'all';
   ADD_BRAND = this.brandsBase + 'add';
+  SHOW_EXCHANGES = this.base + 'brandsexchanges';
 
   // products
   private productsBase = this.base + 'products/';
@@ -107,4 +109,7 @@ export class UrlConfig {
   SAVE_ORDER = this.saleBase + 'save';
   SEND_ORDER_BY_EMAIL = this.saleBase + 'sendorder';
   SHOW_ORDERS = this.saleBase + 'orders/';
+  SHOW_DISCOUNT = this.saleBase + 'clientdisc';
+  UPDATE_DISCOUNT = this.saleBase + 'updatediscount';
+  SHOW_SALE_CLIENTS = this.saleBase + 'clients';
 }

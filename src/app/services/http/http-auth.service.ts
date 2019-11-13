@@ -14,8 +14,7 @@ import {User} from '../../dto/User/User';
 export class HttpAuthService {
   urlConfig: UrlConfig = new UrlConfig();
 
-  constructor(@Inject(HttpClient) private http: HttpClient,
-              @Inject(CookieService) private cookieService: CookieService) {
+  constructor(@Inject(HttpClient) private http: HttpClient) {
   }
 
   // LOGIN
@@ -36,7 +35,9 @@ export class HttpAuthService {
     const params = new FormData();
     params.append('remember_token', rememberToken);
     return this.http.post(this.urlConfig.LOGIN_REMEMBER, params)
-      .pipe(map(resp => resp));
+      .pipe(map(resp => {
+        return resp;
+      }));
   }
 
   // GET USER & ROLES
@@ -48,19 +49,10 @@ export class HttpAuthService {
       .pipe(map(roles => roles));
   }
 
-  user(token: string): Observable<any> {
+  user(): Observable<any> {
     const params = new FormData();
-    params.append('api_token', token);
     return this.http.post(this.urlConfig.USER, params)
       .pipe(map(resp => User.fromJson(resp)));
-  }
-
-  isAdmin(apiToken: string): Observable<any> {
-    const params = new FormData();
-    params.append('api_token', apiToken);
-    return this.http.post(this.urlConfig.IS_ADMIN, params)
-      .pipe(map(resp => ResultResponse.fromJson(resp)))
-      .pipe(map(ResResp => ResResp.response));
   }
 
   register(data: any): Observable<string> {
@@ -75,17 +67,17 @@ export class HttpAuthService {
       .pipe(map(ResResp => ResResp.response));
   }
 
-  rememberVerification(): Observable<string> {
+  rememberVerification(token: string): Observable<string> {
     const params = new FormData();
-    params.append('api_token', this.cookieService.get('api_token'));
+    params.append('api_token', token);
     return this.http.post(this.urlConfig.REPEAT_VERIFICATION, params)
       .pipe(map(resp => ResultResponse.fromJson(resp)))
       .pipe(map(ResResp => ResResp.response));
   }
 
-  updateUser(data: any): Observable<string> {
+  updateUser(data: any, token: string): Observable<string> {
     const params = new FormData();
-    params.append('api_token', this.cookieService.get('api_token'));
+    params.append('api_token', token);
     params.append('id', data.id);
     params.append('name', data.name);
     params.append('email', data.email);

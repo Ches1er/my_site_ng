@@ -49,13 +49,13 @@ export class CurrentUserBlockComponent implements OnInit {
         });
     }
     this.msgService.loginSuccessMessage.subscribe(token => {
-        this.getUserAndRoles(token);
+      this.getUserAndRoles(token);
       }
     );
   }
 
   private getUserAndRoles(apiToken: string) {
-    this.httpAuthService.user(apiToken).subscribe(user => this.currentUser = user);
+    this.httpAuthService.user().subscribe(user => this.currentUser = user);
     this.httpAuthService.roles(apiToken).subscribe(roles => {
       if (CurrentUserBlockComponent.isAdmin(roles)) {
         this.msgService.adminLoggedIn();
