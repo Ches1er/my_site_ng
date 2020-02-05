@@ -6,7 +6,8 @@ export class OrderUnit {
               private pProductName: string,
               private pPrice: number,
               private pQty: number,
-              private pAmount: number) {
+              private pAmount: number,
+              private pDiscount: string) {
   }
 
   get brandId(): number {
@@ -63,5 +64,12 @@ export class OrderUnit {
 
   set amount(value: number) {
     this.pAmount = value;
+  }
+  get discount(): string {
+    return this.pDiscount;
+  }
+
+  set discount(value: string) {
+    this.pDiscount = value;
   }
 }

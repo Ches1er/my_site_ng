@@ -37,6 +37,7 @@ import {SaleService} from './services/http/sale/sale.service';
 import {HttpAuthService} from './services/http/http-auth.service';
 import {JwtModule} from '@auth0/angular-jwt';
 import {AuthHeaderInterceptor} from './http-interceptors/auth-header-interceptor';
+import {NgxLoadingModule, ngxLoadingAnimationTypes} from 'ngx-loading';
 
 registerLocaleData(localeRuUa, 'RuUa');
 
@@ -58,6 +59,14 @@ registerLocaleData(localeRuUa, 'RuUa');
     AuthResultComponent
   ],
   imports: [
+    NgxLoadingModule.forRoot({
+      animationType: ngxLoadingAnimationTypes.circleSwish,
+      backdropBackgroundColour: 'rgba(0,0,0,0.1)',
+      backdropBorderRadius: '4px',
+      primaryColour: '#ffffff',
+      secondaryColour: '#ffffff',
+      tertiaryColour: '#ffffff'
+    }),
     JwtModule.forRoot({
       config: {
         tokenGetter: () => {

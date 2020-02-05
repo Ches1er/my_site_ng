@@ -31,6 +31,8 @@ import {InputChangeWidthDirective} from '../../directives/input-change-width.dir
 import { AdminSaleProductComponent } from './admin/admin-content/admin-main/admin-sale-product/admin-sale-product.component';
 import {SaleService} from '../../services/http/sale/sale.service';
 import {AdminSaleClientsComponent} from './admin/admin-content/admin-main/admin-sale-clients/admin-sale-clients.component';
+import { AdminBranchesComponent } from './admin/admin-content/admin-main/admin-branches/admin-branches.component';
+import {ContactsService} from '../../services/http/contacts/contacts.service';
 
 const routes: Routes = [
   {path: '', redirectTo: '', pathMatch: 'full'},
@@ -43,7 +45,8 @@ const routes: Routes = [
       {path: 'building_objects_clients', component: AdminObjClientsComponent},
       {path: 'solutions', component: AdminSolutionsComponent},
       {path: 'sale_products', component: AdminSaleProductComponent},
-      {path: 'clients', component: AdminSaleClientsComponent}
+      {path: 'clients', component: AdminSaleClientsComponent},
+      {path: 'branches', component: AdminBranchesComponent}
     ]
   }
 ];
@@ -58,7 +61,7 @@ const routes: Routes = [
     AdminProductsComponent,
     AdminApplBrandComponent,
     AdminObjClientsComponent,
-    AdminObjComponent, AdminSaleClientsComponent, AdminSolutionsComponent, AdminSaleProductComponent],
+    AdminObjComponent, AdminSaleClientsComponent, AdminSolutionsComponent, AdminSaleProductComponent, AdminBranchesComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
@@ -78,7 +81,7 @@ const routes: Routes = [
     ApplyingGroupsService,
     ClientsService,
     CookieService,
-    BuildingObjectsService, SaleService]
+    BuildingObjectsService, SaleService, ContactsService]
 })
 export class AdminModule {
 }

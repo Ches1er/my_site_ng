@@ -3,6 +3,7 @@ import {Subject} from 'rxjs';
 import {Campaign} from '../dto/campaign/Campaign';
 import {Solution} from '../dto/solutions/Solution';
 import {Product} from '../dto/products/Product';
+import {User} from '../dto/User/User';
 
 /*@Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class MessagesService {
 
   private pLoginWindowShow: Subject<null> = new Subject<null>();
   private pRegisterWindowShow: Subject<null> = new Subject<null>();
-  private pLoginSuccess: Subject<string> = new Subject<string>();
+  private pLoginSuccess: Subject<User> = new Subject<User>();
   private pRegisterSuccess: Subject<Array<string>> = new Subject<Array<string>>();
   private pLogoutSuccess: Subject<null> = new Subject<null>();
   private pPackMenuShow: Subject<null> = new Subject<null>();
@@ -108,8 +109,8 @@ export class MessagesService {
 
   // Auth
 
-  public loginSuccess(token: string) {
-    this.pLoginSuccess.next(token);
+  public loginSuccess(user: User) {
+    this.pLoginSuccess.next(user);
   }
 
   public registerSuccessMessage(data: Array<string>) {

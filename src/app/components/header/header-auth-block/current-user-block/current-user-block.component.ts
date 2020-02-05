@@ -41,22 +41,22 @@ export class CurrentUserBlockComponent implements OnInit {
     }
     if (localStorage.length > 0 && this.tokenData.remember_token !== null) {
       this.httpAuthService.loginByRememberMeToken(this.tokenData.remember_token)
-        .subscribe(resp => {
-          if (resp) {
-            this.msgService.loginSuccess(resp.api_token);
-            this.getUserAndRoles(resp.api_token);
+        .subscribe(user => {
+          if (user) {
+            this.msgService.loginSuccess(user.apiToken);
+            this.getUserAndRoles(user);
           }
         });
     }
-    this.msgService.loginSuccessMessage.subscribe(token => {
-      this.getUserAndRoles(token);
+    this.msgService.loginSuccessMessage.subscribe(user => {
+      this.getUserAndRoles(user);
       }
     );
   }
 
-  private getUserAndRoles(apiToken: string) {
-    this.httpAuthService.user().subscribe(user => this.currentUser = user);
-    this.httpAuthService.roles(apiToken).subscribe(roles => {
+  private getUserAndRoles(user: User) {
+    this.currentUser = user;
+    this.httpAuthService.roles(user.apiToken).subscribe(roles => {
       if (CurrentUserBlockComponent.isAdmin(roles)) {
         this.msgService.adminLoggedIn();
       }

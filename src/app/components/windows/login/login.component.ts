@@ -10,13 +10,13 @@ import {CookieService} from 'ngx-cookie-service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
+  // "loading" variable use for ngx-loading component
+  public loading = false;
   loginForm: FormGroup = new FormGroup({
     name: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required),
     rememberMe: new FormControl('')
   });
-
   visible = false;
   error = null;
 
@@ -34,20 +34,22 @@ export class LoginComponent implements OnInit {
   }
 
   public onSubmit() {
-
+    this.loading = true;
     this.httpAuthService.login(this.loginForm.value)
       .subscribe(resp => {
         if (resp.error) {
           this.error = resp;
+          this.loading = false;
         } else {
-          this.msgService.loginSuccess(resp.api_token);
+          this.msgService.loginSuccess(resp);
           // 30 min expiration time. 1*24*60*30
           const tokenData = {
-            api_token: resp.api_token,
-            remember_token: resp.remember_token,
+            api_token: resp.apiToken,
+            remember_token: resp.rememberToken,
             expiration: Date.now() + (30 * 60 * 1000)
           };
           localStorage.setItem('tokenData', JSON.stringify(tokenData));
+          this.loading = false;
           this.visible = false;
         }
       });

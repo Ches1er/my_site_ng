@@ -27,6 +27,7 @@ export class ProfileOrdersComponent implements OnInit {
   set ordersStr(value: OrderResponse) {
     this.pOrdersStr = value;
   }
+
   get token(): string {
     return this.pToken;
   }
@@ -34,6 +35,7 @@ export class ProfileOrdersComponent implements OnInit {
   set token(value: string) {
     this.pToken = value;
   }
+
   get currentUser(): User {
     return this.pCurrentUser;
   }
@@ -43,7 +45,7 @@ export class ProfileOrdersComponent implements OnInit {
   }
 
   private pOrdersStr: OrderResponse = null;
-  private pOrdersArr: Array<Array<OrderUnit>>;
+  private pOrdersArr: Array<Array<OrderUnit>> = null;
   private pToken: string = null;
   private pCurrentUser: User;
 
@@ -53,8 +55,8 @@ export class ProfileOrdersComponent implements OnInit {
   ngOnInit() {
     this.getToken();
     this.updateUser();
-
   }
+
   private getToken() {
     if (localStorage.length > 0) {
       const data = JSON.parse(localStorage.getItem('tokenData'));
@@ -63,31 +65,37 @@ export class ProfileOrdersComponent implements OnInit {
       }
     }
   }
+
   private updateUser() {
     this.httpAuthService.user().subscribe(user => {
       this.currentUser = user;
       // Get orders
       this.saleService.showOrders(user.id).subscribe(resp => {
-        this.ordersStr = resp;
-        this.strToArr(resp);
+        if (resp.orders.length) {
+          this.ordersStr = resp;
+          this.strToArr(resp);
+        }
       });
     });
   }
+
   private strToArr(orderStr: OrderResponse) {
     const arr = [];
-    let newArr = [];
+    let newArr: any[];
     orderStr.orders.map(e => {
       arr.push(e.split(';'));
     });
     newArr = arr.map(e => {
-      return e.map(elem => new OrderUnit(JSON.parse(elem).brandId,
-        JSON.parse(elem).brand,
-        JSON.parse(elem).productId,
-        JSON.parse(elem).productName,
-        JSON.parse(elem).price,
-        JSON.parse(elem).qty,
-        JSON.parse(elem).amount));
-    });
+        return e.map(elem => new OrderUnit(JSON.parse(elem).pBrandId,
+          JSON.parse(elem).pBrand,
+          JSON.parse(elem).pProductId,
+          JSON.parse(elem).pProductName,
+          JSON.parse(elem).pPrice,
+          JSON.parse(elem).pQty,
+          JSON.parse(elem).pAmount,
+          JSON.parse(elem).pDiscount));
+      }
+    );
     this.ordersArr = newArr;
   }
 }

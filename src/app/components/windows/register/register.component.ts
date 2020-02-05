@@ -10,7 +10,8 @@ import {HttpAuthService} from '../../../services/http/http-auth.service';
   styleUrls: ['./register.component.less']
 })
 export class RegisterComponent implements OnInit {
-
+  // "loading" variable use for ngx-loading component
+  public loading = false;
   registerForm: FormGroup = new FormGroup({
     name: new FormControl('',
       [
@@ -58,11 +59,16 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit() {
+    this.loading = true;
     if (this.registerForm.value.password !== this.registerForm.value.confirmPassword) {
+      this.loading = false;
       this.authMessage = 'Пароли не совпадают';
     } else {
       this.authMessage = null;
-      this.httpAuthService.register(this.registerForm.value).subscribe(resp => this.responseHandler(resp));
+      this.httpAuthService.register(this.registerForm.value).subscribe(resp => {
+        this.loading = false;
+        this.responseHandler(resp);
+      });
     }
   }
 

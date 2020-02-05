@@ -7,6 +7,7 @@ import {User} from '../../../dto/User/User';
 import {HttpAuthService} from '../../../services/http/http-auth.service';
 import {MessagesService} from '../../../services/messages.service';
 import {OrderUnit} from './OrderUnit';
+import {ClientDiscount} from '../../../dto/clientDiscounts/ClientDiscount';
 
 @Component({
   selector: 'app-order',
@@ -21,6 +22,7 @@ export class OrderComponent implements OnInit {
   private pSumAmount = 0;
   private pOrderPosition: number;
   private pUser: User = null;
+  private pDiscounts: Array<ClientDiscount> = null;
   orderForm: FormGroup = new FormGroup({
       brands: new FormControl(''),
       productId: new FormControl(''),
@@ -32,6 +34,7 @@ export class OrderComponent implements OnInit {
     }
   );
   order: Array<OrderUnit> = [];
+  private pProductChoosen = false;
 
   constructor(private brandService: BrandsService,
               private saleService: SaleService,
@@ -43,6 +46,7 @@ export class OrderComponent implements OnInit {
     this.orderPosition = null;
     this.currentProduct = null;
     this.user = null;
+    // Get user and user discounts
     this.getUser();
     this.sumAmount = 0;
     this.brandService.allBrands.subscribe(b => {
@@ -63,6 +67,7 @@ export class OrderComponent implements OnInit {
       this.products.forEach(e => {
         if (e.id == value) {
           this.currentProduct = e;
+          this.productChoosen = true;
           this.orderForm.patchValue({
             productName: this.currentProduct.name,
             productId: this.currentProduct.id,
@@ -121,12 +126,32 @@ export class OrderComponent implements OnInit {
     this.pCurrentProduct = value;
   }
 
+  get discounts(): Array<ClientDiscount> {
+    return this.pDiscounts;
+  }
+
+  set discounts(value: Array<ClientDiscount>) {
+    this.pDiscounts = value;
+  }
+
+  get productChoosen(): boolean {
+    return this.pProductChoosen;
+  }
+
+  set productChoosen(value: boolean) {
+    this.pProductChoosen = value;
+  }
+
+  // Get user and user discounts
   private getUser(): void {
     if (localStorage.length > 0) {
       const data = JSON.parse(localStorage.getItem('tokenData'));
       if (data.api_token) {
         this.authService.user()
-          .subscribe(u => this.user = u);
+          .subscribe(u => {
+            this.user = u;
+            this.saleService.getClientDiscount(u.id).subscribe(d => this.discounts = d);
+          });
       }
     }
   }
@@ -142,7 +167,8 @@ export class OrderComponent implements OnInit {
       this.orderForm.value.productName,
       this.orderForm.value.price,
       this.orderForm.value.qty,
-      parseInt(this.orderForm.value.amount, 10)
+      parseInt(this.orderForm.value.amount, 10),
+      '0'
     );
     this.order.push(orderUnit);
   }
@@ -167,6 +193,7 @@ export class OrderComponent implements OnInit {
 
   delOrderPos(i) {
     this.order.splice(i, 1);
+    this.sumAmount = this.order.reduce((sum, current) => sum + current.amount, 0);
   }
 
   updateOrder(event) {
@@ -223,7 +250,31 @@ export class OrderComponent implements OnInit {
     const strOrder = [];
     this.order.forEach(item => {
       strOrder.push(JSON.stringify(item));
+      console.log(item);
     });
     return strOrder.join(';');
+  }
+
+  OrderItemWithDiscount(i: number) {
+    const orderItem = this.order[i];
+    this.discounts.forEach(d => {
+      if (orderItem.brandId === d.brandId) {
+        const discount = orderItem.amount - orderItem.amount * (1 - d.discount / 100);
+        orderItem.amount = orderItem.amount - discount;
+        orderItem.discount = discount.toFixed(2);
+      }
+    });
+    this.sumAmount = this.order.reduce((sum, current) => sum + current.amount, 0);
+  }
+
+  OrderItemWithoutDiscount(i: number) {
+    this.products.forEach(p => {
+      if (p.name === this.order[i].productName) {
+        this.order[i].discount = '0';
+        this.order[i].price = p.price;
+        this.order[i].amount = this.order[i].price * this.order[i].qty;
+      }
+    });
+    this.sumAmount = this.order.reduce((sum, current) => sum + current.amount, 0);
   }
 }

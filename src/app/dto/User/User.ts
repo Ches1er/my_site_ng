@@ -6,7 +6,9 @@ export class User {
               private pEmailVerifiedAt,
               private pPhones: string,
               private pConfirmedClient: string,
-              private pApiToken: string) {
+              private pApiToken: string,
+              private pRememberToken: string
+              ) {
   }
 
   get id(): number {
@@ -64,6 +66,14 @@ export class User {
     this.pApiToken = value;
   }
 
+  get rememberToken(): string {
+    return this.pRememberToken;
+  }
+
+  set rememberToken(value: string) {
+    this.pRememberToken = value;
+  }
+
   public static fromJson(jsonObj: any): User {
     return new User(
       jsonObj.id,
@@ -72,6 +82,7 @@ export class User {
       jsonObj.email_verified_at,
       jsonObj.phones,
       jsonObj.confirmed_client,
-      jsonObj.api_token);
+      jsonObj.api_token,
+      jsonObj.remember_token);
   }
 }

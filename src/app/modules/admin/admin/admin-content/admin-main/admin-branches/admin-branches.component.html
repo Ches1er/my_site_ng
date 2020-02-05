@@ -1,0 +1,65 @@
+
+<div class="admin_unit_block">
+  <div class="admin_block_header">В данном блоке вы можете изменять существующие или добавлять новые филиалы</div>
+  <div class="admin_left_list_block">
+    <div *ngFor="let branch of branches">
+      <div class="admin_left_list_unit_block" (click)="fillInBranch(branch)">{{branch.name}}</div>
+    </div>
+  </div>
+  <div class="add_block">
+    <div class="add_block_unit">
+      <form class="admin_content_form" [formGroup]="addChangeBranchForm" (ngSubmit)="onSubmit()">
+        <div class="info_message" *ngIf="onSubmitResponse">{{onSubmitResponse}}</div>
+
+        <!-- Роль -->
+        <div class="form-group">
+          <p class="admin_content_block_label">Выберите роль, которой будет соответствовать филиал</p>
+          <select name="" id="branch_role" formControlName = "role_id">
+            <option disabled selected value> -- Выберите роль -- </option>
+            <option *ngFor="let branch_role of roles" value="{{branch_role.id}}">{{branch_role.role}}</option>
+          </select>
+        </div>
+
+        <!-- Название -->
+        <div class="form-group">
+          <p class="admin_content_block_label">Введите название филиала</p>
+          <input class="admin_content_input" type="text" id="name" formControlName = "name" appInputChangeWidth>
+        </div>
+
+        <!-- Адрес -->
+        <div class="form-group">
+          <p class="admin_content_block_label">Введите адрес</p>
+          <input class="admin_content_input" type="text" id="address" formControlName = "address" appInputChangeWidth>
+        </div>
+
+        <!-- Адрес -->
+        <div class="form-group">
+          <p class="admin_content_block_label">Введите телефон</p>
+          <input class="admin_content_input" type="text" id="phone" formControlName = "phone" appInputChangeWidth>
+        </div>
+
+        <!-- Координаты долгота -->
+        <div class="form-group">
+          <p class="admin_content_block_label">Введите координаты филиала для карты. Введите долготу</p>
+          <input class="admin_content_input" type="text" id="long" formControlName = "long" appInputChangeWidth>
+        </div>
+
+        <!-- Координаты широта -->
+        <div class="form-group">
+          <p class="admin_content_block_label">Введите координаты филиала для карты. Введите широту</p>
+          <input class="admin_content_input" type="text" id="lat" formControlName = "lat" appInputChangeWidth>
+        </div>
+
+        <div class="admin_content_button_block">
+          <div *ngIf="addChangeBranchForm.valid">
+            <button class="admin-btn" type="submit" *ngIf="whatHaveToDo==='add'">Добавить филиал</button>
+          </div>
+          <div *ngIf="addChangeBranchForm.valid">
+            <button class="admin-btn" type="submit" *ngIf="whatHaveToDo==='update'">Обновить филиал</button>
+          </div>
+          <button class="admin-btn" type="submit" (click)="clearFieldsByBtn($event)">Очистить поля</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -2,6 +2,9 @@
   <div class="main_content_header">Блок заказа</div>
   <div class="order_block">
     <form class="order_form" [formGroup]="orderForm" (ngSubmit)="addToOrder()">
+      <div class="tip">
+        Для выбора товарной позиции, выберите бренд, потом подставьте необходимое кол-во товара и нажмите кнопку "Добавить позицию"
+      </div>
       <div class="input_block">
         <div class="form-group">
           <p class="admin_content_block_label">Выберите бренд</p>
@@ -26,20 +29,21 @@
           <input class="order_form_number" type="number" formControlName="qty">
         </div>
       </div>
-      <div class="order_button_block">
+      <div class="order_button_block" *ngIf="productChoosen">
         <button class="admin-btn">Добавить позицию</button>
         <button class="admin-btn" *ngIf="orderPosition !== null" (click)="updateOrder($event)">Обновить заказ</button>
       </div>
     </form>
 
     <div class="order" *ngIf="order.length>0">
+      <div class="table_header">Ваш заказ</div>
       <table>
-        <caption>Ваш заказ</caption>
         <tr>
           <th>Бренд</th>
           <th>Номенклатура</th>
           <th>Стоимость, грн</th>
           <th>Кол-во, шт</th>
+          <th>Скидка, грн</th>
           <th>Всего</th>
         </tr>
         <tr *ngFor="let orderItem of order; let i = index">
@@ -47,13 +51,17 @@
           <td>{{orderItem.productName}}</td>
           <td>{{orderItem.price}}</td>
           <td>{{orderItem.qty}}</td>
+          <td>{{orderItem.discount}}</td>
           <td>{{orderItem.amount}}</td>
           <td class="td-btn"><button class="btn" (click)="delOrderPos(i)"><i class="fa fa-trash"></i></button></td>
           <td class="td-btn"><button class="btn" (click)="changeOrderItem(orderItem.productId)"><i class="fa fa-edit"></i></button></td>
+            <td class="td-btn" *ngIf="orderItem.discount == 0"><button class="btn" (click)="OrderItemWithDiscount(i)">скидка</button></td>
+            <td class="td-btn" *ngIf="orderItem.discount != 0"><button class="btn" (click)="OrderItemWithoutDiscount(i)">без скидки</button></td>
         </tr>
       </table>
       <div class="sum_amount">Итого: {{sumAmount}} грн.</div>
       <div class="order_button_block">
+        <!-- <button class="admin-btn" (click)="orderWithDiscount($event)">Заказ со скидкой</button> -->
         <button class="admin-btn" (click)="saveOrder($event)">Сохранить заказ</button>
         <button class="admin-btn" (click)="sendByEmail($event)">Отправить на почту</button>
       </div>

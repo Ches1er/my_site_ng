@@ -22,7 +22,6 @@ export class AdminGuard implements CanActivate {
       this.token = data.api_token;
     }
     if (this.token) {
-      console.log(this.jwtHelperService.decodeToken(this.token).roles);
       return true;
   }
     this.redirectAndLogin();

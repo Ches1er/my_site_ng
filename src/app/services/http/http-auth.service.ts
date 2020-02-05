@@ -28,7 +28,11 @@ export class HttpAuthService {
     params.append('password', data.password);
     params.append('rememberMe', data.rememberMe);
     return this.http.post(this.urlConfig.LOGIN, params)
-      .pipe(map(resp => resp));
+      .pipe(map(resp => {
+        if (resp.hasOwnProperty('error')) { return resp; } else {
+          return User.fromJson(resp);
+        }
+      }));
   }
 
   loginByRememberMeToken(rememberToken: string): Observable<any> {
@@ -36,7 +40,7 @@ export class HttpAuthService {
     params.append('remember_token', rememberToken);
     return this.http.post(this.urlConfig.LOGIN_REMEMBER, params)
       .pipe(map(resp => {
-        return resp;
+        return User.fromJson(resp);
       }));
   }
 

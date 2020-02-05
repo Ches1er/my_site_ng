@@ -1,4 +1,5 @@
 <div class="fade" *ngIf="visible">
+  <ngx-loading [show]="loading"></ngx-loading>
   <div class="auth_window">
     <div class="auth_window-header">Вход на сайт</div>
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">

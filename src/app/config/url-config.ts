@@ -20,6 +20,8 @@ export class UrlConfig {
 
   private branchesBase = this.base + 'branches';
   BRANCHES = this.branchesBase;
+  BRANCHESROLES = this.branchesBase + '/roles';
+  ADD_BRANCH = this.branchesBase + '/add';
 
   // MAIN
 

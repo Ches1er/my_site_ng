@@ -11,6 +11,7 @@
           <th>Номенклатура</th>
           <th>Стоимость, грн</th>
           <th>Кол-во, шт</th>
+          <th>Скидка, грн</th>
           <th>Всего</th>
         </tr>
         <tr *ngFor="let orderItem of order">
@@ -18,6 +19,7 @@
           <td>{{orderItem.productName}}</td>
           <td>{{orderItem.price}}</td>
           <td>{{orderItem.qty}}</td>
+          <td>{{orderItem.discount}}</td>
           <td>{{orderItem.amount}}</td>
           <!--<td class="td-btn"><button class="btn" (click)="delOrderPos(i)"><i class="fa fa-trash"></i></button></td> -->
         </tr>
