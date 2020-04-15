@@ -33,7 +33,6 @@ export class BuildTechInfoGroutCalcComponent implements OnInit {
   onChanges() {
 
     this.groutCalc.valueChanges.subscribe(r => {
-      console.log('changes');
       if (this.groutCalc.valid) {
         if (this.calcDefiner === 'Ultracolor' || this.calcDefiner === 'Kerapoxy') {
           this.ul_ep();

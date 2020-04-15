@@ -6,11 +6,13 @@ import {PageNotFoundComponent} from './components/main/page-not-found/page-not-f
 import {ProductsModule} from './modules/products/products.module';
 import {AuthGuardGuard} from './guards/auth-guard.guard';
 import {RoleGuardGuard} from './guards/role-guard.guard';
+import {FindComponent} from './components/main/find/find.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'main', pathMatch: 'full'},
   {path: 'main', loadChildren: './modules/products/products.module#ProductsModule'},
   {path: 'contacts', component: ContactsComponent},
+  {path: 'find', component: FindComponent},
   {path: 'about_us', component: AboutUsComponent},
   {path: 'admin', canActivate: [RoleGuardGuard], loadChildren: './modules/admin/admin.module#AdminModule', data: {
       expectedRole: ['admin']

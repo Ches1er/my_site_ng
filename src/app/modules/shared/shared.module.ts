@@ -20,7 +20,6 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpAuthService} from '../../services/http/http-auth.service';
 import {InfoWindowComponent} from '../../components/windows/info-window/info-window.component';
 
-
 @NgModule({
   declarations: [ProdByMenuUnitComponent,
     ProdContentComponent,

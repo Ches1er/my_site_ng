@@ -3,6 +3,7 @@ import {MessagesService} from '../../../../../../../../../services/messages.serv
 import {Solution} from '../../../../../../../../../dto/solutions/Solution';
 import {ProductsService} from '../../../../../../../../../services/http/products/products.service';
 import {Product} from '../../../../../../../../../dto/products/Product';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-building-solution-unit',
@@ -16,7 +17,8 @@ export class BuildingSolutionUnitComponent implements OnInit {
   private pItems: Array<string> = [];
   private pProducts: Array<Product> = [];
 
-  constructor(private msgService: MessagesService, private productsService: ProductsService) {
+  constructor(private msgService: MessagesService,
+              private productsService: ProductsService) {
   }
 
   ngOnInit() {
@@ -25,6 +27,7 @@ export class BuildingSolutionUnitComponent implements OnInit {
       this.currentSolution = solution;
       const i = this.currentSolution.items;
       const p = this.currentSolution.products;
+      console.log(p);
       this.items = i.split(';');
       this.fillInProducts(p.split(','));
       this.msgService.changeSolutionProductMessage(null);

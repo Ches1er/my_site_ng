@@ -23,7 +23,8 @@ export class AdminBranchesComponent implements OnInit {
     long: new FormControl(''),
     lat: new FormControl(''),
     role_id: new FormControl(''),
-    role: new FormControl('')
+    role: new FormControl(''),
+    active: new FormControl('')
     }
   );
 
@@ -87,7 +88,8 @@ export class AdminBranchesComponent implements OnInit {
       phone: branch.phone,
       long: branch.long,
       lat: branch.lat,
-      role_id: branch.roleId
+      role_id: branch.roleId,
+      active: branch.active
     });
     this.whatHaveToDo = 'update';
   }
@@ -98,7 +100,7 @@ export class AdminBranchesComponent implements OnInit {
     });
   }
   clearFields() {
-    this.addChangeBranchForm.patchValue({id: '', name: '', address: '', phone: '', long: '', lat: ''});
+    this.addChangeBranchForm.patchValue({id: '', name: '', address: '', phone: '', long: '', lat: '', active: ''});
     this.onSubmitResponse = null;
     this.whatHaveToDo = 'add';
   }

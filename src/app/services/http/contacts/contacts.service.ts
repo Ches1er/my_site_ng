@@ -46,6 +46,7 @@ export class ContactsService {
     params.append('long', data.long);
     params.append('lat', data.lat);
     params.append('role_id', data.role_id);
+    params.append('active', data.active);
     return this.http.post(this.urlConfig.ADD_BRANCH, params)
       .pipe(map(resp => ResultResponse.fromJson(resp)))
       .pipe(map(ResResp => ResResp.response));

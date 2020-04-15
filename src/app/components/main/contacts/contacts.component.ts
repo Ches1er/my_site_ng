@@ -69,8 +69,10 @@ export class ContactsComponent implements OnInit {
 
   private fillInMarkers(branches: Array<Branch>) {
     branches.forEach(e => {
-      this.markers.push({lat: e.lat, lng: e.long, draggable: false});
-      this.infoWindowTextArray.push(e.role + ' ' + e.address);
+      if (e.active) {
+        this.markers.push({lat: e.lat, lng: e.long, draggable: false});
+        this.infoWindowTextArray.push(e.role + ' ' + e.address);
+      }
     });
   }
 }

@@ -37,6 +37,7 @@ export class UrlConfig {
   PACK_NEWS = this.newsBase + '/pack';
   BUILDING_NEWS = this.newsBase + '/building';
   ADD_NEWS = this.newsBase + '/add';
+  FIND_NEWS = this.newsBase + '/find';
 
   // CAMPAIGN
 
@@ -45,6 +46,7 @@ export class UrlConfig {
   PACK_CAMPAIGN = this.campaignBase + 'pack';
   BUILDING_CAMPAIGN = this.campaignBase + 'building';
   ADD_CAMPAIGN = this.campaignBase + 'add';
+  FIND_CAMPAIGNS = this.campaignBase + 'find/';
 
   // GOODS
 
@@ -69,6 +71,7 @@ export class UrlConfig {
   SHOW_ALL_PRODUCTS = this.productsBase + 'all';
   SHOW_PRODUCTS_BY_APPLYING = this.productsBase + 'applying/';
   SHOW_PRODUCTS_BY_BRAND = this.productsBase + 'brand/';
+  FIND_PRODUCTS = this.productsBase + 'find_products/';
   ADD_PRODUCT = this.productsBase + 'add';
 
   // clients
@@ -90,6 +93,7 @@ export class UrlConfig {
   private solutionsBase = this.base + 'solutions';
   SHOW_SOLUTIONS = this.solutionsBase;
   ADD_SOLUTION = this.solutionsBase + '/add';
+  FIND_SOLUTIONS = this.solutionsBase + '/find/';
 
   // ADMIN
 

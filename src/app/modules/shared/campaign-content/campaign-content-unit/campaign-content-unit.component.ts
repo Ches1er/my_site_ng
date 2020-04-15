@@ -9,11 +9,10 @@ import {MessagesService} from '../../../../services/messages.service';
   styleUrls: ['./campaign-content-unit.component.less']
 })
 export class CampaignContentUnitComponent implements OnInit {
-  datePipe = new DatePipe('en-EN');
   @Input() campaign: Campaign = null;
   private pCampaignExpired = false;
 
-  constructor(@Inject(MessagesService) private msgService: MessagesService) {
+  constructor(private msgService: MessagesService) {
   }
 
   get campaignExpired() {

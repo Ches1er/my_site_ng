@@ -1,4 +1,11 @@
 export class User {
+  get password(): string {
+    return this.pPassword;
+  }
+
+  set password(value: string) {
+    this.pPassword = value;
+  }
 
   constructor(private pId: number,
               private pName: string,
@@ -7,7 +14,8 @@ export class User {
               private pPhones: string,
               private pConfirmedClient: string,
               private pApiToken: string,
-              private pRememberToken: string
+              private pRememberToken: string,
+              private pPassword: string
               ) {
   }
 
@@ -83,6 +91,7 @@ export class User {
       jsonObj.phones,
       jsonObj.confirmed_client,
       jsonObj.api_token,
-      jsonObj.remember_token);
+      jsonObj.remember_token,
+      jsonObj.password);
   }
 }

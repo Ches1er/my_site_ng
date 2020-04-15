@@ -39,6 +39,13 @@
       font-size: 1.2em;
       color: #505050;
     }
+      .table_header_print {
+        margin-top: 10px;
+        font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+        font-size: 1.2em;
+        color: #505050;
+        display: none
+      }
     table{
       border-radius: 3px;
       margin-top: 3px;
@@ -90,6 +97,51 @@
       color: white;
     }
   }
+}
 
+// Print
+
+@media print {
+  .main_content{
+    .main_content_header{ display: none;}
+    .order_block{
+      .order_form { display: none; }
+      .order {
+        .table_header{display: none}
+        .table_header_print {display: block}
+        table{
+          color: #000000;
+          tr {
+            .td-btn {display: none}
+          }
+          tr:first-child {
+            border-width: 1px 1px 1px 1px;
+          }
+          th {
+            border: 1px solid #000000;
+            background-color: white;
+            color: #000;
+          }
+          td:first-child{
+            background-color: white;
+            border-width: 1px 1px 1px 1px;
+            color: black;
+          }
+          td{
+            background-color: white;
+            border-style: solid;
+            border-width: 0 1px 1px 0;
+            border-color: #000000;
+          }
+        }
+        .order_button_block {display: none}
+      }
+      .sum_amount{
+        background-color: white;
+        color: black;
+      }
+    }
+  }
 
 }
+

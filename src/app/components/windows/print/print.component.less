@@ -1,0 +1,73 @@
+@import "../../../common";
+
+.header, .header-space, .footer, .footer-space { height: 100px; }
+.header { position: fixed; top: 0; }
+.footer { position: fixed; bottom: 0; }
+
+.table_header{
+  margin-top: 10px;
+  font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+  font-size: 1.2em;
+  color: #505050;
+}
+table{
+  border-radius: 3px;
+  padding: 5px;
+  box-sizing: border-box;
+  width: 100%;
+  color: #505050;
+  border-collapse: collapse;
+  font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+  font-size: 0.9em;
+  tr:first-child {
+    border-width: 1px 1px 1px 1px;
+  }
+  th {
+    text-align: center;
+    padding: 5px 10px;
+    border: 1px solid #000000;
+  }
+  td:first-child{
+    border-width: 1px 1px 1px 1px;
+    text-align: center;
+    padding: 5px 10px;
+  }
+  td{
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    border-color: #000000;
+    text-align: center;
+    padding: 3px 5px;
+  }
+}
+.sum_amount{
+  border-radius: 3px;
+  padding: 5px 10px;
+  display: inline-block;
+  margin-top: 10px;
+  width: auto;
+  font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+  font-size: 1.2em;
+}
+.table_footer{
+  margin-top: 10px;
+  button {
+    height: 29px;
+    padding: 0 5px;
+    margin-right: 5px;
+    background-color: #a5d7ff;
+    color: white;
+    cursor: pointer;
+    border: 1px solid rgba(0,0,0,.1);
+    border-radius: 2px;
+    transition: all .218s ease 0s;
+  }
+  button:hover{
+    background-color: #124071;
+  }
+
+@media print {
+  button { display: none; }
+  table {width: 90%; max-width: 1048px;}
+}
+}

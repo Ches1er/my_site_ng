@@ -1,0 +1,64 @@
+<div class="find_block">
+<!--  <div class="find_app">
+    <app-header-find></app-header-find>
+  </div>-->
+  <div class="find_form">
+    <div class="main_right_unit_header">Вы ищите {{findData}} .Укажите, где будем искать:</div>
+    <div class="info_message" *ngIf="error">{{error}}</div>
+    <form [formGroup]="findDefinerForm" (ngSubmit)="onSubmit()">
+      <div class="radio_options">
+        <div class="radio_option">
+          <input type="radio" id="contactChoice1"
+                 name="definer" formControlName="definer" value="news">
+          <label for="contactChoice1">В новостях</label>
+        </div>
+
+        <div class="radio_option">
+          <input type="radio" id="contactChoice2"
+                 name="definer" formControlName="definer" value="campaign">
+          <label for="contactChoice2">В акциях</label>
+        </div>
+
+        <div class="radio_option">
+          <input type="radio" id="contactChoice3"
+                 name="definer" formControlName="definer" value="production_by_brand">
+          <label for="contactChoice3">В технических картах материалов</label>
+        </div>
+
+        <div class="radio_option">
+          <input type="radio" id="contactChoice4"
+                 name="definer" formControlName="definer" value="building_objects">
+          <label for="contactChoice3">В объектах</label>
+        </div>
+
+        <div class="radio_option">
+          <input type="radio" id="contactChoice5"
+                 name="definer" formControlName="definer" value="solutions">
+          <label for="contactChoice3">В готовых решениях</label>
+        </div>
+
+        <div class="radio_option">
+          <input type="radio" id="contactChoice6"
+                 name="definer" formControlName="definer" value="clients">
+          <label for="contactChoice3">В клиентах</label>
+        </div>
+      </div>
+      <div>
+        <button class = 'wnd-btn' type="submit">Начать поиск</button>
+      </div>
+    </form>
+  </div>
+  <div class="finded_products" *ngIf="findedItems && !error">
+    <div class="main_right_unit_header">Вы искали "{{findData}}" в {{whereToFindSubscriber}}, по вашему запросу найдены следующие результаты:</div>
+    <div class="main_right_header_aux">*Кликните на позицию в списке, чтоб открыть полную информацию.</div>
+    <ul *ngFor="let findedItem of findedItems">
+      <!-- Solutions and Building Obj has only building material,
+      that is why in case of choosing this definer in redirectToFullInfoPage method we put second argument is '2'-->
+      <li *ngIf="definer == 'solutions' || definer == 'building_objects'; else elseList" (click)="redirectToFullInfoPage(findedItem.id, 2)">{{findedItem.name}}</li>
+      <ng-template #elseList>
+        <li (click)="redirectToFullInfoPage(findedItem.id, findedItem.salesAreaId)">{{findedItem.name}}</li>
+      </ng-template>
+    </ul>
+  </div>
+</div>
+

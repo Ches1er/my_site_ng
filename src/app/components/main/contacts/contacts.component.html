@@ -23,8 +23,10 @@
         <div class="contacts_block_content_text">
           <div class="main_right_unit_header">Наши адреса и телефоны:</div>
           <div class="contacts_block_content_unit" *ngFor="let branch of branches">
-            <div class="contacts_branch_address">{{branch.role}}: {{branch.address}}</div>
-            <div class="contacts_branch_phone">Телефон: {{branch.phone}}</div>
+            <div *ngIf="branch.active===1">
+              <div class="contacts_branch_address">{{branch.role}}: {{branch.address}}</div>
+              <div class="contacts_branch_phone">Телефон: {{branch.phone}}</div>
+            </div>
             <hr>
           </div>
         </div>

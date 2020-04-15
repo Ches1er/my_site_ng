@@ -15,7 +15,6 @@ import {ClientDiscount} from '../../../dto/clientDiscounts/ClientDiscount';
   styleUrls: ['./order.component.less']
 })
 export class OrderComponent implements OnInit {
-
   private pBrands;
   private pProducts: Array<SaleProduct> = null;
   private pCurrentProduct: SaleProduct = null;
@@ -23,6 +22,7 @@ export class OrderComponent implements OnInit {
   private pOrderPosition: number;
   private pUser: User = null;
   private pDiscounts: Array<ClientDiscount> = null;
+  private pDateNow: string = null;
   orderForm: FormGroup = new FormGroup({
       brands: new FormControl(''),
       productId: new FormControl(''),
@@ -43,6 +43,8 @@ export class OrderComponent implements OnInit {
   }
 
   ngOnInit() {
+    const date = new Date();
+    this.dateNow = date.toISOString().substr(0, 10);
     this.orderPosition = null;
     this.currentProduct = null;
     this.user = null;
@@ -140,6 +142,13 @@ export class OrderComponent implements OnInit {
 
   set productChoosen(value: boolean) {
     this.pProductChoosen = value;
+  }
+  get dateNow(): string {
+    return this.pDateNow;
+  }
+
+  set dateNow(value: string) {
+    this.pDateNow = value;
   }
 
   // Get user and user discounts
@@ -250,7 +259,6 @@ export class OrderComponent implements OnInit {
     const strOrder = [];
     this.order.forEach(item => {
       strOrder.push(JSON.stringify(item));
-      console.log(item);
     });
     return strOrder.join(';');
   }
@@ -276,5 +284,14 @@ export class OrderComponent implements OnInit {
       }
     });
     this.sumAmount = this.order.reduce((sum, current) => sum + current.amount, 0);
+  }
+
+  printOrder(event) {
+    event.preventDefault();
+    window.print();
+/*    const strOrder = this.convertOrderToStr();
+    // printData[0] = definer, printData[1] = data to print. Both elements must be string
+    const printData = ['order', strOrder];
+    this.msgService.printWindowShow(printData);*/
   }
 }

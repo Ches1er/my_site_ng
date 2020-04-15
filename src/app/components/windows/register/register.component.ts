@@ -50,8 +50,14 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.clearFormFields();
+    this.msgService.registerWindowShowMessage.subscribe(m =>{
+      this.clearFormFields();
+      this.visible = true;
+    });
+  }
+  private clearFormFields() {
     this.registerForm.patchValue({name: '', email: '', confirmedClient: '', password: '', confirmPassword: ''});
-    this.msgService.registerWindowShowMessage.subscribe(m => this.visible = true);
   }
 
   public cancel() {

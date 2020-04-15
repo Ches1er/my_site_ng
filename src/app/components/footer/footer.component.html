@@ -16,8 +16,11 @@
   </div>
   <div class="footer_content_branches">
     <div *ngFor="let branch of branches" class="footer_content_branch">
-      <div class="footer_branch_address">{{branch.role}}: {{branch.address}}</div>
-      <div class="footer_branch_phone">Тел.: {{branch.phone}}</div>
+        <div class="footer_branch_address" *ngIf="branch.active">{{branch.role}}: {{branch.address}}</div>
+        <div class="footer_branch_phone" *ngIf="branch.active">Тел.: {{branch.phone}}</div>
     </div>
+  </div>
+  <div class="footer_content_address_print">
+    г. Днипро, ул. Б. Хмельницкого, 16, офис 205
   </div>
 </div>

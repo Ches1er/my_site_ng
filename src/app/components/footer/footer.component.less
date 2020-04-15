@@ -62,8 +62,10 @@ ul{
       padding: 3px;
       margin-top: 5px;
       border-bottom: 1px solid @main_content_border;
-
       color: @link_color_hover;
+      &:last-child{
+        border-bottom: none;
+      }
       .footer_branch_address{
         font-size: 0.8em;
       }
@@ -72,5 +74,28 @@ ul{
       }
       &:last-child {border-bottom: none;}
     }
+  }
+  .footer_content_address_print{
+    display: none;
+  }
+}
+@media print {
+  .footer_nav {display: none}
+  .footer_content {
+    display: inline-flex;
+    flex-flow: column;
+    .footer_content_copyright_dilers{
+      border-left: none;
+      .footer_dilers{
+        color: #000000;
+        a{
+          color: #000000;
+          text-decoration: none;
+        }
+      }
+      .footer_copyright {display: none}
+    }
+    .footer_content_branches {display: none}
+    .footer_content_address_print{display: block; padding: 3px;}
   }
 }

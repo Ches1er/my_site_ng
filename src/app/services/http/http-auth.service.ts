@@ -29,7 +29,9 @@ export class HttpAuthService {
     params.append('rememberMe', data.rememberMe);
     return this.http.post(this.urlConfig.LOGIN, params)
       .pipe(map(resp => {
-        if (resp.hasOwnProperty('error')) { return resp; } else {
+        if (resp.hasOwnProperty('error')) {
+          return resp;
+        } else {
           return User.fromJson(resp);
         }
       }));
@@ -79,15 +81,18 @@ export class HttpAuthService {
       .pipe(map(ResResp => ResResp.response));
   }
 
-  updateUser(data: any, token: string): Observable<string> {
+  // Update User data through Profile
+
+  updateUser(data: any, changePassAction: string): Observable<string> {
     const params = new FormData();
-    params.append('api_token', token);
+    params.append('change_pass', changePassAction);
     params.append('id', data.id);
     params.append('name', data.name);
     params.append('email', data.email);
     params.append('phones', data.phones.join(','));
     params.append('confirmed_client', data.confirmedClient);
     params.append('email_verified_at', data.emailVerifiedAt);
+    params.append('new_password', data.newPassword);
     return this.http.post(this.urlConfig.UPDATE_USER, params)
       .pipe(map(resp => ResultResponse.fromJson(resp)))
       .pipe(map(ResResp => ResResp.response));

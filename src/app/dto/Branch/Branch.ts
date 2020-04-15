@@ -7,7 +7,8 @@ export class Branch {
               private pLong: number,
               private pLat: number,
               private pRoleId: number,
-              private pRole: string) {
+              private pRole: string,
+              private pActive: boolean) {
   }
 
   get id(): number {
@@ -73,6 +74,13 @@ export class Branch {
   set role(value: string) {
     this.pRole = value;
   }
+  get active(): boolean {
+    return this.pActive;
+  }
+
+  set active(value: boolean) {
+    this.pActive = value;
+  }
 
   public static fromJson(jsonObj: any): Branch {
     return new Branch(jsonObj.id,
@@ -82,6 +90,7 @@ export class Branch {
       jsonObj.long,
       jsonObj.lat,
       jsonObj.role_id,
-      jsonObj.role);
+      jsonObj.role,
+      jsonObj.active);
   }
 }

@@ -10,6 +10,14 @@ import {User} from '../../../../dto/User/User';
   styleUrls: ['./current-user-block.component.less']
 })
 export class CurrentUserBlockComponent implements OnInit {
+  get currentUser(): User {
+    return this.pCurrentUser;
+  }
+
+  set currentUser(value: User) {
+    this.pCurrentUser = value;
+  }
+
   get tokenData() {
     return this.pTokenData;
   }
@@ -18,7 +26,7 @@ export class CurrentUserBlockComponent implements OnInit {
     this.pTokenData = value;
   }
 
-  currentUser: User = null;
+  private pCurrentUser: User = null;
   private pTokenData;
   admin = false;
 
@@ -32,12 +40,14 @@ export class CurrentUserBlockComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.msgService.logoutSuccessMessage.subscribe(m => {
+    this.msgService.logoutSuccessMessage.subscribe(() => {
       this.currentUser = null;
     });
     if (localStorage.length > 0) {
       this.tokenData = JSON.parse(localStorage.getItem('tokenData'));
-      if (this.tokenData.expiration < Date.now()) {localStorage.clear(); }
+      if (this.tokenData.expiration < Date.now()) {
+        localStorage.clear();
+      }
     }
     if (localStorage.length > 0 && this.tokenData.remember_token !== null) {
       this.httpAuthService.loginByRememberMeToken(this.tokenData.remember_token)
@@ -49,13 +59,17 @@ export class CurrentUserBlockComponent implements OnInit {
         });
     }
     this.msgService.loginSuccessMessage.subscribe(user => {
-      this.getUserAndRoles(user);
+        if (this.tokenData.remember_token === null) {
+          this.getUserAndRoles(user);
+        } else {
+          return null;
+        }
       }
     );
   }
 
   private getUserAndRoles(user: User) {
-    this.currentUser = user;
+    this.pCurrentUser = user;
     this.httpAuthService.roles(user.apiToken).subscribe(roles => {
       if (CurrentUserBlockComponent.isAdmin(roles)) {
         this.msgService.adminLoggedIn();

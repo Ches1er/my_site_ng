@@ -1,0 +1,61 @@
+@import "../../../common";
+
+.find_block{
+  display: inline-flex;
+  flex-flow: column nowrap;
+  padding: 10px;
+  box-sizing: border-box;
+  border: 1px solid @main_content_border;
+  .find_app{
+    width: 50%;
+    margin-bottom: 5px;
+  }
+  .find_form{
+    box-sizing: border-box;
+    padding: 5px;
+    border: 1px solid @main_content_border;
+    margin-bottom: 5px;
+    .radio_options{
+      display: inline-flex;
+      flex-flow: row nowrap;
+      .radio_option{
+        display: inline-flex;
+        flex-flow: row nowrap;
+        margin-right: 5px;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Open Sans Condensed', sans-serif;
+        font-size: large;
+        font-weight: bold;
+        color: @active_main_nav_link_color;
+        input{
+          margin-right: 3px;
+        }
+      }
+    }
+    .wnd-btn{
+      height: 30px;
+      line-height: 30px;
+    }
+  }
+  .finded_products{
+    box-sizing: border-box;
+    padding: 5px;
+    border: 1px solid @main_content_border;
+    ul{
+      list-style: none;
+      li{
+        padding: 3px;
+        margin-bottom: 2px;
+        display: block;
+        border: 1px solid @main_content_border;
+        cursor: pointer;
+        font-family: 'Open Sans Condensed', sans-serif;
+      }
+      li:hover{
+        background-color: @main_bgc;
+        transition: all .218s ease 0s;
+      }
+    }
+  }
+}

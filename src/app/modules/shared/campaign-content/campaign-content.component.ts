@@ -15,14 +15,19 @@ export class CampaignContentComponent implements OnInit {
   private pCampaign: Array<Campaign> = [];
   private pCurrentCampaign: Campaign = null;
   private pActiveBlock = null;
+  private pFindData = null;
 
-  constructor(@Inject(CampaignService) private campaignService: CampaignService,
-              @Inject(MessagesService) private messageService: MessagesService,
+  constructor(private campaignService: CampaignService,
+              private messageService: MessagesService,
               private route: ActivatedRoute) {
   }
 
   ngOnInit() {
+    this.findData = null;
     this.route.data.subscribe(value => this.salesAreaDefiner = value.definer);
+    this.route.queryParams.subscribe(routeData => {
+      this.findData = routeData.findData;
+    });
     if (this.salesAreaDefiner === 'build') {
       this.updateBuildCampaign();
     }
@@ -55,6 +60,7 @@ export class CampaignContentComponent implements OnInit {
   set currentCampaign(value: Campaign) {
     this.pCurrentCampaign = value;
   }
+
   get activeBlock(): any {
     return this.pActiveBlock;
   }
@@ -63,22 +69,57 @@ export class CampaignContentComponent implements OnInit {
     this.pActiveBlock = value;
   }
 
+  get findData(): any {
+    return this.pFindData;
+  }
+
+  set findData(value: any) {
+    this.pFindData = value;
+  }
+
   // Other Methods
 
   private updateBuildCampaign() {
     this.campaignService.buildingCampaign.subscribe(resp => {
       this.campaign = resp;
-      this.currentCampaign = resp[0];
-    });
-  }
-  private updatePackCampaign() {
-    this.campaignService.packCampaign.subscribe(resp => {
-      this.campaign = resp;
-      this.currentCampaign = resp[0];
+      if (this.findData) {
+        this.getCurrentCampaignFromFindData();
+      } else {
+        this.currentCampaign = resp[0];
+      }
     });
   }
 
+  private updatePackCampaign() {
+    this.campaignService.packCampaign.subscribe(resp => {
+      this.campaign = resp;
+      if (this.findData) {
+        this.getCurrentCampaignFromFindData();
+      } else {
+        this.currentCampaign = resp[0];
+      }
+    });
+  }
+
+  private getCurrentCampaignFromFindData() {
+    let i = 0;
+    let currentCampaign: Campaign = null;
+    this.campaign.every(campaign => {
+      if (campaign.id == this.findData) {
+        currentCampaign = campaign;
+        i = i + 1;
+        return false;
+      } else {
+        currentCampaign = campaign;
+        i = i + 1;
+        return true;
+      }
+    });
+    this.changeCurrentCampaign(currentCampaign, i - 1);
+  }
+
   changeCurrentCampaign(campaignUnit: Campaign, i) {
+    this.currentCampaign = campaignUnit;
     this.messageService.changeCurrentCampaign(campaignUnit);
     this.activeBlock = i;
   }

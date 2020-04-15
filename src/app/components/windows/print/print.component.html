@@ -1,0 +1,34 @@
+<div class="fade" *ngIf="visible">
+  <div class="order_window">
+        <div id="print_content" class="content">
+          <div *ngIf="printDefiner === 'order'">
+            <div class="table_header">Дата создания заказа: {{dateNow}}</div>
+            <table>
+              <tr>
+                <th>Номер п/п</th>
+                <th>Бренд</th>
+                <th>Номенклатура</th>
+                <th>Стоимость, грн</th>
+                <th>Кол-во, шт</th>
+                <th>Скидка, грн</th>
+                <th>Всего</th>
+              </tr>
+              <tr *ngFor="let orderItem of printContent; let i = index">
+                <td>{{i+1}}</td>
+                <td>{{orderItem.brand}}</td>
+                <td>{{orderItem.productName}}</td>
+                <td>{{orderItem.price}}</td>
+                <td>{{orderItem.qty}}</td>
+                <td>{{orderItem.discount}}</td>
+                <td>{{orderItem.amount}}</td>
+              </tr>
+            </table>
+            <div class="sum_amount">Всего к оплате: {{sumOrderAmount}}, грн</div>
+            <div class="table_footer">
+              <button (click)="print()">Распечатать</button>
+              <button (click)="exit()">Выход</button>
+            </div>
+          </div>
+        </div>
+  </div>
+</div>

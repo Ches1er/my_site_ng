@@ -19,6 +19,14 @@ export class CampaignService {
     @Inject(HttpClient) private http: HttpClient, private cookieService: CookieService) {
   }
 
+  private getApiToken(): any {
+    if (localStorage.length > 0) {
+      const data = JSON.parse(localStorage.getItem('tokenData'));
+      return data.api_token;
+    }
+    return false;
+  }
+
   get packCampaign(): Observable<Array<Campaign>> {
     return this.http.get(this.urlConfig.PACK_CAMPAIGN)
       .pipe(map(resp => CampaignResponse.fromJson(resp)))
@@ -37,12 +45,10 @@ export class CampaignService {
       .pipe(map(campaignResponse => campaignResponse.data));
   }
 
-  private getApiToken(): any {
-    if (localStorage.length > 0) {
-      const data = JSON.parse(localStorage.getItem('tokenData'));
-      return data.api_token;
-    }
-    return false;
+  findCampaigns(findData: string): Observable<Array<Campaign>> {
+    return this.http.get(this.urlConfig.FIND_CAMPAIGNS + findData)
+      .pipe(map(resp => CampaignResponse.fromJson(resp)))
+      .pipe(map(campaignResponse => campaignResponse.data));
   }
 
   addCampaign(data: any, action: string): Observable<any> {

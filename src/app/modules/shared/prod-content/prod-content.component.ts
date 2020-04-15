@@ -18,6 +18,7 @@ export class ProdContentComponent implements OnInit {
   private pProdByDefiner: string;
   private pGroups;
   private pHeader: string;
+  private pFindData = null;
   @Input() product: Product = null;
 
   constructor(@Inject(MessagesService) private msgService: MessagesService,
@@ -31,6 +32,7 @@ export class ProdContentComponent implements OnInit {
 
   ngOnInit() {
     this.groups = [];
+    this.route.queryParams.subscribe(data => this.findData = data.findData);
     this.route.data.subscribe(value => this.salesAreaDefiner = value.definer);
     this.route.data.subscribe(value => this.prodByDefiner = value.prod_by);
     this.getProducts(this.prodByDefiner, this.salesAreaDefiner);
@@ -78,6 +80,14 @@ export class ProdContentComponent implements OnInit {
   set header(value: string) {
     this.pHeader = value;
   }
+  get findData(): any {
+    return this.pFindData;
+  }
+
+  set findData(value: any) {
+    this.pFindData = value;
+  }
+
 
   private getProducts(prodByDefiner: string, salesAreaDefiner: string) {
     if (salesAreaDefiner === 'build') {
@@ -129,8 +139,9 @@ export class ProdContentComponent implements OnInit {
   private updateBuildBrandGroups() {
     this.brandService.buildBrands.subscribe(brands => {
       this.groups = brands;
-      console.log(this.groups);
-      if (brands.length > 0) {
+      if (brands.length > 0 && this.findData) {
+        this.updateCurrentProductByFindData();
+      } else {
         this.updateCurrentProductByBrand(brands[0].id);
       }
     });
@@ -139,7 +150,9 @@ export class ProdContentComponent implements OnInit {
   private updatePackBrandGroups() {
     this.brandService.packBrands.subscribe(brands => {
       this.groups = brands;
-      if (brands.length > 0) {
+      if (brands.length > 0 && this.findData) {
+        this.updateCurrentProductByFindData();
+      } else {
         this.updateCurrentProductByBrand(brands[0].id);
       }
     });
@@ -151,7 +164,12 @@ export class ProdContentComponent implements OnInit {
   }
 
   private setHeader(prodByDefiner: string) {
-    if (prodByDefiner === 'brand')this.header = 'Продукция по-брендам';
-    if (prodByDefiner === 'appl')this.header = 'Продукция по-применению';
+    if (prodByDefiner === 'brand') {this.header = 'Продукция по-брендам'; }
+    if (prodByDefiner === 'appl') {this.header = 'Продукция по-применению'; }
+  }
+
+  private updateCurrentProductByFindData() {
+    this.productService.product(this.findData)
+      .subscribe(product => this.currentProduct = product);
   }
 }

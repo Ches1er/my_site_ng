@@ -37,6 +37,7 @@
 
     <div class="order" *ngIf="order.length>0">
       <div class="table_header">Ваш заказ</div>
+      <div class="table_header_print">Дата заказа: {{dateNow}}</div>
       <table>
         <tr>
           <th>Бренд</th>
@@ -64,11 +65,13 @@
         <!-- <button class="admin-btn" (click)="orderWithDiscount($event)">Заказ со скидкой</button> -->
         <button class="admin-btn" (click)="saveOrder($event)">Сохранить заказ</button>
         <button class="admin-btn" (click)="sendByEmail($event)">Отправить на почту</button>
+        <button class="admin-btn" (click)="printOrder($event)">Распечатать заказ</button>
       </div>
     </div>
   </div>
 </div>
 <app-info-window></app-info-window>
+
 
 
 

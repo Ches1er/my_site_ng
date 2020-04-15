@@ -67,8 +67,19 @@
       border-left: 1px solid @nav_border;
       width: 20%;
     }
+    .header_find{
+      box-sizing: border-box;
+      padding: 10px;
+      border-left: 1px solid @nav_border;
+      width: 30%;
+      display: inline-flex;
+      flex-flow: row nowrap;
+      align-items: center;
+    }
   }
-
+@media print {
+  .header_nav {display: none}
+}
 
 
 

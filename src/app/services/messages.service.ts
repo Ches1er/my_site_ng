@@ -25,6 +25,7 @@ export class MessagesService {
   private pImagesViewerShow: Subject<string> = new Subject<string>();
   private pGroutCalcShow: Subject<string> = new Subject<string>();
   private pInfoWindowShow: Subject<string> = new Subject<string>();
+  private pPrintWindowShow: Subject<Array<string>> = new Subject<Array<string>>();
 
   constructor() {
   }
@@ -35,6 +36,9 @@ export class MessagesService {
 
   get loginWindowShowMessage() {
     return this.pLoginWindowShow;
+  }
+  get printWindowShowMessage() {
+    return this.pPrintWindowShow;
   }
 
   get registerWindowShowMessage() {
@@ -129,6 +133,9 @@ export class MessagesService {
 
   public loginWindowShow() {
     this.pLoginWindowShow.next(null);
+  }
+  public printWindowShow(printData) {
+    this.pPrintWindowShow.next(printData);
   }
 
   public registerWindowShow() {

@@ -30,7 +30,8 @@ export class ProfileMainComponent implements OnInit {
     ]),
     phones: new FormArray([]),
     confirmedClient: new FormControl(''),
-    emailVerifiedAt: new FormControl('')
+    emailVerifiedAt: new FormControl(''),
+    newPassword: new FormControl('')
   });
   private pCurrentUser: User;
   private pOnSubmitResponse: string;
@@ -93,10 +94,15 @@ export class ProfileMainComponent implements OnInit {
   }
 
   onSubmit() {
-    this.httpAuthService.updateUser(this.profileForm.value, this.token).subscribe(resp => {
+    let changePassAction = 'no';
+    if (this.profileForm.controls.newPassword.value !== '') {
+      changePassAction = 'yes';
+    }
+    this.httpAuthService.updateUser(this.profileForm.value, changePassAction).subscribe(resp => {
       this.updateUser();
-      if (resp === 'update success') this.onSubmitResponse = 'Данные успешно обновлены';
-      if (resp === 'error') this.onSubmitResponse = 'Ой! Что-то пошло не так, повторите процедуру позже.';
+      if (resp === 'update success') { this.onSubmitResponse = 'Данные успешно обновлены'; }
+      if (resp === 'update pass success') { this.onSubmitResponse = 'Данные и пароль успешно обновлены. Новый пароль отправлен на Вашу почту'; }
+      if (resp === 'error') { this.onSubmitResponse = 'Ой! Что-то пошло не так, повторите процедуру позже.'; }
     });
   }
 
@@ -115,8 +121,14 @@ export class ProfileMainComponent implements OnInit {
   sendVerificationEmail(event) {
     event.preventDefault();
     this.httpAuthService.rememberVerification(this.token).subscribe(resp => {
-      if (resp === 'Letter has sent') this.onSubmitResponse = 'Повторное письмо отправлено';
+      if (resp === 'Letter has sent') { this.onSubmitResponse = 'Повторное письмо отправлено'; }
       // if (resp === 'error') this.onSubmitResponse = 'Ой! Что-то пошло не так, повторите процедуру позже.';
     });
+  }
+
+  showPassword(event) {
+    event.preventDefault();
+    document.getElementById('newPassword').setAttribute('type', 'text');
+    setTimeout(() => document.getElementById('newPassword').setAttribute('type', 'password'), 1000);
   }
 }

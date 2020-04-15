@@ -3,7 +3,6 @@ import {HttpNewsService} from '../../../services/http/news/http-news.service';
 import {MessagesService} from '../../../services/messages.service';
 import {News} from '../../../dto/news/News';
 import {ActivatedRoute} from '@angular/router';
-import {HttpUrlEncodingCodec} from '@angular/common/http';
 
 @Component({
   selector: 'app-news-content',
@@ -11,10 +10,18 @@ import {HttpUrlEncodingCodec} from '@angular/common/http';
   styleUrls: ['./news-content.component.less']
 })
 export class NewsContentComponent implements OnInit {
+  get findData(): any {
+    return this.pFindData;
+  }
+
+  set findData(value: any) {
+    this.pFindData = value;
+  }
 
   private pSalesAreaDefiner = null;
   private pNews: Array<News> = [];
   private pCurrentNews: News = null;
+  private pFindData = null;
   private pActiveBlock = null;
 
   constructor(@Inject(HttpNewsService) private newsService: HttpNewsService,
@@ -31,7 +38,11 @@ export class NewsContentComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.findData = null;
     this.route.data.subscribe(value => this.salesAreaDefiner = value.definer);
+    this.route.queryParams.subscribe(routeData => {
+      this.findData = routeData.findData;
+    });
     if (this.salesAreaDefiner === 'build') {
       this.updateBuildNews();
     }
@@ -40,10 +51,26 @@ export class NewsContentComponent implements OnInit {
     }
   }
 
+  private getCurrentNewsFromFindData() {
+    this.news.every(news => {
+      if (news.id == this.findData) {
+        this.currentNews = news;
+        return false;
+      } else {
+        this.currentNews = this.news[0];
+        return true;
+      }
+    });
+  }
+
   private updateBuildNews() {
     this.newsService.buildingNews.subscribe(resp => {
       this.news = resp;
-      this.currentNews = resp[0];
+      if (this.findData) {
+        this.getCurrentNewsFromFindData();
+      } else {
+        this.currentNews = resp[0];
+      }
     });
   }
 

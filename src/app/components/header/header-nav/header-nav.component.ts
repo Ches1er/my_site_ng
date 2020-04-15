@@ -17,9 +17,9 @@ export class HeaderNavComponent implements OnInit {
 
   ngOnInit() {
     this.unlogUser();
-    this.msgService.adminLoggedInMessage.subscribe(resp => this.adminLoggedIn = true);
-    this.msgService.loginSuccessMessage.subscribe(resp => this.userLoggedIn = true);
-    this.msgService.logoutSuccessMessage.subscribe(m => {
+    this.msgService.adminLoggedInMessage.subscribe(() => this.adminLoggedIn = true);
+    this.msgService.loginSuccessMessage.subscribe(() => this.userLoggedIn = true);
+    this.msgService.logoutSuccessMessage.subscribe(() => {
       this.unlogUser();
     });
   }

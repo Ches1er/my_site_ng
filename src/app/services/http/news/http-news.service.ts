@@ -37,6 +37,13 @@ export class HttpNewsService {
       .pipe(map(resp => NewsResponse.fromJson(resp)))
       .pipe(map(newsResponse => newsResponse.data));
   }
+  findNews(findData: string): Observable<Array<News>> {
+    const params = new FormData();
+    params.append('findData', findData);
+    return this.http.post(this.urlConfig.FIND_NEWS, params)
+      .pipe(map(resp => NewsResponse.fromJson(resp)))
+      .pipe(map(newsResponse => newsResponse.data));
+  }
 
   private getApiToken(): any {
     if (localStorage.length > 0) {

@@ -38,6 +38,9 @@ import {HttpAuthService} from './services/http/http-auth.service';
 import {JwtModule} from '@auth0/angular-jwt';
 import {AuthHeaderInterceptor} from './http-interceptors/auth-header-interceptor';
 import {NgxLoadingModule, ngxLoadingAnimationTypes} from 'ngx-loading';
+import { PrintComponent } from './components/windows/print/print.component';
+import { HeaderFindComponent } from './components/header/header-find/header-find.component';
+import { FindComponent } from './components/main/find/find.component';
 
 registerLocaleData(localeRuUa, 'RuUa');
 
@@ -56,7 +59,10 @@ registerLocaleData(localeRuUa, 'RuUa');
     AuthButtonsBlockComponent,
     LoginComponent,
     RegisterComponent,
-    AuthResultComponent
+    AuthResultComponent,
+    PrintComponent,
+    HeaderFindComponent,
+    FindComponent
   ],
   imports: [
     NgxLoadingModule.forRoot({

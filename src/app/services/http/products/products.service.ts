@@ -27,6 +27,13 @@ export class ProductsService {
     return this.http.get(this.urlConfig.SHOW_PRODUCT + id)
       .pipe(map(product => Product.fromJson(product)));
   }
+  findProducts(findData: string): Observable<Array<Product>> {
+    return this.http.get(this.urlConfig.FIND_PRODUCTS + findData)
+      .pipe(map(resp => {
+        return ProductsResponse.fromJson(resp);
+      }))
+      .pipe(map(productsResponse => productsResponse.data));
+  }
 
   productsByApplying(id: number): Observable<Array<Product>> {
     return this.http.get(this.urlConfig.SHOW_PRODUCTS_BY_APPLYING + id)

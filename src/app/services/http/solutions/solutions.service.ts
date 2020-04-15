@@ -28,6 +28,11 @@ export class SolutionsService {
     }
     return false;
   }
+  findSolutions(findData: string): Observable<Array<Solution>> {
+    return this.http.get(this.urlConfig.FIND_SOLUTIONS + findData)
+      .pipe(map(resp => SolutionsResponse.fromJson(resp)))
+      .pipe(map(sr => sr.data));
+  }
   addSolution(data: any, action: string): Observable<string> {
     const params = new FormData();
     params.append('api_token', this.getApiToken());
